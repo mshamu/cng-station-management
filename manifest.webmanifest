@@ -1,0 +1,36 @@
+{
+  "name": "Energy Station Platform",
+  "short_name": "CNG Attendant",
+  "description": "Green Gas CNG live refill & vehicle transaction capture with ANPR plate scanning.",
+  "id": "/cng-attendant/",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#14532D",
+  "theme_color": "#1B7A3D",
+  "categories": [
+    "business",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
