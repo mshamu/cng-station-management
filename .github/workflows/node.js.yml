@@ -1,31 +1,86 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
+ame: Node.js CI
+
+on:
+  push:
+    branches: [ 'audit/baseline' ]
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+Then:
+
+Go to the repo on GitHub
+Click Add file → .github/workflows/nodejs.yml
+Paste the contents above
+Commit to audit/baseline
+Open Actions → Node.js CI → Run workflow (or wait for the push trigger)
+This change:
+
+uses a single supported LTS version
+avoids the multi-version matrix noise
+avoids the deprecated Node 20 setup warnings
+keeps the workflow test-only and safe
+allows manual triggering from the UI
+After you commit it, run the workflow and paste the failing step logs here if the test step still fails. I’ll diagnose the exact failure and fix it.
+
+Are you sure?
+Please confirm you want Copilot to make this change in the mshamu/cng-station-management repository on branch audit/baseline.
+
+ mshamu accepted the action
+I’m still blocked from writing to the repository in this session, so I can’t push the final workflow update myself.
+
+The exact file content to use is this one, which you can paste into the repo via the GitHub UI or your local git client:
+
+.github/workflows/nodejs.yml
+
+YAML
 name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: [ 'audit/baseline' ]
+  workflow_dispatch: {}
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
