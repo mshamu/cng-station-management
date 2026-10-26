@@ -7,7 +7,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#1B7A3D">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-acquirable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Energy Station">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -236,7 +236,6 @@ const MODULES = [
 const moduleIsActive = (module) => module && (module.enabled !== false) && (module.status !== 'Inactive') && (module.status !== 'Disabled');
 
 function companyById(id){ return COMPANIES.find(c=>c.id===id)||COMPANIES[0]; }
-function mixWithWhite(hex, ratio) { hex=hex.replace('#',''); const num=parseInt(hex,16); const r=Math.round(((num>>16)&255)*ratio + 255*(1-ratio)); const g=Math.round(((num>>8)&255)*ratio + 255*(1-ratio)); const b=Math.round((num&255)*ratio + 255*(1-ratio)); return `rgb(${r}, ${g}, ${b})`; }
 function shadeColor(hex, percent) { const num=parseInt(hex.slice(1),16); const amt=Math.round(2.55*percent); const r=Math.min(255,Math.max(0,(num>>16)+amt)); const g=Math.min(255,Math.max(0,((num>>8)&255)+amt)); const b=Math.min(255,Math.max(0,(num&255)+amt)); return '#'+((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1); }
 function applyStationTheme(station) { const active = station || state.station; const color=active?.color||state.company?.color||'#1B7A3D'; const dark=active?.colorDark||state.company?.colorD||'#14532D'; document.documentElement.style.setProperty('--green', color); document.documentElement.style.setProperty('--green-d', dark); }
 function getStationLogo(station, company){ const st=station||state.station; const c=company||state.company||COMPANIES[0]; const brand=st?.logo||c.defaultBranding?.logo||(c.name||'').slice(0,2).toUpperCase(); return brand; }
@@ -263,7 +262,7 @@ function classify(p){ const s=(p||'').toUpperCase().replace(/[^A-Z0-9]/g,''); if
 const isThree = t => t === 'Three-Wheeler';
 function typeShort(t){ return isThree(t)?'3-Wheeler':'4-Wheeler'; }
 function permitOK(s){ return PERMIT_OK.includes(s); }
-function buildRec(o){ const comp = companyById(o.companyId||'C001'); const type = o.type || classify(o.plate) || 'Four-Wheeler'; const denied = !!o.denied; const industrial = o.mode === 'Industrial'; return { id:(state.seq+1), ...o, companyId:o.companyId||'C001', stationId:o.stationId||'S01', type, denied, permit:o.permit||'Active', amount:(o.kg||0)*price(), paid:o.paid||0, syncStatus:SYNC.SYNCED, syncAt:nowStamp(), companyName:comp.name, color:comp.color, createdAt:Date.now() }; }
+function buildRec(o){ const comp = companyById(o.companyId||'C001'); const type = o.type || classify(o.plate) || 'Four-Wheeler'; const denied = !!o.denied; return { id:(state.seq+1), ...o, companyId:o.companyId||'C001', stationId:o.stationId||'S01', type, denied, permit:o.permit||'Active', amount:(o.kg||0)*price(), paid:o.paid||0, syncStatus:SYNC.SYNCED, syncAt:nowStamp(), companyName:comp.name, color:comp.color, createdAt:Date.now() }; }
 function S(o){ o.companyId=o.companyId||'C001'; o.stationId=o.stationId||'S01'; state.seq++; if(o.bajajStatus==='Member'&&!o.membershipId) o.membershipId=newMembershipId(); if(o.bajajType==='TVS King Bajaj'&&!o.membershipId) o.membershipId=newMembershipId(); const rec=buildRec(o); state.txns.push(rec); return rec; }
 S({date:TODAY,time:'08:31',att:'Salha Mohamed Duge',shift:'Day',plate:'MC 332 KDR',kg:3.2,pay:'Mobile Money',prov:'Mixx by Yas',noz:'Nozzle 1',permit:'Active',bajajStatus:'Member',membershipId:'GG-1001',driver:'Ali Hassan',phone:'0757 010101'});
 S({date:TODAY,time:'08:52',att:'Salha Mohamed Duge',shift:'Day',plate:'T 564 PQR',kg:9.1,pay:'Cash',noz:'Nozzle 2',permit:'Valid',driver:'Neema Paul',phone:'0754 220145'});
@@ -282,6 +281,7 @@ S({date:TODAY,time:'23:40',att:'Rashid Haji Simtitu',shift:'Night',plate:'T 450 
 S({companyId:'C002',stationId:'S01',date:TODAY,time:'09:05',att:'Pius Maberi Phares',shift:'Day',plate:'T 300 BLU',kg:8.0,pay:'Cash',noz:'Nozzle 1',permit:'Active'});
 S({companyId:'C002',stationId:'S01',date:TODAY,time:'10:12',att:'Johnson Noel Koroto',shift:'Day',plate:'MC 410 BLU',kg:3.5,pay:'Mobile Money',prov:'Airtel Money',noz:'Nozzle 2',permit:'Valid',bajajStatus:'Member',membershipId:'GG-9999'});
 S({companyId:'C002',stationId:'S01',date:TODAY,time:'11:40',att:'Pius Maberi Phares',shift:'Day',plate:'T 512 BLU',kg:12.0,pay:'Mobile Money',prov:'M-Pesa',noz:'Nozzle 1',permit:'Active'});
+
 const $=s=>document.querySelector(s);
 const money=n=>cur()+' '+Math.round(n).toLocaleString('en-US');
 const sum=(a,f)=>a.reduce((s,x)=>s+f(x),0);
@@ -298,7 +298,7 @@ function isMember(x){ return x.loyaltyStatus==='Member'; }
 function metrics(arr){ const comp=completed(arr); const refilled=comp.filter(x=>!x.denied); const denied=comp.filter(x=>x.denied); const tw=refilled.filter(x=>isThree(x.type)), fw=refilled.filter(x=>!isThree(x.type)); return { sales:sum(refilled,x=>x.amount||x.kg*price()), cng:sum(refilled,x=>x.kg||0), txns:refilled.length, three:tw.length, four:fw.length, denied:denied.length, unique:uniq(refilled) }; }
 function permitCounts(arr){ const c={}; PERMITS.forEach(p=>c[p]=0); completed(arr).forEach(x=>c[x.permit]=(c[x.permit]||0)+1); return c; }
 function nowStamp(){ return state.shiftDate+' '+clock(); }
-function commitToCentral(rec){ rec.syncStatus=SYNC.SYNCED; rec.syncAt=nowStamp(); state.central.lastSync=rec.syncAt; state.central.lastRec=rec; bumpData(); uiSyncTick(rec); }
+function commitToCentral(rec){ rec.syncStatus=SYNC.SYNCED; rec.syncAt=nowStamp(); bumpData(); uiSyncTick(rec); }
 function scheduleSync(rec){ setTimeout(()=>{ rec.syncStatus=SYNC.SYNCING; uiSyncTick(rec); setTimeout(()=>{ if(Math.random()<0.12){ rec.syncStatus=SYNC.FAILED; bumpData(); uiSyncTick(rec); setTimeout(()=>{ rec.syncStatus=SYNC.SYNCED; bumpData(); uiSyncTick(rec); },1200); } else { rec.syncStatus=SYNC.SYNCED; bumpData(); uiSyncTick(rec); } },1000); },50); }
 function uiSyncTick(rec){ if($('#succSync_'+rec.id)) $('#succSync_'+rec.id).innerHTML=syncBadge(rec.syncStatus); if(state.role==='attendant' && state.view==='list') renderList(); if(state.role==='manager' && state.view==='dashboard') renderMgr(); }
 function syncCounts(){ const c={}; Object.values(SYNC).forEach(s=>c[s]=0); scopeTxns().forEach(x=>{ c[x.syncStatus]=(c[x.syncStatus]||0)+1; }); return c; }
@@ -317,6 +317,7 @@ function liveFeedHTML(){ const rows=[...scopeTxns()].slice(-8).reverse().map(x=>
 function brandName(){ return state.company ? state.company.name : PLATFORM_NAME; }
 function logoLetters(){ const n=brandName().trim().split(' '); return ((n[0]&&n[0][0])||'E')+((n[1]&&n[1][0])||''); }
 function renderTenantPicker(){ stopMgrLive(); stopDemo(); state.role=null; state.demoLive=false; if(!state._pickCompany) state._pickCompany=COMPANIES[0].id; const comp=companyById(state._pickCompany); $('#navbar').innerHTML=''; $('#appBody').innerHTML=`<div class="fade" style="padding-top:12px"><div class="center" style="margin-bottom:10px"><div style="width:58px;height:58px;border-radius:18px;background:${comp.color};color:#fff;display:grid;place-items:center;font-size:28px;font-weight:800;margin:0 auto 10px">${logoLetters()}</div><h3 class="sec">Select Station</h3></div><div class="card"><label class="fl">Company</label><select id="pickCompany" class="sel" onchange="state._pickCompany=this.value; renderTenantPicker();">${COMPANIES.map(c=>`<option value="${c.id}" ${c.id===comp.id?'selected':''}>${c.name}</option>`).join('')}</select><label class="fl" style="margin-top:10px">Station</label><select id="pickStation" class="sel">${comp.stations.map(s=>`<option value="${s.id}">${s.name}</option>`).join('')}</select><button class="btn primary" style="margin-top:14px" onclick="enterTenant()">Continue</button></div></div>`; }
+
 const ENERGY_OPTIONS=['CNG','LNG','Biomethane','Hydrogen','EV Charging','Solar'];
 const BRAND_PALETTE=[['#7C3AED','#4C1D95'],['#B45309','#7C2D12'],['#0E7490','#164E63'],['#BE185D','#831843'],['#15803D','#14532D'],['#2563EB','#1E3A8A']];
 function nextCompanyId(){ let n=1; while(COMPANIES.some(c=>c.id==='C'+String(n).padStart(3,'0'))) n++; return 'C'+String(n).padStart(3,'0'); }
@@ -353,8 +354,23 @@ function renderGas(){ $('#appBody').innerHTML='<div class="fade"><h3 class="sec"
 function renderBilling(){ $('#appBody').innerHTML='<div class="fade"><h3 class="sec">Billing</h3><div class="card">Billing module is active and ready.</div></div>'; }
 function renderAdmin(){ state.view='admin'; refreshTop(); $('#navbar').innerHTML='<button class="on" onclick="renderAdmin()"><span class="ic">⚙️</span>Admin</button><button onclick="renderSettings()"><span class="ic">⚙️</span>Settings</button>'; $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">Administration</h3><div class="card"><div class="kv"><span class="l">All modules</span><b>Enabled</b></div><div class="kv"><span class="l">System mode</span><b>Live</b></div></div></div>`; }
 function renderMgr(){ state.view='dashboard'; refreshTop(); $('#navbar').innerHTML='<button class="on" onclick="renderMgr()"><span class="ic">▦</span>Dashboard</button><button onclick="renderSettings()"><span class="ic">⚙️</span>Settings</button>'; const m=metrics(scopeTxns()); $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">Station Dashboard</h3><div class="kpis"><div class="kpi wide"><div class="k">Revenue</div><div class="v">${money(m.sales)}</div><div class="u">${m.txns} processed</div></div><div class="kpi"><div class="k">CNG</div><div class="v">${m.cng.toFixed(1)}</div><div class="u">kg</div></div><div class="kpi"><div class="k">3-Wheeler</div><div class="v">${m.three}</div><div class="u">sales</div></div><div class="kpi"><div class="k">4-Wheeler</div><div class="v">${m.four}</div><div class="u">sales</div></div><div class="kpi"><div class="k">Denied</div><div class="v">${m.denied}</div><div class="u">entries</div></div><div class="kpi"><div class="k">Unique</div><div class="v">${m.unique}</div><div class="u">vehicles</div></div></div><div class="card"><div class="kv"><span class="l">Modules</span><b>${MODULES.filter(moduleIsActive).length}/${MODULES.length}</b></div><div class="kv"><span class="l">Status</span><b>All active</b></div></div></div>`; }
+
+function autoLoginManager(){
+  state.company = companyById('C001');
+  state.station = state.company.stations[0];
+  state.currentUser = { name: STATION_MANAGER, role: 'Manager', companyId: state.company.id, stationId: state.station.id };
+  state.role = 'Manager';
+  applyStationTheme(state.station);
+  refreshTop();
+  renderMgr();
+}
+
 function startApp(){ const appBody=$('#appBody'); if(!appBody){ return; }
-  state.company=companyById('C001'); state.station=state.company.stations[0]; applyStationTheme(state.station); refreshTop(); renderLogin(); }
+  state.company=companyById('C001');
+  state.station=state.company.stations[0];
+  applyStationTheme(state.station);
+  autoLoginManager();
+}
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', startApp); } else { startApp(); }
 </script>
 </body>
