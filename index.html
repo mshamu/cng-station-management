@@ -26,12 +26,10 @@
   .stage h2{color:#e2e8f0;font-size:14px;font-weight:600;margin:0;letter-spacing:.3px}
   .stage p.sub{color:#94a3b8;font-size:12px;margin:0 0 2px;max-width:360px;text-align:center}
 
-  /* phone frame */
   .phone{width:378px;height:772px;background:#000;border-radius:44px;padding:12px;box-shadow:0 30px 70px rgba(0,0,0,.55);position:relative}
   .notch{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:150px;height:26px;background:#000;border-radius:0 0 18px 18px;z-index:40}
   .screen{width:100%;height:100%;background:#F7F9F8;border-radius:33px;overflow:hidden;position:relative;display:flex;flex-direction:column}
 
-  /* app chrome */
   .topbar{background:linear-gradient(135deg,var(--green) 0%,var(--green-d) 100%);color:#fff;padding:34px 18px 14px;flex-shrink:0}
   .topbar .row{display:flex;justify-content:space-between;align-items:center}
   .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px}
@@ -45,16 +43,12 @@
   .body{flex:1;overflow-y:auto;padding:16px 16px 90px}
   .body::-webkit-scrollbar{width:0}
 
-  /* nav */
-  .nav{position:absolute;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:space-around;
-    padding:9px 6px 16px;flex-shrink:0;z-index:30}
+  .nav{position:absolute;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:9px 6px 16px;flex-shrink:0;z-index:30}
   .nav button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--muted);font-size:10px;font-weight:600;cursor:pointer;flex:1}
   .nav button .ic{font-size:19px;line-height:1}
   .nav button.on{color:var(--green)}
-  .fab{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green-d));color:#fff;
-    display:grid;place-items:center;font-size:26px;margin-top:-24px;box-shadow:0 8px 18px rgba(27,122,61,.5);border:3px solid #fff}
+  .fab{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green-d));color:#fff;display:grid;place-items:center;font-size:26px;margin-top:-24px;box-shadow:0 8px 18px rgba(27,122,61,.5);border:3px solid #fff}
 
-  /* generic */
   h3.sec{font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin:4px 0 10px;font-weight:700}
   .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
   .btn{width:100%;border:0;border-radius:14px;padding:15px;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
@@ -91,7 +85,6 @@
   .pill.warn{background:var(--amber-l);color:var(--amber)}
   .pill.bad{background:var(--red-l);color:var(--red)}
 
-  /* KPI tiles */
   .kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   .kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px}
   .kpi .k{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:700}
@@ -100,7 +93,6 @@
   .kpi.wide{grid-column:1/3;background:linear-gradient(135deg,var(--green),var(--green-d));border:0;color:#fff}
   .kpi.wide .k{color:rgba(255,255,255,.85)}.kpi.wide .v{color:#fff;font-size:28px}.kpi.wide .u{color:rgba(255,255,255,.85)}
 
-  /* camera */
   .cam{background:#111827;border-radius:16px;height:210px;position:relative;overflow:hidden;display:grid;place-items:center;margin-bottom:12px}
   .cam .frame{position:absolute;inset:26px 30px;border:2px dashed rgba(255,255,255,.55);border-radius:10px}
   .cam .plate{background:#f8fafc;border:3px solid #111;border-radius:7px;padding:8px 16px;font-weight:800;font-size:26px;letter-spacing:2px;color:#111;box-shadow:0 4px 10px rgba(0,0,0,.4);transform:rotate(-6deg)}
@@ -141,7 +133,6 @@
   .camimg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#0b1220;border-radius:16px}
   .thumb{width:46px;height:46px;border-radius:9px;object-fit:cover;flex-shrink:0;border:1px solid var(--line)}
 
-  /* ---- phone / small screens: run full-screen like a real app ---- */
   @media (max-width:820px){
     body{padding:0;gap:0;background:var(--green-d);display:block}
     .stage{width:100%;gap:0;margin-bottom:0}
@@ -157,7 +148,6 @@
     .phone{height:100vh}
   }
 
-  /* Responsive fixes */
   :root { --phone-w: 378px; }
   body { padding: 28px 14px; min-height: 100vh; }
   .stage { width: 100%; display: flex; flex-direction: column; align-items: center; }
@@ -201,20 +191,15 @@
 </head>
 <body>
 
-<!-- ============ SINGLE ROLE-GATED APP ============ -->
 <div class="stage">
   <h2 id="stageCap">Green Gas CNG</h2>
   <div class="phone">
     <div class="notch"></div>
     <div class="screen">
-      <div class="topbar" id="topbar"><!-- role-based header injected --></div>
-
-      <div class="body" id="appBody"><!-- screens injected --></div>
-
+      <div class="topbar" id="topbar"></div>
+      <div class="body" id="appBody"></div>
       <input type="file" id="camInput" accept="image/*" capture="environment" style="display:none" onchange="onPhoto(event)">
-
-      <div class="nav" id="navbar"><!-- role-based nav injected --></div>
-
+      <div class="nav" id="navbar"></div>
       <div class="toast" id="toast"></div>
     </div>
   </div>
@@ -222,23 +207,20 @@
 </div>
 
 <script>
-
-/* ================= PLATFORM / MULTI-TENANT CONFIG ================= */
-let PLATFORM_NAME = 'Energy Station Platform';   // configurable, not branded to one company
-// Companies (tenants) — each fully isolated. CNG is Version 1; energyTypes is configurable.
+let PLATFORM_NAME = 'Energy Station Platform';
 const COMPANIES = [
-  { id:'C001', name:'Green Gas CNG', trading:'Green Gas', country:'Tanzania', currency:'TZS',
-    color:'#1B7A3D', colorD:'#14532D', energyTypes:['CNG'], pricePerKg:1550, pointsPerKg:1,
-    stations:[ {id:'S01',code:'GG-MAIN',name:'Main Station',status:'Active',color:'#1B7A3D',colorDark:'#14532D'},
-               {id:'S02',code:'GG-MIKO',name:'Mikocheni',status:'Active',color:'#0F766E',colorDark:'#115E59'} ],
+  { id:'C001', name:'Green Gas CNG', trading:'Green Gas', country:'Tanzania', currency:'TZS', color:'#1B7A3D', colorD:'#14532D', energyTypes:['CNG'], pricePerKg:1550, pointsPerKg:1,
+    stations:[ {id:'S01',code:'GG-MAIN',name:'Main Station',status:'Active',color:'#1B7A3D',colorDark:'#14532D',logo:'GG',logoBg:'#E6F4EA'},
+               {id:'S02',code:'GG-MIKO',name:'Mikocheni',status:'Active',color:'#0F766E',colorDark:'#115E59',logo:'MK',logoBg:'#DCFCE7'}],
     licences:[ {name:'EWURA Operating Licence', number:'EWURA/CNG/2024/012', issuer:'EWURA', issued:'2024-01-15', expiry:'2026-12-31', fileName:'ewura_licence.pdf', fileData:null},
                 {name:'Fire Safety Certificate', number:'FIRE/2025/220', issuer:'Fire & Rescue Force', issued:'2025-03-01', expiry:'2026-03-01', fileName:'fire_cert.pdf', fileData:null},
                 {name:'Meter Calibration Certificate', number:'WMA/2025/44', issuer:'Weights & Measures Agency', issued:'2025-06-01', expiry:'2026-06-01', fileName:'meter_cal.pdf', fileData:null},
-                {name:'Business Licence', number:'BRELA/2024/9981', issuer:'BRELA', issued:'2024-01-10', expiry:'2027-01-10', fileName:'', fileData:null} ] },
-  { id:'C002', name:'BlueFuel Energy', trading:'BlueFuel', country:'Tanzania', currency:'TZS',
-    color:'#1D4E89', colorD:'#0f2f57', energyTypes:['CNG','LNG'], pricePerKg:1600, pointsPerKg:2,
-    stations:[ {id:'S01',code:'BF-DOD',name:'Dodoma 01',status:'Active',color:'#1D4E89',colorDark:'#0f2f57'} ],
-    licences:[ {name:'EWURA Operating Licence', number:'EWURA/CNG/2025/077', issuer:'EWURA', issued:'2025-02-01', expiry:'2027-02-01', fileName:'', fileData:null} ] }
+                {name:'Business Licence', number:'BRELA/2024/9981', issuer:'BRELA', issued:'2024-01-10', expiry:'2027-01-10', fileName:'', fileData:null} ],
+    defaultBranding:{logo:'GG', logoBg:'#E6F4EA'} },
+  { id:'C002', name:'BlueFuel Energy', trading:'BlueFuel', country:'Tanzania', currency:'TZS', color:'#1D4E89', colorD:'#0f2f57', energyTypes:['CNG','LNG'], pricePerKg:1600, pointsPerKg:2,
+    stations:[ {id:'S01',code:'BF-DOD',name:'Dodoma 01',status:'Active',color:'#1D4E89',colorDark:'#0f2f57',logo:'BF',logoBg:'#DBEAFE'} ],
+    licences:[ {name:'EWURA Operating Licence', number:'EWURA/CNG/2025/077', issuer:'EWURA', issued:'2025-02-01', expiry:'2027-02-01', fileName:'', fileData:null} ],
+    defaultBranding:{logo:'BF', logoBg:'#DBEAFE'} }
 ];
 function companyById(id){ return COMPANIES.find(c=>c.id===id)||COMPANIES[0]; }
 function mixWithWhite(hex, ratio) {
@@ -268,47 +250,15 @@ function applyStationTheme(station) {
   const tb = document.getElementById('topbar');
   if (tb) tb.style.background = `linear-gradient(135deg, ${color} 0%, ${dark} 100%)`;
 }
-// ---- SaaS subscription plans (monthly, TZS) ----
-const PLANS=[
-  {id:'trial',name:'Free Trial (14 days)',monthly:0,seats:5,stations:1,tag:'Try it'},
-  {id:'standard',name:'Standard',monthly:250000,seats:15,stations:2,tag:'Single station'},
-  {id:'pro',name:'Pro',monthly:600000,seats:50,stations:10,tag:'Growing operator'},
-  {id:'enterprise',name:'Enterprise',monthly:0,seats:9999,stations:9999,custom:true,tag:'Custom / contact us'}
-];
-function planById(id){ return PLANS.find(p=>p.id===id)||PLANS[0]; }
-function subDaysLeft(c){ const s=c&&c.subscription; if(!s||!s.trialEndsOn)return null; return Math.ceil((new Date(s.trialEndsOn)-new Date())/864e5); }
-function subActive(c){ c=c||state.company; if(!c||!c.subscription)return true; const s=c.subscription; if(s.status==='Active')return true; if(s.status==='Trial'){ const d=subDaysLeft(c); return d===null || d>0; } return false; }
-(function seedSubs(){ const now=new Date(); const trialEnd=new Date(now.getTime()+14*864e5).toISOString().slice(0,10);
-  COMPANIES.forEach(c=>{ if(!c.subscription) c.subscription={plan:'trial',status:'Trial',trialEndsOn:trialEnd,monthly:0,since:now.toISOString().slice(0,10)}; });
-  companyById('C001').subscription={plan:'pro',status:'Active',trialEndsOn:'',monthly:600000,since:'2026-01-01'};
-  companyById('C002').subscription={plan:'trial',status:'Trial',trialEndsOn:trialEnd,monthly:0,since:now.toISOString().slice(0,10)};
-})();
-function price(){ return state.company?state.company.pricePerKg:1550; }
-function pts(){ return state.company?state.company.pointsPerKg:1; }
-function cur(){ return state.company?state.company.currency:'TZS'; }
-// Platform module catalog (§58) — Active modules map to built screens; others are Version-1 roadmap
-const MODULES = [
-  {k:'ops',name:'Operations',icon:'🛠️',status:'Active'},{k:'gas',name:'Gas & Reconciliation',icon:'🛢️',status:'Active'},
-  {k:'sales',name:'Sales & Dispensing',icon:'⛽',status:'Active'},{k:'customers',name:'Customers',icon:'👥',status:'Active'},
-  {k:'loyalty',name:'Loyalty',icon:'⭐',status:'Active'},{k:'care',name:'Customer Care',icon:'📞',status:'Planned'},
-  {k:'maint',name:'Maintenance',icon:'🔧',status:'Planned'},{k:'inv',name:'Inventory',icon:'📦',status:'Planned'},
-  {k:'hse',name:'HSE & Safety',icon:'🦺',status:'Planned'},{k:'comp',name:'Compliance',icon:'📜',status:'Planned'},
-  {k:'staff',name:'Staff & Shifts',icon:'🧑',status:'Active'},{k:'fin',name:'Finance',icon:'💰',status:'Active'},
-  {k:'inc',name:'Incidents',icon:'⚠️',status:'Planned'},{k:'iot',name:'IoT / Equipment',icon:'📡',status:'Planned'},
-  {k:'analytics',name:'Analytics',icon:'📈',status:'Active'},{k:'reports',name:'Reports',icon:'📊',status:'Active'},
-  {k:'recon',name:'Reconciliations',icon:'🧮',status:'Active'},{k:'settings',name:'Settings',icon:'⚙️',status:'Active'}
-];
-
-/* ================= STATION MASTER DATA ================= */
-const ATTENDANTS = [
-  'Salha Mohamed Duge','Mary Aloyce Shio','Magreth Selemani Adamu','Sunday Alfred Mmanda',
-  'Rajabu Shija Rajabu','Rashid Haji Simtitu','Swaumu Abubakari Kidindi','Beatrice Nasiph Kinyau',
-  'Pius Maberi Phares','Johnson Noel Koroto'
-];
-const SHIFTS = [
-  {name:'Day',   time:'08:00 – 18:30', start:'08:00', end:'18:30'},
-  {name:'Night', time:'18:30 – 08:00', start:'18:30', end:'08:00'}
-];
+function getStationLogo(station, company){
+  const st = station || state.station;
+  const c = company || state.company || COMPANIES[0];
+  const brand = st?.logo || c.defaultBranding?.logo || (c.name||'').slice(0,2).toUpperCase();
+  const bg = st?.logoBg || c.defaultBranding?.logoBg || '#E6F4EA';
+  return {brand, bg};
+}
+const ATTENDANTS = ['Salha Mohamed Duge','Mary Aloyce Shio','Magreth Selemani Adamu','Sunday Alfred Mmanda','Rajabu Shija Rajabu','Rashid Haji Simtitu','Swaumu Abubakari Kidindi','Beatrice Nasiph Kinyau','Pius Maberi Phares','Johnson Noel Koroto'];
+const SHIFTS = [{name:'Day', time:'08:00 – 18:30', start:'08:00', end:'18:30'},{name:'Night', time:'18:30 – 08:00', start:'18:30', end:'08:00'}];
 const STATION_MANAGER = 'Erick Hussein Mshamu';
 const MANAGER_PIN = '1234';
 const PROVIDERS = ['Mixx by Yas','Airtel Money','Selcom','M-Pesa','HaloPesa','T-Pesa'];
@@ -316,40 +266,23 @@ const PAY_CHANNELS = ['Cash', ...PROVIDERS, 'Account (Credit)'];
 const PERMITS = ['Active','Valid','Inactive','Invalid','Expired'];
 const PERMIT_OK = ['Active','Valid'];
 const BAJAJ_TYPES = ['TVS King Bajaj','Other Bajaj'];
-const BULK_POSTS = ['Bulk Post 1','Bulk Post 2'];   // industrial gas take-off points
+const BULK_POSTS = ['Bulk Post 1','Bulk Post 2'];
 const KG_MIN = 0.5, KG_MAX = 25;
-// Real-time date/time taken directly from the phone / device clock
-function deviceDate(){ const n=new Date(); return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0'); }
-function deviceTime(){ const n=new Date(); return String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0'); }
-const TODAY = deviceDate();   // demo data is dated to the device's current day
-// Synchronization states (Attendant → central store → Manager)
+const TODAY = new Date().toISOString().slice(0,10);
 const SYNC = { PENDING:'Pending Synchronization', SYNCING:'Synchronizing', SYNCED:'Synchronized', FAILED:'Synchronization Failed' };
 function syncShort(s){ return s.replace('Pending Synchronization','Pending sync').replace('Synchronizing','Syncing').replace('Synchronization Failed','Sync failed'); }
-function syncBadge(s){ const cls={[SYNC.SYNCED]:'ok',[SYNC.PENDING]:'warn',[SYNC.SYNCING]:'warn',[SYNC.FAILED]:'bad'}[s]||'warn';
-  const ic={[SYNC.SYNCED]:'✓',[SYNC.PENDING]:'⟳',[SYNC.SYNCING]:'⟳',[SYNC.FAILED]:'⚠'}[s]||'•'; return `<span class="pill ${cls}">${ic} ${syncShort(s)}</span>`; }
-const SYNC_INTERVAL_MS = 3000;   // Manager live auto-refresh cadence (configurable, no code change)
-const DEMO_INTERVAL_MS = 5000;   // Live-demo: simulate an incoming attendant sale every N ms
-
-function classify(p){ const s=(p||'').toUpperCase().replace(/[^A-Z0-9]/g,''); if(s.startsWith('MC'))return'Three-Wheeler'; if(s.startsWith('T'))return'Four-Wheeler'; return''; }
-const isThree = t => t==='Three-Wheeler';
-function typeIcon(t){ return isThree(t)?'🛺':'🚗'; }
-function typeShort(t){ return isThree(t)?'3-Wheeler':'4-Wheeler'; }
-function permitOK(s){ return PERMIT_OK.includes(s); }
-
+function syncBadge(s){ const cls={[SYNC.SYNCED]:'ok',[SYNC.PENDING]:'warn',[SYNC.SYNCING]:'warn',[SYNC.FAILED]:'bad'}[s]||'warn'; const ic={[SYNC.SYNCED]:'✓',[SYNC.PENDING]:'⟳',[SYNC.SYNCING]:'⟳',[SYNC.FAILED]:'⚠'}[s]||'•'; return `<span class="pill ${cls}">${ic} ${syncShort(s)}</span>`; }
 const state = {
-  company:null, station:null, platformAdmin:false,   // tenant context
+  company:null, station:null, platformAdmin:false,
   role:null, attendant:ATTENDANTS[0], shift:'Day', shiftDate:TODAY, shiftStart:'08:00', shiftStarted:false,
   seq:0, memberSeq:2000, txns:[], nozzles:['Nozzle 1','Nozzle 2','Nozzle 3','Nozzle 4'], draft:null, view:'home',
   filter:{date:'All',attendant:'All',shift:'All',type:'All',payment:'All',permit:'All',bajaj:'All',loyalty:'All',q:''},
   central:{lastSync:null,lastRec:null}, mgrTimer:null,
   dataVersion:0, lastRenderVersion:-1, demoLive:false, demoTimer:null,
-  currentUser:null, users:[], loginFail:0,     // authentication
-  // Integration health (demo: device links are configurable/simulated; real ones need hardware+credentials)
-  integrations:{ Internet:'Online', Database:'Online', Synchronization:'Online',
-    POS:'Configuration required', 'VFD / Fiscal':'Configuration required', 'RFID reader':'Configuration required', 'Payment gateway':'Configuration required' },
+  currentUser:null, users:[], loginFail:0,
+  integrations:{ Internet:'Online', Database:'Online', Synchronization:'Online', POS:'Configuration required', 'VFD / Fiscal':'Configuration required', 'RFID reader':'Configuration required', 'Payment gateway':'Configuration required' },
   rfids:[], receiptSeq:1000, focalTimer:null
 };
-/* ---- Passwords: hashed (demo hash stands in for bcrypt/Argon2 server-side); never stored/shown in plain text ---- */
 function hashPw(s){ let h=5381; s=String(s); for(let i=0;i<s.length;i++){ h=((h<<5)+h+s.charCodeAt(i))|0; } return 'h'+((h>>>0).toString(16)); }
 (function seedUsers(){
   const mk=(o)=>{ o.passwordHash=hashPw(o.password||'1234'); delete o.password; o.status=o.status||'Active'; o.lastLogin=null; state.users.push(o); };
@@ -363,551 +296,120 @@ function hashPw(s){ let h=5381; s=String(s); for(let i=0;i<s.length;i++){ h=((h<
   mk({companyId:'C002', fullName:'BlueFuel Admin', username:'admin', employeeId:'BF-ADM', station:'S01', role:'Administrator', mustChange:false});
 })();
 function newMembershipId(){ state.memberSeq++; return 'GG-'+state.memberSeq; }
-
-/* ================= TRANSACTION MODEL + SEED ================= */
+function classify(p){ const s=(p||'').toUpperCase().replace(/[^A-Z0-9]/g,''); if(s.startsWith('MC'))return'Three-Wheeler'; if(s.startsWith('T'))return'Four-Wheeler'; return''; }
+const isThree = t => t==='Three-Wheeler';
+function typeShort(t){ return isThree(t)?'3-Wheeler':'4-Wheeler'; }
+function permitOK(s){ return PERMIT_OK.includes(s); }
 function buildRec(o){
   const comp = companyById(o.companyId||'C001');
   const type = o.type || classify(o.plate) || 'Four-Wheeler';
   const denied = !!o.denied;
   const industrial = o.mode==='Industrial';
-  const kg = denied?0:(industrial?+Math.max(0,(+o.meterEnd||0)-(+o.meterStart||0)).toFixed(2):(+o.kg||0));
-  const unit = (industrial && +o.negPrice>0)?+o.negPrice:comp.pricePerKg;
+  const kg = denied ? 0 : (industrial ? +Math.max(0,(+o.meterEnd||0)-(+o.meterStart||0)).toFixed(2) : (+o.kg||0));
+  const unit = (industrial && +o.negPrice>0) ? +o.negPrice : comp.pricePerKg;
   const member = isThree(type) && (o.bajajStatus==='Member' || o.bajajType==='TVS King Bajaj');
-  const loyaltyStatus = member?'Member':'Non-member';
+  const loyaltyStatus = member ? 'Member' : 'Non-member';
   const membershipId = member ? (o.membershipId||'') : '';
   const points = (member && !denied && permitOK(o.permit)) ? +(kg*comp.pointsPerKg).toFixed(2) : 0;
-  const source = o.source || (industrial?'Bulk Post':(o.rfid?'RFID':'Dispenser'));
-  const txType = o.txType || (industrial?'Bulk CNG':'Retail CNG');
+  const source = o.source || (industrial ? 'Bulk Post' : (o.rfid ? 'RFID' : 'Dispenser'));
+  const txType = o.txType || (industrial ? 'Bulk CNG' : 'Retail CNG');
   state.receiptSeq = (state.receiptSeq||1000)+1; const receiptNo='RCP-'+state.receiptSeq;
-  const payStatus = denied?'—':(o.pay==='Account (Credit)'?'Pending':(o.paymentStatus||'Received'));
-  const vfdStatus = denied?'—':((state.integrations&&state.integrations['VFD / Fiscal']==='Online')?'Fiscalized':'Pending');
-  const posRef = denied?'':((state.integrations&&state.integrations.POS==='Online')?'POS-'+state.receiptSeq:'');
-  return {
-    source, txType, rfid:o.rfid||'', paymentStatus:payStatus, posRef, vfdStatus, receiptNo,
-    companyId:comp.id, stationId:o.stationId||'S01', tenantId:comp.id,
-    id:comp.id+'-'+(o.stationId||'S01')+'-'+(o.date||state.shiftDate).replace(/-/g,'')+'-'+String(state.seq).padStart(4,'0'),
-    date:o.date, time:o.time, attendant:o.att, shift:o.shift, shiftStart:(SHIFTS.find(s=>s.name===o.shift)||SHIFTS[0]).start,
-    mode:industrial?'Industrial':'Retail', meterStart:(+o.meterStart||null), meterEnd:(+o.meterEnd||null),
-    pressure:o.pressure||'', temperature:o.temperature||'', negotiated:(industrial && unit!==comp.pricePerKg),
-    customerAccount:o.customerAccount||'', trailerId:o.trailerId||'',
-    photos:o.photos||[], confirmed:!!o.confirmed, confirmedBy:o.confirmedBy||'',
-    plate:o.plate, type,
-    driver:o.driver||'', phone:o.phone||'',
-    bajajStatus:isThree(type)?(o.bajajStatus||''):'', bajajType:isThree(type)?(o.bajajType||''):'',
-    loyaltyStatus, membershipId, points,
-    kg, unitPrice:unit, amount:Math.round(kg*unit),
-    permit:o.permit||'Active', denied,
-    reason:denied?(o.reason||'Not refilled'):'', remarks:o.remarks||'',
-    pay:denied?'—':o.pay, provider:(o.pay==='Mobile Money')?(o.prov||'M-Pesa'):'',
-    nozzle:denied?'—':(o.noz||'Nozzle 1'), method:o.method||'ANPR/OCR', conf:o.conf||0.9, photo:(o.photos&&o.photos[0])||o.photo||null, status:'Completed',
-    syncStatus:o.sync||SYNC.SYNCED, syncAt:o.syncAt||((o.date||TODAY)+' '+(o.time||''))
-  };
+  const payStatus = denied ? '—' : (o.pay === 'Account (Credit)' ? 'Pending' : (o.paymentStatus || 'Received'));
+  const vfdStatus = denied ? '—' : ((state.integrations && state.integrations['VFD / Fiscal'] === 'Online') ? 'Fiscalized' : 'Pending');
+  const posRef = denied ? '' : ((state.integrations && state.integrations.POS === 'Online') ? 'POS-' + state.receiptSeq : '');
+  return { source, txType, rfid:o.rfid || '', paymentStatus:payStatus, posRef, vfdStatus, receiptNo, companyId:comp.id, stationId:o.stationId || 'S01', tenantId:comp.id, id:comp.id+'-'+(o.stationId||'S01')+'-'+(o.date||state.shiftDate).replace(/-/g,'')+'-'+String(state.seq).padStart(4,'0'), date:o.date, time:o.time, attendant:o.att, shift:o.shift, shiftStart:(SHIFTS.find(s=>s.name===o.shift)||SHIFTS[0]).start, mode:industrial?'Industrial':'Retail', meterStart:(+o.meterStart||null), meterEnd:(+o.meterEnd||null), pressure:o.pressure||'', temperature:o.temperature||'', negotiated:(industrial && unit !== comp.pricePerKg), customerAccount:o.customerAccount||'', trailerId:o.trailerId||'', photos:o.photos||[], confirmed:!!o.confirmed, confirmedBy:o.confirmedBy||'', plate:o.plate, type, driver:o.driver||'', phone:o.phone||'', bajajStatus:isThree(type)?(o.bajajStatus||''):'', bajajType:isThree(type)?(o.bajajType||''):'', loyaltyStatus, membershipId, points, kg, unitPrice:unit, amount:Math.round(kg*unit), permit:o.permit || 'Active', denied, reason:denied ? (o.reason||'Not refilled') : '', remarks:o.remarks || '', pay:denied ? '—' : o.pay, provider:(o.pay==='Mobile Money') ? (o.prov || 'M-Pesa') : '', nozzle:denied ? '—' : (o.noz || 'Nozzle 1'), method:o.method || 'ANPR/OCR', conf:o.conf || 0.9, photo:(o.photos && o.photos[0]) || o.photo || null, status:'Completed', syncStatus:o.sync || SYNC.SYNCED, syncAt:o.syncAt || ((o.date||TODAY)+' '+(o.time||'')) };
 }
 function S(o){ o.companyId=o.companyId||'C001'; o.stationId=o.stationId||'S01'; state.seq++; if(o.bajajStatus==='Member'&&!o.membershipId)o.membershipId=newMembershipId(); if(o.bajajType==='TVS King Bajaj'&&!o.membershipId)o.membershipId=newMembershipId(); const r=buildRec(o); state.txns.push(r); return r; }
-
-// Salha · Day
 S({date:TODAY,time:'08:31',att:'Salha Mohamed Duge',shift:'Day',plate:'MC 332 KDR',kg:3.2,pay:'Mobile Money',prov:'Mixx by Yas',noz:'Nozzle 1',permit:'Active',bajajStatus:'Member',membershipId:'GG-1001',driver:'Juma Ally',phone:'0712 300111'});
 S({date:TODAY,time:'08:52',att:'Salha Mohamed Duge',shift:'Day',plate:'T 564 PQR',kg:9.1,pay:'Cash',noz:'Nozzle 2',permit:'Valid',driver:'Neema Paul',phone:'0754 220145'});
 S({date:TODAY,time:'09:20',att:'Salha Mohamed Duge',shift:'Day',plate:'MC 109 JHT',kg:2.8,pay:'Mobile Money',prov:'M-Pesa',noz:'Nozzle 1',permit:'Active',bajajStatus:'Not member',bajajType:'TVS King Bajaj',driver:'Hassan Mfaume',phone:'0711 998833'});
 S({date:TODAY,time:'09:41',att:'Salha Mohamed Duge',shift:'Day',plate:'T 908 ZXC',kg:8.4,pay:'Mobile Money',prov:'Airtel Money',noz:'Nozzle 3',permit:'Valid'});
 S({date:TODAY,time:'10:05',att:'Salha Mohamed Duge',shift:'Day',plate:'MC 745 BVN',kg:3.0,pay:'Cash',noz:'Nozzle 2',permit:'Active',bajajStatus:'Not member',bajajType:'Other Bajaj',driver:'Halima Ngoma',phone:'0788 440771'});
 S({date:TODAY,time:'10:30',att:'Salha Mohamed Duge',shift:'Day',plate:'T 118 ABC',denied:true,permit:'Expired',reason:'No Valid Permit – Not Refilled',remarks:'Permit expired'});
-// Mary · Day
 S({date:TODAY,time:'08:44',att:'Mary Aloyce Shio',shift:'Day',plate:'T 220 FDG',kg:10.2,pay:'Mobile Money',prov:'Selcom',noz:'Nozzle 4',permit:'Active'});
 S({date:TODAY,time:'09:15',att:'Mary Aloyce Shio',shift:'Day',plate:'MC 540 PLI',kg:2.5,pay:'Cash',noz:'Nozzle 1',permit:'Active',bajajStatus:'Member',membershipId:'GG-1002',driver:'Frank Mushi',phone:'0756 311899'});
 S({date:TODAY,time:'11:02',att:'Mary Aloyce Shio',shift:'Day',plate:'MC 332 KDR',kg:3.1,pay:'Mobile Money',prov:'HaloPesa',noz:'Nozzle 1',permit:'Active',bajajStatus:'Member',membershipId:'GG-1001',driver:'Juma Ally',phone:'0712 300111'});
-// Rajabu · Night
 S({date:TODAY,time:'19:10',att:'Rajabu Shija Rajabu',shift:'Night',plate:'T 771 ZZA',kg:7.6,pay:'Mobile Money',prov:'T-Pesa',noz:'Nozzle 2',permit:'Valid'});
 S({date:TODAY,time:'20:22',att:'Rajabu Shija Rajabu',shift:'Night',plate:'MC 880 QWE',kg:2.9,pay:'Cash',noz:'Nozzle 3',permit:'Active',bajajStatus:'Not member',bajajType:'TVS King Bajaj',driver:'Asha Ramadhani',phone:'0786 900120'});
 S({date:TODAY,time:'21:05',att:'Rajabu Shija Rajabu',shift:'Night',plate:'MC 301 RTY',denied:true,permit:'Invalid',reason:'No Valid Permit – Not Refilled',remarks:'Invalid permit'});
-// Rashid · Night
 S({date:TODAY,time:'22:15',att:'Rashid Haji Simtitu',shift:'Night',plate:'T 450 BNM',kg:11.0,pay:'Mobile Money',prov:'M-Pesa',noz:'Nozzle 4',permit:'Active'});
 S({date:TODAY,time:'23:40',att:'Rashid Haji Simtitu',shift:'Night',plate:'T 450 BNM',kg:6.2,pay:'Cash',noz:'Nozzle 4',permit:'Valid'});
-// ---- Company B (BlueFuel Energy) seeds — demonstrates tenant isolation ----
 S({companyId:'C002',stationId:'S01',date:TODAY,time:'09:05',att:'Pius Maberi Phares',shift:'Day',plate:'T 300 BLU',kg:8.0,pay:'Cash',noz:'Nozzle 1',permit:'Active'});
 S({companyId:'C002',stationId:'S01',date:TODAY,time:'10:12',att:'Johnson Noel Koroto',shift:'Day',plate:'MC 410 BLU',kg:3.5,pay:'Mobile Money',prov:'Airtel Money',noz:'Nozzle 2',permit:'Valid',bajajStatus:'Not member',bajajType:'Other Bajaj',driver:'Mbaraka Saleh',phone:'0734 128900'});
 S({companyId:'C002',stationId:'S01',date:TODAY,time:'11:40',att:'Pius Maberi Phares',shift:'Day',plate:'T 512 BLU',kg:12.0,pay:'Mobile Money',prov:'M-Pesa',noz:'Nozzle 1',permit:'Active'});
-
-// central store initial state (all seeds already synchronized)
 (function(){ const last=state.txns[state.txns.length-1]; state.central.lastSync=last?last.syncAt:null; state.central.lastRec=last||null; })();
-
-/* ================= HELPERS ================= */
 const $=s=>document.querySelector(s);
 const money=n=>cur()+' '+Math.round(n).toLocaleString('en-US');
 const sum=(a,f)=>a.reduce((s,x)=>s+f(x),0);
 const uniq=a=>new Set(a.map(x=>x.plate)).size;
 function toast(html,ms=2200){const t=$('#toast');if(!t)return;t.innerHTML=html;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),ms);}
 function dl(href,name){const a=document.createElement('a');a.href=href;a.download=name;document.body.appendChild(a);a.click();a.remove();}
-function channel(x){ if(x.pay==='Cash')return'Cash'; if(x.pay==='Mobile Money')return x.provider; if(x.pay==='Account (Credit)')return'Account (Credit)'; return'—'; }
+function price(){ return state.company ? state.company.pricePerKg : 1550; }
+function cur(){ return state.company ? state.company.currency : 'TZS'; }
 function completed(arr){ return arr.filter(x=>x.status==='Completed'); }
-// ---- Tenant isolation: only records for the signed-in company + station ----
 function inTenant(x){ return state.company && x.companyId===state.company.id && (!state.station || x.stationId===state.station.id); }
 function scopeTxns(){ return state.txns.filter(inTenant); }
 function mine(){ return scopeTxns().filter(x=>x.attendant===state.attendant && x.shift===state.shift && x.date===state.shiftDate); }
 function isMember(x){ return x.loyaltyStatus==='Member'; }
-
-function metrics(arr){
-  const comp=completed(arr);
-  const refilled=comp.filter(x=>!x.denied);
-  const denied=comp.filter(x=>x.denied);
-  const tw=refilled.filter(x=>isThree(x.type)), fw=refilled.filter(x=>!isThree(x.type));
-  const members=refilled.filter(isMember);
-  const memberIds=new Set(members.map(x=>x.membershipId||x.plate));
-  return {
-    total:comp.length, refilled, denied,
-    n:refilled.length, kg:sum(refilled,x=>x.kg), sales:sum(refilled,x=>x.amount), unique:uniq(refilled),
-    avgKg:refilled.length?sum(refilled,x=>x.kg)/refilled.length:0,
-    avgVal:refilled.length?sum(refilled,x=>x.amount)/refilled.length:0,
-    twN:tw.length,twU:uniq(tw),twKg:sum(tw,x=>x.kg),twSales:sum(tw,x=>x.amount),
-    fwN:fw.length,fwU:uniq(fw),fwKg:sum(fw,x=>x.kg),fwSales:sum(fw,x=>x.amount),
-    deniedN:denied.length, deniedTW:denied.filter(x=>isThree(x.type)).length, deniedFW:denied.filter(x=>!isThree(x.type)).length,
-    cash:sum(refilled.filter(x=>x.pay==='Cash'),x=>x.amount),
-    mobile:sum(refilled.filter(x=>x.pay==='Mobile Money'),x=>x.amount),
-    membersServed:memberIds.size, pointsAwarded:sum(refilled,x=>x.points),
-    tvsN:refilled.filter(x=>x.bajajType==='TVS King Bajaj').length,
-    otherN:refilled.filter(x=>x.bajajType==='Other Bajaj').length,
-    permitOKn:comp.filter(x=>permitOK(x.permit)).length,
-    permitIssueN:comp.filter(x=>!permitOK(x.permit)).length
-  };
-}
+function metrics(arr){ const comp=completed(arr); const refilled=comp.filter(x=>!x.denied); const denied=comp.filter(x=>x.denied); const tw=refilled.filter(x=>isThree(x.type)), fw=refilled.filter(x=>!isThree(x.type)); const members=refilled.filter(isMember); const memberIds=new Set(members.map(x=>x.membershipId||x.plate)); return { total:comp.length, refilled, denied, n:refilled.length, kg:sum(refilled,x=>x.kg), sales:sum(refilled,x=>x.amount), unique:uniq(refilled), avgKg:refilled.length?sum(refilled,x=>x.kg)/refilled.length:0, avgVal:refilled.length?sum(refilled,x=>x.amount)/refilled.length:0, twN:tw.length,twU:uniq(tw),twKg:sum(tw,x=>x.kg),twSales:sum(tw,x=>x.amount), fwN:fw.length,fwU:uniq(fw),fwKg:sum(fw,x=>x.kg),fwSales:sum(fw,x=>x.amount), deniedN:denied.length, deniedTW:denied.filter(x=>isThree(x.type)).length, deniedFW:denied.filter(x=>!isThree(x.type)).length, cash:sum(refilled.filter(x=>x.pay==='Cash'),x=>x.amount), mobile:sum(refilled.filter(x=>x.pay==='Mobile Money'),x=>x.amount), membersServed:memberIds.size, pointsAwarded:sum(refilled,x=>x.points), tvsN:refilled.filter(x=>x.bajajType==='TVS King Bajaj').length, otherN:refilled.filter(x=>x.bajajType==='Other Bajaj').length, permitOKn:comp.filter(x=>permitOK(x.permit)).length, permitIssueN:comp.filter(x=>!permitOK(x.permit)).length }; }
 function permitCounts(arr){ const c={}; PERMITS.forEach(p=>c[p]=0); completed(arr).forEach(x=>c[x.permit]=(c[x.permit]||0)+1); return c; }
-
-/* ---- Synchronization engine (Attendant → central store → Manager) ---- */
 function nowStamp(){ return state.shiftDate+' '+clock(); }
 function commitToCentral(rec){ rec.syncStatus=SYNC.SYNCED; rec.syncAt=nowStamp(); state.central.lastSync=rec.syncAt; state.central.lastRec=rec; bumpData(); uiSyncTick(rec); }
-function scheduleSync(rec){
-  setTimeout(()=>{ rec.syncStatus=SYNC.SYNCING; uiSyncTick(rec);
-    setTimeout(()=>{
-      if(Math.random()<0.12){ rec.syncStatus=SYNC.FAILED; bumpData(); uiSyncTick(rec);
-        setTimeout(()=>{ commitToCentral(rec); }, 1600);
-      } else { commitToCentral(rec); }
-    }, 800);
-  }, 700);
-}
-function uiSyncTick(rec){
-  if($('#succSync_'+rec.id)) $('#succSync_'+rec.id).innerHTML=syncBadge(rec.syncStatus);
-  if(state.role==='attendant' && state.view==='list') renderList();
-  if(state.role==='manager' && $('#syncPanel')) $('#syncPanel').innerHTML=syncPanelHTML();
-}
+function scheduleSync(rec){ setTimeout(()=>{ rec.syncStatus=SYNC.SYNCING; uiSyncTick(rec); setTimeout(()=>{ if(Math.random()<0.12){ rec.syncStatus=SYNC.FAILED; bumpData(); uiSyncTick(rec); setTimeout(()=>{ commitToCentral(rec); },1600);} else { commitToCentral(rec);} },800); },700); }
+function uiSyncTick(rec){ if($('#succSync_'+rec.id)) $('#succSync_'+rec.id).innerHTML=syncBadge(rec.syncStatus); if(state.role==='attendant' && state.view==='list') renderList(); if(state.role==='manager' && $('#syncPanel')) $('#syncPanel').innerHTML=syncPanelHTML(); }
 function syncCounts(){ const c={}; Object.values(SYNC).forEach(s=>c[s]=0); scopeTxns().forEach(x=>{ c[x.syncStatus]=(c[x.syncStatus]||0)+1; }); return c; }
 function activeAttendants(){ return new Set(completed(scopeTxns()).map(x=>x.attendant)).size; }
-function syncPanelHTML(){ const c=syncCounts(); const pending=(c[SYNC.PENDING]||0)+(c[SYNC.SYNCING]||0); const last=state.central.lastRec; const failed=c[SYNC.FAILED]||0;
-  return `<div class="rowb"><span>Connection</span><b><span class="pill ok">🟢 Connected</span></b></div>
-    <div class="rowb"><span>Active attendants</span><b>${activeAttendants()}</b></div>
-    <div class="rowb"><span>Last successful sync</span><b>${state.central.lastSync||'—'}</b></div>
-    <div class="rowb"><span>Transactions received</span><b>${c[SYNC.SYNCED]||0}</b></div>
-    <div class="rowb"><span>Pending / synchronizing</span><b style="color:var(--amber)">${pending}</b></div>
-    <div class="rowb"><span>Failed synchronization</span><b style="color:var(--red)">${failed}</b></div>
-    <div class="rowb"><span>Last transaction received</span><b>${last?last.id+' · '+last.attendant.split(' ')[0]+' · '+last.time:'—'}</b></div>
-    <div class="rowb"><span>Reconciliation</span><b>${pending+failed===0?'<span class="pill ok">✓ In sync</span>':'<span class="pill warn">'+(pending+failed)+' awaiting</span>'}</b></div>`;
-}
-
-/* ---- Live Manager Dashboard engine ---- */
+function syncPanelHTML(){ const c=syncCounts(); const pending=(c[SYNC.PENDING]||0)+(c[SYNC.SYNCING]||0); const last=state.central.lastRec; const failed=c[SYNC.FAILED]||0; return `<div class="rowb"><span>Connection</span><b><span class="pill ok">🟢 Connected</span></b></div><div class="rowb"><span>Active attendants</span><b>${activeAttendants()}</b></div><div class="rowb"><span>Last successful sync</span><b>${state.central.lastSync||'—'}</b></div><div class="rowb"><span>Transactions received</span><b>${c[SYNC.SYNCED]||0}</b></div><div class="rowb"><span>Pending / synchronizing</span><b style="color:var(--amber)">${pending}</b></div><div class="rowb"><span>Failed synchronization</span><b style="color:var(--red)">${failed}</b></div><div class="rowb"><span>Last transaction received</span><b>${last?last.id+' · '+last.attendant.split(' ')[0]+' · '+last.time:'—'}</b></div><div class="rowb"><span>Reconciliation</span><b>${pending+failed===0?'<span class="pill ok">✓ In sync</span>':'<span class="pill warn">'+(pending+failed)+' awaiting</span>'}</b></div>`; }
 function bumpData(){ state.dataVersion++; }
-function startMgrLive(){ stopMgrLive(); state.mgrTimer=setInterval(()=>{
-    if(state.role!=='manager') return;
-    const ls=$('#liveStamp'); if(ls) ls.textContent='System Status: 🟢 Live · Connected · '+clock();
-    const typing = document.activeElement && document.activeElement.id==='mgrSearch';
-    if(state.dataVersion!==state.lastRenderVersion && !typing){ renderMgr(); }
-  }, SYNC_INTERVAL_MS); }
+function startMgrLive(){ stopMgrLive(); state.mgrTimer=setInterval(()=>{ if(state.role!=='manager') return; const ls=$('#liveStamp'); if(ls) ls.textContent='System Status: 🟢 Live · Connected · '+clock(); const typing = document.activeElement && document.activeElement.id==='mgrSearch'; if(state.dataVersion!==state.lastRenderVersion && !typing){ renderMgr(); } }, SYNC_INTERVAL_MS); }
 function stopMgrLive(){ if(state.mgrTimer){ clearInterval(state.mgrTimer); state.mgrTimer=null; } }
-
-/* ---- Manual backup: genuine station-wide synchronization (not a page refresh) ---- */
-function syncAllData(){
-  toast('🔄 Synchronizing all data across all attendants…');
-  const scope=scopeTxns();
-  let n=0; scope.forEach(x=>{ if(x.syncStatus!==SYNC.SYNCED){ x.syncStatus=SYNC.SYNCED; x.syncAt=nowStamp(); n++; } });
-  const last=scope[scope.length-1]; if(last){ state.central.lastSync=nowStamp(); state.central.lastRec=last; }
-  bumpData(); renderMgr();
-  toast('✓ Synchronized '+completed(scope).length+' transactions across '+activeAttendants()+' attendants'+(n?(' · '+n+' reconciled'):''));
-}
-
-/* ---- Live-demo: stream incoming sales from other attendants (single-device demo) ---- */
+function syncAllData(){ toast('🔄 Synchronizing all data across all attendants…'); const scope=scopeTxns(); let n=0; scope.forEach(x=>{ if(x.syncStatus!==SYNC.SYNCED){ x.syncStatus=SYNC.SYNCED; x.syncAt=nowStamp(); n++; } }); const last=scope[scope.length-1]; if(last){ state.central.lastSync=nowStamp(); state.central.lastRec=last; } bumpData(); renderMgr(); toast('✓ Synchronized '+completed(scope).length+' transactions across '+activeAttendants()+' attendants'+(n?(' · '+n+' reconciled'):'')); }
 function toggleDemoLive(){ state.demoLive=!state.demoLive; if(state.demoLive){ startDemo(); toast('🟢 Live demo on — incoming sales will appear automatically'); } else { stopDemo(); toast('Live demo off'); } }
-function startDemo(){ stopDemo(); state.demoTimer=setInterval(()=>{ if(state.demoLive && state.role==='manager') injectRandomSale(); }, DEMO_INTERVAL_MS); }
+function startDemo(){ stopDemo(); state.demoTimer=setInterval(()=>{ if(state.demoLive && state.role==='manager') injectRandomSale(); }, 5000); }
 function stopDemo(){ if(state.demoTimer){ clearInterval(state.demoTimer); state.demoTimer=null; } }
 function rndL(){ const L='ABCDEFGHJKLMNPQRSTUVWXYZ'; return L[Math.floor(Math.random()*L.length)]+L[Math.floor(Math.random()*L.length)]+L[Math.floor(Math.random()*L.length)]; }
-function injectRandomSale(){
-  state.seq++;
-  const att=ATTENDANTS[Math.floor(Math.random()*5)];
-  const hr=new Date().getHours(); const shift=(hr>=8&&hr<18)?'Day':'Night';
-  const three=Math.random()<0.5;
-  const plate=(three?'MC ':'T ')+(100+Math.floor(Math.random()*899))+' '+rndL();
-  const kg=+((three?2+Math.random()*2:6+Math.random()*6)).toFixed(1);
-  const mobile=Math.random()<0.6;
-  const o={ companyId:state.company.id, stationId:state.station.id, date:state.shiftDate, time:clock(), att, shift, plate, type:classify(plate), kg:String(kg),
-    pay:mobile?'Mobile Money':'Cash', prov:mobile?PROVIDERS[Math.floor(Math.random()*PROVIDERS.length)]:'',
-    noz:'Nozzle '+(1+Math.floor(Math.random()*4)), permit:'Active', driver:'', phone:'', method:'ANPR/OCR', conf:0.9,
-    bajajStatus: three?(Math.random()<0.5?'Member':'Not member'):'', bajajType:'' };
-  if(three && o.bajajStatus==='Not member') o.bajajType=Math.random()<0.5?'TVS King Bajaj':'Other Bajaj';
-  if(three && (o.bajajStatus==='Member'||o.bajajType==='TVS King Bajaj')) o.membershipId=newMembershipId();
-  const rec=buildRec(o); rec.syncStatus=SYNC.PENDING; rec.syncAt=null;
-  state.txns.push(rec); bumpData(); scheduleSync(rec);
-}
-function liveFeedHTML(){
-  const rows=[...scopeTxns()].slice(-8).reverse().map(x=>[
-    x.time, x.attendant.split(' ')[0], x.plate, typeShort(x.type),
-    x.denied?'0.0':x.kg.toFixed(1), x.denied?'—':Math.round(x.amount).toLocaleString(), x.points||0, x.permit, syncBadge(x.syncStatus)
-  ]);
-  return mtable(['Time','Attendant','Plate','Type','KG','Amount','Pts','Permit','Sync'], rows, ['left','left','left','left','right','right','right','left','left']);
-}
-
-/* ================= TENANT PICKER (Platform → Company → Station) ================= */
-function brandName(){ return state.company?state.company.name:PLATFORM_NAME; }
+function injectRandomSale(){ state.seq++; const att=ATTENDANTS[Math.floor(Math.random()*5)]; const hr=new Date().getHours(); const shift=(hr>=8&&hr<18)?'Day':'Night'; const three=Math.random()<0.5; const plate=(three?'MC ':'T ')+(100+Math.floor(Math.random()*899))+' '+rndL(); const kg=+((three?2+Math.random()*2:6+Math.random()*6)).toFixed(1); const mobile=Math.random()<0.6; const o={ companyId:state.company.id, stationId:state.station.id, date:state.shiftDate, time:clock(), att, shift, plate, type:classify(plate), kg:String(kg), pay:mobile?'Mobile Money':'Cash', prov:mobile?PROVIDERS[Math.floor(Math.random()*PROVIDERS.length)]:'', noz:'Nozzle '+(1+Math.floor(Math.random()*4)), permit:'Active', driver:'', phone:'', method:'ANPR/OCR', conf:0.9, bajajStatus: three?(Math.random()<0.5?'Member':'Not member'):'', bajajType:'' }; if(three && o.bajajStatus==='Not member') o.bajajType=Math.random()<0.5?'TVS King Bajaj':'Other Bajaj'; if(three && (o.bajajStatus==='Member'||o.bajajType==='TVS King Bajaj')) o.membershipId=newMembershipId(); const rec=buildRec(o); rec.syncStatus=SYNC.PENDING; rec.syncAt=null; state.txns.push(rec); bumpData(); scheduleSync(rec); }
+function liveFeedHTML(){ const rows=[...scopeTxns()].slice(-8).reverse().map(x=>[x.time, x.attendant.split(' ')[0], x.plate, typeShort(x.type), x.denied?'0.0':x.kg.toFixed(1), x.denied?'—':Math.round(x.amount).toLocaleString(), x.points||0, x.permit, syncBadge(x.syncStatus)]); return mtable(['Time','Attendant','Plate','Type','KG','Amount','Pts','Permit','Sync'], rows, ['left','left','left','left','right','right','right','left','left']); }
+function brandName(){ return state.company ? state.company.name : PLATFORM_NAME; }
 function logoLetters(){ const n=brandName().trim().split(' '); return ((n[0]&&n[0][0])||'E')+((n[1]&&n[1][0])||''); }
-function renderTenantPicker(){
-  stopMgrLive(); stopDemo(); state.role=null; state.demoLive=false;
-  if(!state._pickCompany) state._pickCompany=COMPANIES[0].id;
-  const comp=companyById(state._pickCompany);
-  const tb=$('#topbar'); if(tb){ tb.style.background='linear-gradient(135deg,#334155,#0f172a)'; tb.innerHTML=`<div class="row"><div class="brand"><div class="logo">⚡</div><div>${PLATFORM_NAME}</div></div><div class="who"><b>Platform</b>company selector</div></div>`; }
-  if($('#stageCap'))$('#stageCap').textContent=PLATFORM_NAME;
-  $('#navbar').innerHTML='';
-  $('#appBody').innerHTML=`<div class="fade" style="padding-top:16px">
-    <div class="center" style="margin-bottom:14px"><div style="width:64px;height:64px;border-radius:18px;background:#eef2ff;display:grid;place-items:center;margin:0 auto;font-size:30px">⚡</div>
-      <h3 style="margin:12px 0 2px">${PLATFORM_NAME}</h3><div class="tiny muted">Multi-company · multi-station · Version 1 (CNG)</div></div>
-    <div class="card">
-      <label class="fl">Company (tenant)</label>
-      <select class="txt sel" onchange="state._pickCompany=this.value;renderTenantPicker()">${COMPANIES.map(c=>`<option value="${c.id}"${c.id===state._pickCompany?' selected':''}>${c.name}</option>`).join('')}</select>
-      <label class="fl" style="margin-top:14px">Station</label>
-      <select class="txt sel" id="pickStation">${comp.stations.map(s=>`<option value="${s.id}">${s.name} · ${s.code} (${s.status})</option>`).join('')}</select>
-      <div class="rowb" style="margin-top:12px"><span class="tiny muted">Currency · price · loyalty</span><b>${comp.currency} ${comp.pricePerKg}/kg · ${comp.pointsPerKg} pt/kg</b></div>
-      <div class="rowb"><span class="tiny muted">Energy types</span><b>${comp.energyTypes.join(', ')}</b></div>
-    </div>
-    <button class="btn primary" onclick="enterTenant()">Continue →</button>
-    <div class="grid2" style="margin-top:8px"><button class="btn dark sm" onclick="renderCompanyRegister()">➕ Register new company</button><button class="btn ghost sm" onclick="renderModules()">Modules</button></div>
-    <p class="tiny muted center" style="margin-top:12px">🔒 Data is isolated per company. ${COMPANIES[0].name} can never see ${COMPANIES[1].name} data.</p>
-  </div>`;
-}
-
-/* ---- Company registration / onboarding wizard (§4) ---- */
+function renderTenantPicker(){ stopMgrLive(); stopDemo(); state.role=null; state.demoLive=false; if(!state._pickCompany) state._pickCompany=COMPANIES[0].id; const comp=companyById(state._pickCompany); const tb=$('#topbar'); if(tb){ tb.style.background='linear-gradient(135deg,#334155,#0f172a)'; tb.innerHTML=`<div class="row"><div class="brand"><div class="logo">⚡</div><div>${PLATFORM_NAME}</div></div><div class="who"><b>Platform</b>company selector</div></div>`; } if($('#stageCap'))$('#stageCap').textContent=PLATFORM_NAME; $('#navbar').innerHTML=''; $('#appBody').innerHTML=`<div class="fade" style="padding-top:16px"><div class="center" style="margin-bottom:14px"><div style="width:64px;height:64px;border-radius:18px;background:#eef2ff;display:grid;place-items:center;margin:0 auto;font-size:30px">⚡</div><h3 style="margin:12px 0 2px">${PLATFORM_NAME}</h3><div class="tiny muted">Multi-company · multi-station · Version 1 (CNG)</div></div><div class="card"><label class="fl">Company (tenant)</label><select class="txt sel" onchange="state._pickCompany=this.value;renderTenantPicker()">${COMPANIES.map(c=>`<option value="${c.id}"${c.id===state._pickCompany?' selected':''}>${c.name}</option>`).join('')}</select><label class="fl" style="margin-top:14px">Station</label><select class="txt sel" id="pickStation">${comp.stations.map(s=>`<option value="${s.id}">${s.name} · ${s.code} (${s.status})</option>`).join('')}</select><div class="rowb" style="margin-top:12px"><span class="tiny muted">Currency · price · loyalty</span><b>${comp.currency} ${comp.pricePerKg}/kg · ${comp.pointsPerKg} pt/kg</b></div><div class="rowb"><span class="tiny muted">Energy types</span><b>${comp.energyTypes.join(', ')}</b></div></div><button class="btn primary" onclick="enterTenant()">Continue →</button><div class="grid2" style="margin-top:8px"><button class="btn dark sm" onclick="renderCompanyRegister()">➕ Register new company</button><button class="btn ghost sm" onclick="renderModules()">Modules</button></div><p class="tiny muted center" style="margin-top:12px">🔒 Data is isolated per company. ${COMPANIES[0].name} can never see ${COMPANIES[1].name} data.</p></div>`; }
 const ENERGY_OPTIONS=['CNG','LNG','Biomethane','Hydrogen','EV Charging','Solar'];
 const BRAND_PALETTE=[['#7C3AED','#4C1D95'],['#B45309','#7C2D12'],['#0E7490','#164E63'],['#BE185D','#831843'],['#15803D','#14532D'],['#2563EB','#1E3A8A']];
 function nextCompanyId(){ let n=1; while(COMPANIES.some(c=>c.id==='C'+String(n).padStart(3,'0'))) n++; return 'C'+String(n).padStart(3,'0'); }
-function renderCompanyRegister(){
-  $('#navbar').innerHTML='';
-  $('#appBody').innerHTML=`<div class="fade" style="padding-top:12px">
-    <div class="center" style="margin-bottom:10px"><div style="width:56px;height:56px;border-radius:16px;background:#eef2ff;display:grid;place-items:center;margin:0 auto;font-size:26px">🏢</div>
-      <h3 style="margin:10px 0 2px">Register a new company</h3><div class="tiny muted">Onboard a new tenant onto ${PLATFORM_NAME}</div></div>
-    <div class="card">
-      <div class="sec" style="margin:0 0 8px">Company profile</div>
-      <label class="fl">Company name <span style="color:var(--red)">*</span></label><input class="txt" id="regName" placeholder="e.g. Sunrise Gas Ltd">
-      <div class="grid2" style="margin-top:8px"><div><label class="fl">Trading name</label><input class="txt" id="regTrading" placeholder="optional"></div><div><label class="fl">Country</label><input class="txt" id="regCountry" value="Tanzania"></div></div>
-      <div class="grid2" style="margin-top:8px"><div><label class="fl">Currency</label><input class="txt" id="regCurrency" value="TZS"></div><div><label class="fl">Price / kg</label><input class="txt" id="regPrice" type="number" value="1550"></div></div>
-      <label class="fl" style="margin-top:8px">Loyalty points / kg</label><input class="txt" id="regPoints" type="number" value="1">
-      <label class="fl" style="margin-top:10px">Energy types</label>
-      <div id="regEnergy" style="display:flex;flex-wrap:wrap;gap:6px">${ENERGY_OPTIONS.map(e=>`<label class="chip" style="cursor:pointer;padding:8px 10px"><input type="checkbox" value="${e}" ${e==='CNG'?'checked':''}> ${e}</label>`).join('')}</div>
-    </div>
-    <div class="card">
-      <div class="sec" style="margin:0 0 8px">First station</div>
-      <label class="fl">Station name <span style="color:var(--red)">*</span></label><input class="txt" id="regStation" placeholder="e.g. Main Station">
-      <label class="fl" style="margin-top:8px">Station code</label><input class="txt" id="regCode" placeholder="auto if blank" style="text-transform:uppercase">
-    </div>
-    <button class="btn primary" onclick="registerCompany()">✓ Create company & Tenant ID</button>
-    <button class="btn ghost sm" style="margin-top:8px" onclick="renderTenantPicker()">Cancel</button>
-    <p class="tiny muted center" style="margin-top:10px">A unique Tenant ID is generated. The new company's data is fully isolated from all others.</p>
-  </div>`;
-}
-function registerCompany(){
-  const name=($('#regName')?$('#regName').value:'').trim();
-  const station=($('#regStation')?$('#regStation').value:'').trim();
-  if(!name){ toast('⚠️ Enter the company name'); return; }
-  if(!station){ toast('⚠️ Enter the first station name'); return; }
-  const energy=Array.from(document.querySelectorAll('#regEnergy input:checked')).map(i=>i.value);
-  const id=nextCompanyId();
-  const pal=BRAND_PALETTE[(COMPANIES.length)%BRAND_PALETTE.length];
-  const initials=name.split(' ').map(w=>w[0]).join('').slice(0,3).toUpperCase();
-  const code=(($('#regCode')&&$('#regCode').value.trim())|| (initials+'-01')).toUpperCase();
-  const comp={ id, name, trading:($('#regTrading')&&$('#regTrading').value.trim())||name,
-    country:($('#regCountry')&&$('#regCountry').value.trim())||'Tanzania',
-    currency:($('#regCurrency')&&$('#regCurrency').value.trim())||'TZS',
-    color:pal[0], colorD:pal[1], energyTypes:energy.length?energy:['CNG'],
-    pricePerKg:+($('#regPrice')&&$('#regPrice').value)||1550, pointsPerKg:+($('#regPoints')&&$('#regPoints').value)||1,
-    stations:[{id:'S01',code,name:station,status:'Active',color:pal[0],colorDark:pal[1]}], licences:[],
-    subscription:{plan:'trial',status:'Trial',trialEndsOn:new Date(Date.now()+14*864e5).toISOString().slice(0,10),monthly:0,since:new Date().toISOString().slice(0,10)} };
-  COMPANIES.push(comp);
-  state._pickCompany=id;
-  toast('✓ '+name+' registered · Tenant '+id);
-  renderTenantPicker();
-}
-function enterTenant(){
-  state.company=companyById(state._pickCompany);
-  const sid=$('#pickStation')?$('#pickStation').value:state.company.stations[0].id;
-  state.station=state.company.stations.find(s=>s.id===sid)||state.company.stations[0];
-  applyStationTheme(state.station);
-  renderLogin();
-}
-
-/* ================= MODULES + SETTINGS ================= */
-function renderModules(){ $('#navbar').innerHTML='';
-  const cells=MODULES.map(m=>{ const act=m.status==='Active'; return `<div class="kpi" style="${act?'border-color:#bbf7d0;cursor:pointer':''}" ${act?`onclick="openModule('${m.k}')"':''}><div style="display:flex;justify-content:space-between;align-items:center;"><span class="k">${m.icon} ${m.name}</span><span class="pill ${act?'ok':'warn'}">${m.status}</span></div></div>`; }).join('');
-  $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">${brandName()}${state.station?' · '+state.station.name:''} · Modules</h3>
-    <p class="tiny muted" style="margin:0 0 10px">Platform module catalog (§58). Active modules are built in Version 1 (CNG); others are configurable and activate in future versions without rebranding.</p>
-    <div class="kpis">${cells}</div>
-    <button class="btn ghost sm" style="margin-top:12px" onclick="${state.company?'renderRolePicker':'renderTenantPicker'}()">← Back</button></div>`;
-}
-function openModule(k){ if(!state.company){ toast('Select a company first'); return; }
-  if(k==='settings'){ renderSettings(); }
-  else if(k==='recon'){ renderRecon(); }
-  else if(k==='gas'){ renderGasRecon(); }
-  else if(k==='staff'){ if(state.role==='manager'||state.role==='admin') renderUsers(); else toast('User management is a manager/admin function'); }
-  else { toast('Open this module from the '+(state.role==='attendant'?'attendant':'manager')+' area'); } }
-function renderSettings(){ const c=state.company||COMPANIES[0];
-  $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">⚙️ Configuration Center · ${c.name}</h3>
-    <div class="card"><div class="sec" style="margin:0 0 8px">Platform</div><label class="fl">Platform name</label><input class="txt" value="${PLATFORM_NAME}" oninput="PLATFORM_NAME=this.value"><p class="tiny muted" style="margin-top:8px">This affects the app name shown for all companies.</p></div>
-    <div class="card"><div class="sec" style="margin:0 0 8px">Company · tenant ${c.id}</div>
-      <div class="rowb"><span>Name</span><b>${c.name}</b></div><div class="rowb"><span>Country</span><b>${c.country}</b></div><div class="rowb"><span>Currency</span><b>${c.currency}</b></div>
-      <label class="fl" style="margin-top:8px">Price per kg (${c.currency})</label><input class="txt" type="number" value="${c.pricePerKg}" oninput="if(state.company)state.company.pricePerKg=+this.value; if(!state.company) c.pricePerKg=+this.value; renderSettings();">
-      <label class="fl" style="margin-top:8px">Loyalty points per kg</label><input class="txt" type="number" value="${c.pointsPerKg}" oninput="if(state.company)state.company.pointsPerKg=+this.value; if(!state.company) c.pointsPerKg=+this.value; renderSettings();">
-      <label class="fl" style="margin-top:8px">Energy types</label><div>${c.energyTypes.map(e=>`<span class="pill ok">${e}</span> `).join('')}<span class="pill warn">+ add (V2)</span></div></div>
-    <div class="card"><div class="sec" style="margin:0 0 8px">Stations</div>${c.stations.map(s=>`<div class="rowb" style="padding:10px 0;"><span>${s.name} · ${s.code}</span><div style="display:flex;align-items:center;gap:8px;"><span style="width:14px;height:14px;border-radius:50%;background:${s.color || c.color};display:inline-block;border:1px solid #ddd;"></span><input type="color" value="${s.color || c.color || '#1B7A3D'}" onchange="updateStationColor('${s.id}', this.value)" /></div></div>`).join('')}</div>
-    <div class="card"><div class="sec" style="margin:0 0 8px">📜 Regulatory licences & certificates</div>
-      ${(c.licences&&c.licences.length)?c.licences.map(l=>`<div class="rowb"><span>${l.name}<div class="tiny muted">${l.number||''}${l.issuer?' · '+l.issuer:''}${l.expiry?' · exp '+l.expiry:''}</div></span><b>${licStatus(l.expiry)}</b></div>`).join(''):'<p class="tiny muted">No licences uploaded yet.</p>'}
-      <div style="margin-top:10px;border-top:1px solid var(--line);padding-top:10px">
-        <label class="fl">Add / upload licence or certificate</label>
-        <input class="txt" id="licName" placeholder="e.g. EWURA Operating Licence">
-        <div class="grid2" style="margin-top:6px"><input class="txt" id="licNumber" placeholder="Licence number"><input class="txt" id="licIssuer" placeholder="Issuing authority"></div>
-        <div class="grid2" style="margin-top:6px"><div><label class="fl">Issued</label><input class="txt" type="date" id="licIssue"></div><div><label class="fl">Expiry</label><input class="txt" type="date" id="licExpiry"></div></div>
-        <label class="fl" style="margin-top:6px">Upload document (PDF / image)</label><input class="txt" type="file" id="licFile" accept="image/*,application/pdf">
-        <button class="btn dark sm" style="margin-top:8px" onclick="addLicence()">＋ Add / upload licence</button>
-      </div>
-    </div>
-    <button class="btn ghost sm" onclick="renderModules()">← Back to modules</button></div>`;
-}
-function updateStationColor(stationId, colorHex) {
-  const c = state.company || COMPANIES[0];
-  const station = c.stations.find(s => s.id === stationId);
-  if (!station) return;
-  station.color = colorHex;
-  station.colorDark = shadeColor(colorHex, -18);
-  if (state.station && state.station.id === stationId) {
-    state.station = station;
-    applyStationTheme(station);
-  }
-  renderSettings();
-}
-
-function licStatus(expiry){ if(!expiry) return '<span class="pill">—</span>'; const days=Math.round((new Date(expiry)-new Date())/86400000);
-  if(days<0) return '<span class="pill bad">Expired</span>'; if(days<=30) return '<span class="pill warn">'+days+'d left</span>'; if(days<=90) return '<span class="pill warn">'+Math.round(days/30)+'m left</span>'; return '<span class="pill ok">Valid</span>'; }
-function addLicence(){ const c=state.company; if(!c){ toast('Select a company first'); return; }
-  const name=($('#licName')&&$('#licName').value.trim())||''; if(!name){ toast('⚠️ Enter the licence name'); return; }
-  const lic={ name, number:($('#licNumber')&&$('#licNumber').value.trim())||'', issuer:($('#licIssuer')&&$('#licIssuer').value.trim())||'', issued:($('#licIssue')&&$('#licIssue').value)||'', expiry:($('#licExpiry')&&$('#licExpiry').value)||'', fileName:'', fileData:null };
-  c.licences=c.licences||[];
-  const fi=$('#licFile'); const f=fi&&fi.files&&fi.files[0];
-  if(f){ lic.fileName=f.name; const rd=new FileReader(); rd.onload=()=>{ lic.fileData=rd.result; c.licences.push(lic); toast('✓ '+name+' uploaded'); renderSettings(); }; rd.readAsDataURL(f); }
-  else { c.licences.push(lic); toast('✓ '+name+' added (attach a file later)'); renderSettings(); }
-}
-
-/* ================= AUTHENTICATION (login / roles / users) ================= */
+function renderCompanyRegister(){ $('#navbar').innerHTML=''; $('#appBody').innerHTML=`<div class="fade" style="padding-top:12px"><div class="center" style="margin-bottom:10px"><div style="width:56px;height:56px;border-radius:16px;background:#eef2ff;display:grid;place-items:center;margin:0 auto;font-size:26px">🏢</div><h3 style="margin:10px 0 2px">Register a new company</h3><div class="tiny muted">Onboard a new tenant onto ${PLATFORM_NAME}</div></div><div class="card"><div class="sec" style="margin:0 0 8px">Company profile</div><label class="fl">Company name <span style="color:var(--red)">*</span></label><input class="txt" id="regName" placeholder="e.g. Sunrise Gas Ltd"><div class="grid2" style="margin-top:8px"><div><label class="fl">Trading name</label><input class="txt" id="regTrading" placeholder="optional"></div><div><label class="fl">Country</label><input class="txt" id="regCountry" value="Tanzania"></div></div><div class="grid2" style="margin-top:8px"><div><label class="fl">Currency</label><input class="txt" id="regCurrency" value="TZS"></div><div><label class="fl">Price / kg</label><input class="txt" id="regPrice" type="number" value="1550"></div></div><label class="fl" style="margin-top:8px">Loyalty points / kg</label><input class="txt" id="regPoints" type="number" value="1"><label class="fl" style="margin-top:10px">Energy types</label><div id="regEnergy" style="display:flex;flex-wrap:wrap;gap:6px">${ENERGY_OPTIONS.map(e=>`<label class="chip" style="cursor:pointer;padding:8px 10px"><input type="checkbox" value="${e}" ${e==='CNG'?'checked':''}> ${e}</label>`).join('')}</div></div><div class="card"><div class="sec" style="margin:0 0 8px">First station</div><label class="fl">Station name <span style="color:var(--red)">*</span></label><input class="txt" id="regStation" placeholder="e.g. Main Station"><label class="fl" style="margin-top:8px">Station code</label><input class="txt" id="regCode" placeholder="auto if blank" style="text-transform:uppercase"></div><button class="btn primary" onclick="registerCompany()">✓ Create company & Tenant ID</button><button class="btn ghost sm" style="margin-top:8px" onclick="renderTenantPicker()">Cancel</button><p class="tiny muted center" style="margin-top:10px">A unique Tenant ID is generated. The new company's data is fully isolated from all others.</p></div>`; }
+function registerCompany(){ const name=($('#regName')?$('#regName').value:'').trim(); const station=($('#regStation')?$('#regStation').value:'').trim(); if(!name){ toast('⚠️ Enter the company name'); return; } if(!station){ toast('⚠️ Enter the first station name'); return; } const energy=Array.from(document.querySelectorAll('#regEnergy input:checked')).map(i=>i.value); const id=nextCompanyId(); const pal=BRAND_PALETTE[(COMPANIES.length)%BRAND_PALETTE.length]; const initials=name.split(' ').map(w=>w[0]).join('').slice(0,3).toUpperCase(); const code=(($('#regCode')&&$('#regCode').value.trim())|| (initials+'-01')).toUpperCase(); const comp={ id, name, trading:($('#regTrading')&&$('#regTrading').value.trim())||name, country:($('#regCountry')&&$('#regCountry').value.trim())||'Tanzania', currency:($('#regCurrency')&&$('#regCurrency').value.trim())||'TZS', color:pal[0], colorD:pal[1], energyTypes:energy.length?energy:['CNG'], pricePerKg:+($('#regPrice')&&$('#regPrice').value)||1550, pointsPerKg:+($('#regPoints')&&$('#regPoints').value)||1, stations:[{id:'S01',code,name:station,status:'Active',color:pal[0],colorDark:pal[1],logo:initials.slice(0,2).toUpperCase(),logoBg:mixWithWhite(pal[0],0.9)}], licences:[], defaultBranding:{logo:initials.slice(0,2).toUpperCase(), logoBg:mixWithWhite(pal[0],0.9)}, subscription:{plan:'trial',status:'Trial',trialEndsOn:new Date(Date.now()+14*864e5).toISOString().slice(0,10),monthly:0,since:new Date().toISOString().slice(0,10)} }; COMPANIES.push(comp); state._pickCompany=id; toast('✓ '+name+' registered · Tenant '+id); renderTenantPicker(); }
+function enterTenant(){ state.company=companyById(state._pickCompany); const sid=$('#pickStation')?$('#pickStation').value:state.company.stations[0].id; state.station=state.company.stations.find(s=>s.id===sid)||state.company.stations[0]; applyStationTheme(state.station); renderLogin(); }
+function renderModules(){ $('#navbar').innerHTML=''; const cells=MODULES.map(m=>{ const act=m.status==='Active'; return `<div class="kpi" style="${act?'border-color:#bbf7d0;cursor:pointer':''}" ${act?`onclick="openModule('${m.k}')"':''}><div style="display:flex;justify-content:space-between;align-items:center;"><span class="k">${m.icon} ${m.name}</span><span class="pill ${act?'ok':'warn'}">${m.status}</span></div></div>`; }).join(''); $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">${brandName()}${state.station?' · '+state.station.name:''} · Modules</h3><p class="tiny muted" style="margin:0 0 10px">Platform module catalog (§58). Active modules are built in Version 1 (CNG); others are configurable and activate in future versions without rebranding.</p><div class="kpis">${cells}</div><button class="btn ghost sm" style="margin-top:12px" onclick="${state.company?'renderRolePicker':'renderTenantPicker'}()">← Back</button></div>`; }
+function openModule(k){ if(!state.company){ toast('Select a company first'); return; } if(k==='settings'){ renderSettings(); } else if(k==='recon'){ renderRecon(); } else if(k==='gas'){ renderGasRecon(); } else if(k==='staff'){ if(state.role==='manager'||state.role==='admin') renderUsers(); else toast('User management is a manager/admin function'); } else { toast('Open this module from the '+(state.role==='attendant'?'attendant':'manager')+' area'); } }
+function updateStationColor(stationId, colorHex) { const c = state.company || COMPANIES[0]; const station = c.stations.find(s => s.id === stationId); if (!station) return; station.color = colorHex; station.colorDark = shadeColor(colorHex, -18); station.logoBg = mixWithWhite(colorHex,0.9); if (state.station && state.station.id === stationId) { state.station = station; applyStationTheme(station); } renderSettings(); }
+function setCompanyDefaultTheme(colorHex){ const c = state.company || COMPANIES[0]; c.color = colorHex; c.colorD = shadeColor(colorHex, -18); if (state.station) { state.station.color = colorHex; state.station.colorDark = c.colorD; applyStationTheme(state.station); } renderSettings(); }
+function renderSettings(){ const c=state.company||COMPANIES[0]; $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">⚙️ Configuration Center · ${c.name}</h3><div class="card"><div class="sec" style="margin:0 0 8px">Brand theme</div><label class="fl">Default company color</label><div class="rowb"><span>Applies to the default brand palette</span><input type="color" value="${c.color || '#1B7A3D'}" onchange="setCompanyDefaultTheme(this.value)" /></div></div><div class="card"><div class="sec" style="margin:0 0 8px">Company · tenant ${c.id}</div><div class="rowb"><span>Name</span><b>${c.name}</b></div><div class="rowb"><span>Country</span><b>${c.country}</b></div><div class="rowb"><span>Currency</span><b>${c.currency}</b></div><label class="fl" style="margin-top:8px">Price per kg (${c.currency})</label><input class="txt" type="number" value="${c.pricePerKg}" oninput="if(state.company)state.company.pricePerKg=+this.value; if(!state.company) c.pricePerKg=+this.value; renderSettings();"><label class="fl" style="margin-top:8px">Loyalty points per kg</label><input class="txt" type="number" value="${c.pointsPerKg}" oninput="if(state.company)state.company.pointsPerKg=+this.value; renderSettings();"><label class="fl" style="margin-top:8px">Energy types</label><div>${c.energyTypes.map(e=>`<span class="pill ok">${e}</span> `).join('')}<span class="pill warn">+ add (V2)</span></div></div><div class="card"><div class="sec" style="margin:0 0 8px">Stations</div>${c.stations.map(s=>`<div class="rowb" style="padding:10px 0;"><span>${s.name} · ${s.code}</span><div style="display:flex;align-items:center;gap:10px;"><span style="width:16px;height:16px;border-radius:50%;background:${s.color || c.color};display:inline-block;border:1px solid #ddd;"></span><input type="color" value="${s.color || c.color || '#1B7A3D'}" onchange="updateStationColor('${s.id}', this.value)" /></div></div>`).join('')}</div><div class="card"><div class="sec" style="margin:0 0 8px">Station branding</div>${c.stations.map(s=>`<div class="card" style="padding:10px;margin-bottom:8px"><div class="rowb"><span>Station</span><b>${s.name}</b></div><div class="grid2" style="margin-top:8px"><div><label class="fl">Logo text</label><input class="txt" value="${s.logo || (s.name||'').slice(0,2).toUpperCase()}" oninput="updateStationBrand('${s.id}', this.value, null)"></div><div><label class="fl">Logo background</label><input type="color" value="${s.logoBg || c.defaultBranding?.logoBg || '#E6F4EA'}" onchange="updateStationBrand('${s.id}', null, this.value)" /></div></div></div>`).join('')}</div><div class="card"><div class="sec" style="margin:0 0 8px">📜 Regulatory licences & certificates</div>${(c.licences&&c.licences.length)?c.licences.map(l=>`<div class="rowb"><span>${l.name}<div class="tiny muted">${l.number||''}${l.issuer?' · '+l.issuer:''}${l.expiry?' · exp '+l.expiry:''}</div></span><b>${licStatus(l.expiry)}</b></div>`).join(''):'<p class="tiny muted">No licences uploaded yet.</p>'}<div style="margin-top:10px;border-top:1px solid var(--line);padding-top:10px"><label class="fl">Add / upload licence or certificate</label><input class="txt" id="licName" placeholder="e.g. EWURA Operating Licence"><div class="grid2" style="margin-top:6px"><input class="txt" id="licNumber" placeholder="Licence number"><input class="txt" id="licIssuer" placeholder="Issuing authority"></div><div class="grid2" style="margin-top:6px"><div><label class="fl">Issued</label><input class="txt" type="date" id="licIssue"></div><div><label class="fl">Expiry</label><input class="txt" type="date" id="licExpiry"></div></div><label class="fl" style="margin-top:6px">Upload document (PDF / image)</label><input class="txt" type="file" id="licFile" accept="image/*,application/pdf"><button class="btn dark sm" style="margin-top:8px" onclick="addLicence()">＋ Add / upload licence</button></div></div><button class="btn ghost sm" onclick="renderModules()">← Back to modules</button></div>`; }
+function updateStationBrand(stationId, text, bg) { const c = state.company || COMPANIES[0]; const station = c.stations.find(s => s.id === stationId); if (!station) return; if (text !== null && text !== undefined && text.trim()) station.logo = text.trim().slice(0,2).toUpperCase(); if (bg !== null && bg !== undefined) station.logoBg = bg; if (state.station && state.station.id === stationId) { state.station = station; } renderSettings(); }
+function licStatus(expiry){ if(!expiry) return '<span class="pill">—</span>'; const days=Math.round((new Date(expiry)-new Date())/86400000); if(days<0) return '<span class="pill bad">Expired</span>'; if(days<=30) return '<span class="pill warn">'+days+'d left</span>'; if(days<=90) return '<span class="pill warn">'+Math.round(days/30)+'m left</span>'; return '<span class="pill ok">Valid</span>'; }
+function addLicence(){ const c=state.company; if(!c){ toast('Select a company first'); return; } const name=($('#licName')&&$('#licName').value.trim())||''; if(!name){ toast('⚠️ Enter the licence name'); return; } const lic={ name, number:($('#licNumber')&&$('#licNumber').value.trim())||'', issuer:($('#licIssuer')&&$('#licIssuer').value.trim())||'', issued:($('#licIssue')&&$('#licIssue').value)||'', expiry:($('#licExpiry')&&$('#licExpiry').value)||'', fileName:'', fileData:null }; c.licences=c.licences||[]; const fi=$('#licFile'); const f=fi&&fi.files&&fi.files[0]; if(f){ lic.fileName=f.name; const rd=new FileReader(); rd.onload=()=>{ lic.fileData=rd.result; c.licences.push(lic); toast('✓ '+name+' uploaded'); renderSettings(); }; rd.readAsDataURL(f); } else { c.licences.push(lic); toast('✓ '+name+' added (attach a file later)'); renderSettings(); } }
 function findUser(un){ return state.users.find(x=>x.username.toLowerCase()===String(un||'').toLowerCase() && x.companyId===state.company.id); }
-function renderLogin(){ stopMgrLive(); stopDemo(); stopFocalLive(); state.role=null; state.currentUser=null; state.demoLive=false; refreshTop(); $('#navbar').innerHTML='';
-  const exAtt=(state.users.find(u=>u.companyId===state.company.id&&u.role==='Attendant')||{}).username||'attendant';
-  $('#appBody').innerHTML=`<div class="fade" style="padding-top:14px">
-    <div class="tiny muted center" style="margin-bottom:8px">${PLATFORM_NAME} › <b>${state.company.name}</b> › ${state.station.name}</div>
-    <div class="center" style="margin-bottom:12px"><div style="width:60px;height:60px;border-radius:16px;background:var(--green-l);display:grid;place-items:center;margin:0 auto;font-size:28px">🔑</div>
-      <h3 style="color:var(--green-d);margin:10px 0 2px">Sign in</h3><div class="tiny muted">Attendant · Manager · Administrator</div></div>
-    <div class="card">
-      <label class="fl">Username</label><input class="txt" id="loginUser" autocapitalize="none" placeholder="username">
-      <label class="fl" style="margin-top:10px">Password</label><input class="txt" id="loginPass" type="password" placeholder="••••" onkeydown="if(event.key==='Enter')doLogin()">
-      <div id="loginMsg" class="tiny" style="margin-top:8px;text-align:center"></div>
-    </div>
-    <button class="btn primary" onclick="doLogin()">Sign in →</button>
-    <button class="btn ghost sm" style="margin-top:8px" onclick="renderTenantPicker()">⇄ Switch company / station</button>
-    <div class="card" style="margin-top:12px;background:var(--green-ll)"><div class="tiny muted">Demo accounts · default password <b>1234</b> (change required on first login):<br>• Attendant: @${exAtt}<br>• Manager: @manager<br>• Admin: @admin</div></div>
-  </div>`;
-  setTimeout(()=>{const u=$('#loginUser');if(u)u.focus();},60);
-}
-function doLogin(){ const un=($('#loginUser')?$('#loginUser').value:'').trim(); const pw=($('#loginPass')?$('#loginPass').value:''); const msg=$('#loginMsg');
-  const u=findUser(un);
-  if(!u){ state.loginFail++; if(msg)msg.innerHTML='<span style="color:var(--red)">Invalid username or password</span>'; return; }
-  if(u.status!=='Active'){ if(msg)msg.innerHTML='<span style="color:var(--red)">Account is inactive — contact your manager</span>'; return; }
-  if(u.passwordHash!==hashPw(pw)){ state.loginFail++; if(msg)msg.innerHTML='<span style="color:var(--red)">Invalid username or password'+(state.loginFail>=3?' · repeated failures are being monitored':'')+'</span>'; return; }
-  state.loginFail=0; u.lastLogin=state.shiftDate+' '+clock(); state.currentUser=u;
-  if(u.mustChange){ renderChangePassword(); return; }
-  routeUser();
-}
-function routeUser(){ const u=state.currentUser; if(!u)return renderLogin();
-  if(!subActive(state.company)){ state.role=(u.role==='Administrator')?'admin':(u.role==='Manager'?'manager':'attendant'); refreshTop(); return renderPaywall(); }
-  if(u.role==='Attendant'){ state.role='attendant'; state.attendant=u.fullName; refreshTop(); renderStart(); }
-  else if(u.role==='Manager'){ state.role='manager'; refreshTop(); $('#navbar').innerHTML=managerNavHTML(); renderMgr(); }
-  else { state.role='admin'; refreshTop(); renderAdmin(); }
-}
-function renderChangePassword(){ $('#navbar').innerHTML='';
-  $('#appBody').innerHTML=`<div class="fade" style="padding-top:16px">
-    <div class="center" style="margin-bottom:10px"><div style="width:58px;height:58px;border-radius:16px;background:#fef3c7;display:grid;place-items:center;margin:0 auto;font-size:26px">🔑</div>
-      <h3 style="margin:10px 0 2px">Change your password</h3><div class="tiny muted">Required after first login · ${state.currentUser.fullName}</div></div>
-    <div class="card">
-      <label class="fl">New password</label><input class="txt" id="np1" type="password" placeholder="new password">
-      <label class="fl" style="margin-top:8px">Confirm new password</label><input class="txt" id="np2" type="password" placeholder="repeat" onkeydown="if(event.key==='Enter')doChangePassword()">
-      <div id="cpMsg" class="tiny" style="margin-top:8px;text-align:center"></div>
-    </div>
-    <button class="btn primary" onclick="doChangePassword()">Save new password</button></div>`;
-}
-function doChangePassword(){ const a=$('#np1')?$('#np1').value:'', b=$('#np2')?$('#np2').value:''; const m=$('#cpMsg');
-  if(a.length<4){ if(m)m.innerHTML='<span style="color:var(--red)">Use at least 4 characters</span>'; return; }
-  if(a==='1234'){ if(m)m.innerHTML='<span style="color:var(--red)">Choose a password other than the default 1234</span>'; return; }
-  if(a!==b){ if(m)m.innerHTML='<span style="color:var(--red)">Passwords do not match</span>'; return; }
-  state.currentUser.passwordHash=hashPw(a); state.currentUser.mustChange=false; toast('✓ Password updated'); routeUser();
-}
+function renderLogin(){ stopMgrLive(); stopDemo(); stopFocalLive(); state.role=null; state.currentUser=null; state.demoLive=false; refreshTop(); $('#navbar').innerHTML=''; const exAtt=(state.users.find(u=>u.companyId===state.company.id&&u.role==='Attendant')||{}).username||'attendant'; $('#appBody').innerHTML=`<div class="fade" style="padding-top:14px"><div class="tiny muted center" style="margin-bottom:8px">${PLATFORM_NAME} › <b>${state.company.name}</b> › ${state.station.name}</div><div class="center" style="margin-bottom:12px"><div style="width:60px;height:60px;border-radius:16px;background:var(--green-l);display:grid;place-items:center;margin:0 auto;font-size:28px">🔑</div><h3 style="color:var(--green-d);margin:10px 0 2px">Sign in</h3><div class="tiny muted">Attendant · Manager · Administrator</div></div><div class="card"><label class="fl">Username</label><input class="txt" id="loginUser" autocapitalize="none" placeholder="username"><label class="fl" style="margin-top:10px">Password</label><input class="txt" id="loginPass" type="password" placeholder="••••" onkeydown="if(event.key==='Enter')doLogin()"><div id="loginMsg" class="tiny" style="margin-top:8px;text-align:center"></div></div><button class="btn primary" onclick="doLogin()">Sign in →</button><button class="btn ghost sm" style="margin-top:8px" onclick="renderTenantPicker()">⇄ Switch company / station</button><div class="card" style="margin-top:12px;background:var(--green-ll)"><div class="tiny muted">Demo accounts · default password <b>1234</b> (change required on first login):<br>• Attendant: @${exAtt}<br>• Manager: @manager<br>• Admin: @admin</div></div></div>`; setTimeout(()=>{const u=$('#loginUser');if(u)u.focus();},60); }
+function doLogin(){ const un=($('#loginUser')?$('#loginUser').value:'').trim(); const pw=($('#loginPass')?$('#loginPass').value:''); const msg=$('#loginMsg'); const u=findUser(un); if(!u){ state.loginFail++; if(msg)msg.innerHTML='<span style="color:var(--red)">Invalid username or password</span>'; return; } if(u.status!=='Active'){ if(msg)msg.innerHTML='<span style="color:var(--red)">Account is inactive — contact your manager</span>'; return; } if(u.passwordHash!==hashPw(pw)){ state.loginFail++; if(msg)msg.innerHTML='<span style="color:var(--red)">Invalid username or password'+(state.loginFail>=3?' · repeated failures are being monitored':'')+'</span>'; return; } state.loginFail=0; u.lastLogin=state.shiftDate+' '+clock(); state.currentUser=u; if(u.mustChange){ renderChangePassword(); return; } routeUser(); }
+function routeUser(){ const u=state.currentUser; if(!u)return renderLogin(); if(!subActive(state.company)){ state.role=(u.role==='Administrator')?'admin':(u.role==='Manager'?'manager':'attendant'); refreshTop(); return renderPaywall(); } if(u.role==='Attendant'){ state.role='attendant'; state.attendant=u.fullName; refreshTop(); renderStart(); } else if(u.role==='Manager'){ state.role='manager'; refreshTop(); $('#navbar').innerHTML=managerNavHTML(); renderMgr(); } else { state.role='admin'; refreshTop(); renderAdmin(); } }
+function renderChangePassword(){ $('#navbar').innerHTML=''; $('#appBody').innerHTML=`<div class="fade" style="padding-top:16px"><div class="center" style="margin-bottom:10px"><div style="width:58px;height:58px;border-radius:16px;background:#fef3c7;display:grid;place-items:center;margin:0 auto;font-size:26px">🔑</div><h3 style="margin:10px 0 2px">Change your password</h3><div class="tiny muted">Required after first login · ${state.currentUser.fullName}</div></div><div class="card"><label class="fl">New password</label><input class="txt" id="np1" type="password" placeholder="new password"><label class="fl" style="margin-top:8px">Confirm new password</label><input class="txt" id="np2" type="password" placeholder="repeat" onkeydown="if(event.key==='Enter')doChangePassword()"><div id="cpMsg" class="tiny" style="margin-top:8px;text-align:center"></div></div><button class="btn primary" onclick="doChangePassword()">Save new password</button></div>`; }
+function doChangePassword(){ const a=$('#np1')?$('#np1').value:'', b=$('#np2')?$('#np2').value:''; const m=$('#cpMsg'); if(a.length<4){ if(m)m.innerHTML='<span style="color:var(--red)">Use at least 4 characters</span>'; return; } if(a==='1234'){ if(m)m.innerHTML='<span style="color:var(--red)">Choose a password other than the default 1234</span>'; return; } if(a!==b){ if(m)m.innerHTML='<span style="color:var(--red)">Passwords do not match</span>'; return; } state.currentUser.passwordHash=hashPw(a); state.currentUser.mustChange=false; toast('✓ Password updated'); routeUser(); }
 function doLogout(){ stopMgrLive(); stopDemo(); stopFocalLive(); state.currentUser=null; state.role=null; state.demoLive=false; toast('Signed out'); renderLogin(); }
-function hasDraftData(){ const d=state.draft; return !!(d && (d.plate||d.kg||d.meterStart||d.meterEnd||d.driver||d.phone||d.confirmedBy)); }
-function goMainMenu(){ if(state.draft && hasDraftData()){ renderUnsavedPrompt(); } else { state.draft=null; renderAttendantMenu(); } }
-function renderUnsavedPrompt(){ $('#appBody').innerHTML=`<div class="fade" style="padding-top:20px">
-    <div class="banner warn"><span class="b">⚠️</span><div><b>You have unsaved changes.</b> Do you want to leave this page?</div></div>
-    <button class="btn primary" onclick="submitTxn()">💾 Save and return</button>
-    <button class="btn red" style="margin-top:8px" onclick="state.draft=null;renderAttendantMenu()">Leave without saving</button>
-    <button class="btn ghost sm" style="margin-top:8px" onclick="renderForm()">Cancel</button></div>`; }
-function renderAttendantMenu(){ state.view='menu'; $('#navbar').innerHTML=attendantNavHTML('home');
-  $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">Main menu · ${state.attendant}</h3>
-    <button class="btn primary" onclick="nav('home')">▦ Attendant dashboard</button>
-    <button class="btn ghost" style="margin-top:8px" onclick="startTxn()">⛽ Sales / Refilling</button>
-    <button class="btn ghost" style="margin-top:8px" onclick="renderStart()">▶︎ Start / switch shift</button>
-    <button class="btn ghost" style="margin-top:8px" onclick="nav('list')">☰ Customer / Vehicle refills</button>
-    <button class="btn ghost" style="margin-top:8px" onclick="nav('report')">▤ Shift summary & reports</button>
-    <button class="btn ghost" style="margin-top:8px;border-color:#1D4E89;color:#1D4E89" onclick="attendantToManager()">🔐 Manager login</button>
-    <button class="btn ghost sm" style="margin-top:12px" onclick="doLogout()">⎋ Logout</button>
-    <p class="tiny muted center" style="margin-top:10px">You only see functions assigned to the Attendant role.</p></div>`;
-}
-function attendantToManager(){ $('#appBody').innerHTML=`<div class="fade" style="padding-top:20px">
-    <div class="banner warn"><span class="b">🔐</span><div>Manager functions require <b>manager credentials</b>. You will be signed out of the attendant session and taken to the login screen.</div></div>
-    <button class="btn dark" onclick="doLogout()">Continue to Manager Login</button>
-    <button class="btn ghost sm" style="margin-top:8px" onclick="renderAttendantMenu()">Cancel</button></div>`; }
-function adminNavHTML(){ return `<button class="on"><span class="ic">▦</span>Admin</button>
-    <button onclick="renderUsers()" style="color:#1D4E89"><span class="ic">👥</span>Users</button>
-    <button onclick="doLogout()"><span class="ic">⎋</span>Sign out</button>`; }
-function renderAdmin(){ stopFocalLive(); state.view='admin'; $('#navbar').innerHTML=adminNavHTML();
-  $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">Administration · ${state.company.name}</h3>
-    <div class="tiny muted" style="margin-bottom:6px">${state.currentUser?state.currentUser.fullName:''} · Administrator · ${state.station.name}</div>
-    <div class="banner ${state.company.subscription.status==='Active'?'ok':'warn'}" style="margin-bottom:10px"><span class="b">💳</span><div>Subscription: <b>${state.company.subscription.status}</b>. Manage billing, users, and module activation.</div></div>
-    <button class="btn primary" onclick="renderFocal()">🛰️ Real-Time Focal Point</button>
-    <button class="btn ghost" style="margin-top:8px" onclick="renderBilling()">💳 Subscription & billing</button>
-    <button class="btn ghost" style="margin-top:8px" onclick="renderUsers()">👥 User management</button>
-    <button class="btn ghost" style="margin-top:8px" onclick="renderHealth()">🔌 Integration & module health</button>
-    <button class="btn ghost" style="margin-top:8px" onclick="renderRecon()">🧮 Reconciliation calculators</button>
-    <button class="btn ghost" style="margin-top:8px" onclick="renderRfid()">📡 RFID management</button>
-    <button class="btn ghost" style="margin-top:8px" onclick="renderActivationReport()">📄 Module activation report</button>
-    <button class="btn ghost" style="margin-top:8px" onclick="renderSettings()">⚙️ Configuration center</button>
-    <button class="btn ghost" style="margin-top:8px" onclick="renderGasRecon()">🛢️ Gas reconciliation</button>
-    <button class="btn ghost sm" style="margin-top:12px" onclick="doLogout()">⎋ Logout</button></div>`;
-}
-function stationName(id){ const c=state.company; const s=(c.stations||[]).find(x=>x.id===id); return s?s.name:id; }
-function renderUsers(){ $('#navbar').innerHTML = state.role==='admin'?adminNavHTML():managerNavHTML();
-  const us=state.users.filter(u=>u.companyId===state.company.id);
-  const rows=us.map(u=>`<div class="card" style="padding:10px"><div><b>${u.fullName}</b> <span class="pill ${u.status==='Active'?'ok':'bad'}">${u.status}</span>
-      <div class="tiny muted">@${u.username} · ${u.role} · ${u.employeeId} · ${stationName(u.station)}${u.mustChange?' · <span style="color:var(--amber)">password change required</span>':''}</div>
-      <div class="tiny muted">Last login: ${u.lastLogin||'—'}</div></div>
-    <div class="grid2" style="margin-top:8px"><button class="btn ghost sm" onclick="resetPassword('${u.username}')">🔑 Reset to 1234</button><button class="btn ghost sm" onclick="toggleActive('${u.username}')">${u.status==='Active'?'⏸ Disable':'✓ Enable'}</button></div></div>`).join('');
-  $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">User management · ${state.company.name}</h3>
-    <div class="card"><div class="sec" style="margin:0 0 8px">Create account</div>
-      <label class="fl">Full name</label><input class="txt" id="uFull" placeholder="e.g. Amina Juma">
-      <div class="grid2" style="margin-top:6px"><input class="txt" id="uUser" placeholder="username (blank = auto)"><select class="txt sel" id="uRole"><option>Attendant</option><option>Manager</option><option>Administrator</option></select></div>
-      <div class="grid2" style="margin-top:6px"><select class="txt sel" id="uStation">${state.company.stations.map(s=>`<option value="${s.id}">${s.name}</option>`).join('')}</select><input class="txt" id="uPass" placeholder="default 1234"></div>
-      <button class="btn dark sm" style="margin-top:8px" onclick="createUser()">＋ Create account (default 1234, change required)</button>
-    </div>
-    <div class="sec" style="margin:6px 0">Accounts (${us.length})</div>
-    ${rows}
-    <button class="btn ghost sm" style="margin-top:8px" onclick="${state.role==='admin'?'renderAdmin':'renderMgr'}()">← Back</button></div>`;
-}
-function createUser(){ const full=($('#uFull')&&$('#uFull').value.trim())||''; if(!full){toast('⚠️ Enter full name');return;}
-  let un=($('#uUser')&&$('#uUser').value.trim().toLowerCase())||''; if(!un){ const p=full.toLowerCase().replace(/[^a-z ]/g,'').split(/\s+/); un=((p[0]&&p[0][0])||'')+((p[p.length-1])||''); }
-  let base=un||'user',n=1; while(state.users.some(x=>x.username===un && x.companyId===state.company.id)) un=base+(++n);
-  const role=($('#uRole')&&$('#uRole').value)||'Attendant'; const station=($('#uStation')&&$('#uStation').value)||state.company.stations[0].id; const pass=($('#uPass')&&$('#uPass').value)||'1234';
-  state.users.push({companyId:state.company.id, fullName:full, username:un, passwordHash:hashPw(pass), employeeId:'U'+String(state.users.length+1).padStart(3,'0'), station, role, status:'Active', mustChange:true});
-  toast('✓ Account created · @'+un+(pass==='1234'?' · default 1234':'')); renderUsers();
-}
-function resetPassword(un){ const u=state.users.find(x=>x.username===un&&x.companyId===state.company.id); if(!u)return; u.passwordHash=hashPw('1234'); u.mustChange=true; toast('🔑 '+u.fullName+' reset to default 1234'); renderUsers(); }
-function toggleActive(un){ const u=state.users.find(x=>x.username===un&&x.companyId===state.company.id); if(!u)return; u.status=u.status==='Active'?'Inactive':'Active'; toast(u.fullName+' → '+u.status); renderUsers(); }
-
-/* ================= SUBSCRIPTION & BILLING (SaaS) ================= */
-function renderPaywall(){ stopFocalLive(); stopMgrLive(); stopDemo(); $('#navbar').innerHTML='';
-  const c=state.company; const admin=(state.currentUser&&(state.currentUser.role==='Administrator'||state.currentUser.role==='Manager'));
-  $('#appBody').innerHTML=`<div class="fade" style="padding-top:18px">
-    <div class="center" style="margin-bottom:12px"><div style="width:64px;height:64px;border-radius:16px;background:#fee2e2;display:grid;place-items:center;margin:0 auto;font-size:30px">🔒</div>
-      <h3 style="color:var(--red);margin:12px 0 2px">Subscription required</h3><div class="tiny muted">${c.name} · ${c.subscription.status}</div></div>
-    <div class="banner warn"><span class="b">⚠️</span><div>This company’s subscription is <b>${c.subscription.status}</b>. Operations are locked until it is reactivated.</div></div>
-    ${admin?`<button class="btn primary" onclick="renderBilling()">💳 Go to billing & reactivate</button>`:`<p class="tiny muted center">Please contact your administrator to reactivate the subscription.</p>`}
-    <button class="btn ghost sm" style="margin-top:8px" onclick="doLogout()">⎋ Sign out</button></div>`;
-}
-function renderBilling(){ stopFocalLive(); $('#navbar').innerHTML= state.role==='admin'?adminNavHTML():managerNavHTML();
-  const c=state.company; const s=c.subscription; const pl=planById(s.plan);
-  const users=state.users.filter(u=>u.companyId===c.id).length, stations=c.stations.length;
-  const dleft=subDaysLeft(c);
-  const stat = s.status==='Active'?'<span class="pill ok">Active</span>':(s.status==='Trial'?('<span class="pill warn">Trial'+(dleft!==null?' · '+(dleft>=0?dleft+' days left':'expired'):'')+'</span>'):'<span class="pill bad">'+s.status+'</span>');
-  const nextBill = s.status==='Active'?new Date(Date.now()+30*864e5).toISOString().slice(0,10):'—';
-  const planCards=PLANS.map(p=>`<div class="kpi" style="${p.id===s.plan?'border-color:#1B7A3D;background:var(--green-l)':''};cursor:pointer" onclick="choosePlan('${p.id}')"><div class="k">${p.name}</div><div class="v" style="font-size:16px;color:var(--green-d)">${p.custom?'Custom':(p.monthly?money(p.monthly)+'/mo':'Free')}</div><div class="u">${p.stations>999?'∞':p.stations} station(s) · ${p.seats>999?'∞':p.seats} users${p.id===s.plan?' · current':''}</div></div>`).join('');
-  $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">💳 Subscription & billing · ${c.name}</h3>
-    <div class="card">
-      <div class="rowb"><span>Current plan</span><b>${pl.name}</b></div>
-      <div class="rowb"><span>Status</span><b>${stat}</b></div>
-      <div class="rowb"><span>Monthly</span><b>${s.monthly?money(s.monthly):(s.status==='Trial'?'Free during trial':'—')}</b></div>
-      <div class="rowb"><span>Next billing date</span><b>${nextBill}</b></div>
-      <div class="rowb"><span>Usage</span><b>${stations} station(s) · ${users} user(s)</b></div>
-    </div>
-    <div class="sec" style="margin:6px 0">Choose a plan</div>
-    <div class="kpis">${planCards}</div>
-    <div class="grid2" style="margin-top:10px">
-      <button class="btn primary sm" onclick="payNow()">✅ ${s.status==='Active'?'Renew / Pay now':'Activate subscription'}</button>
-      <button class="btn red sm" onclick="suspendSub()">⏸ Suspend</button>
-    </div>
-    <div class="banner ok" style="background:#eff6ff;border-color:#bfdbfe"><span class="b">ℹ️</span><div>Demo billing — “Pay now” simulates a successful charge. Production connects a real payment provider.</div></div>
-    <button class="btn ghost sm" style="margin-top:8px" onclick="${state.role==='admin'?'renderAdmin':'renderMgr'}()">← Back</button></div>`;
-}
+function refreshTop(){ const tb=$('#topbar'); if(!tb) return; const color = state.station?.color || state.company?.color || '#1B7A3D'; const dark = state.station?.colorDark || state.company?.colorD || '#14532D'; tb.style.background = `linear-gradient(135deg, ${color} 0%, ${dark} 100%)`; const branding = getStationLogo(state.station, state.company); const badge = state.currentUser ? state.currentUser.fullName : (state.role==='attendant' ? state.attendant : (state.role==='manager' ? STATION_MANAGER : 'System')); const roleLabel = state.role ? state.role.charAt(0).toUpperCase() + state.role.slice(1) : 'Platform'; tb.innerHTML=`<div class="row"><div class="brand"><div class="logo" style="background:${branding.bg};color:${color};">${branding.brand}</div><div>${state.company?state.company.name:PLATFORM_NAME}</div></div><div class="who"><b>${roleLabel}</b>${state.station?state.station.name:'Platform'}</div></div>${state.role ? `<div class="shiftchip"><span><span class="dot"></span>${state.role==='attendant' ? state.shift : 'Live'}</span><span>${state.station?state.station.code:'—'}</span></div>` : ''}`; }
+function renderStart(){ state.view='home'; refreshTop(); $('#navbar').innerHTML=attendantNavHTML('home'); $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">${state.station?state.station.name:''} · Shift start</h3><div class="card"><label class="fl">Attendant</label><select class="txt sel" id="shiftAtt" onchange="state.attendant=this.value">${ATTENDANTS.map(a=>`<option ${a===state.attendant?'selected':''}>${a}</option>`).join('')}</select><label class="fl" style="margin-top:10px">Shift</label><select class="txt sel" id="shiftName" onchange="state.shift=this.value">${SHIFTS.map(s=>`<option ${s.name===state.shift?'selected':''}>${s.name}</option>`).join('')}</select><label class="fl" style="margin-top:10px">Shift date</label><input class="txt" type="date" id="shiftDate" value="${state.shiftDate}" onchange="state.shiftDate=this.value; if(!state.shiftDate) state.shiftDate=TODAY;"><label class="fl" style="margin-top:10px">Shift start time</label><input class="txt" type="time" id="shiftStart" value="${state.shiftStart}" onchange="state.shiftStart=this.value;"></div><button class="btn primary" onclick="startShift()">Start shift</button><button class="btn ghost sm" style="margin-top:8px" onclick="renderAttendantMenu()">Main menu</button></div>`; }
+function startShift(){ state.shiftStarted = true; state.attendant = $('#shiftAtt') ? $('#shiftAtt').value : state.attendant; state.shift = $('#shiftName') ? $('#shiftName').value : state.shift; state.shiftDate = $('#shiftDate') ? ($('#shiftDate').value || TODAY) : TODAY; state.shiftStart = $('#shiftStart') ? ($('#shiftStart').value || '08:00') : '08:00'; renderAttendantMenu(); }
+function attendantNavHTML(active){ return `<button class="${active==='home'?'on':''}" onclick="nav('home')"><span class="ic">▦</span>Home</button><button class="${active==='list'?'on':''}" onclick="nav('list')"><span class="ic">☰</span>List</button><button class="${active==='report'?'on':''}" onclick="nav('report')"><span class="ic">▤</span>Report</button><button class="${active==='menu'?'on':''}" onclick="renderAttendantMenu()"><span class="ic">☰</span>Menu</button>`; }
+function managerNavHTML(){ return `<button class="on" onclick="renderMgr()"><span class="ic">▦</span>Dashboard</button><button onclick="renderFocal()"><span class="ic">🛰️</span>Focal</button><button onclick="renderUsers()"><span class="ic">👥</span>Users</button><button onclick="renderSettings()"><span class="ic">⚙️</span>Config</button>`; }
+function subActive(c){ c=c||state.company; if(!c||!c.subscription)return true; const s=c.subscription; if(s.status==='Active')return true; if(s.status==='Trial'){ const d=subDaysLeft(c); return d===null || d>0; } return false; }
+function subDaysLeft(c){ const s=c&&c.subscription; if(!s||!s.trialEndsOn)return null; return Math.ceil((new Date(s.trialEndsOn)-new Date())/864e5); }
+function renderPaywall(){ stopFocalLive(); stopMgrLive(); stopDemo(); $('#navbar').innerHTML=''; const c=state.company; const admin=(state.currentUser&&(state.currentUser.role==='Administrator'||state.currentUser.role==='Manager')); $('#appBody').innerHTML=`<div class="fade" style="padding-top:18px"><div class="center" style="margin-bottom:12px"><div style="width:64px;height:64px;border-radius:16px;background:#fee2e2;display:grid;place-items:center;margin:0 auto;font-size:30px">🔒</div><h3 style="color:var(--red);margin:12px 0 2px">Subscription required</h3><div class="tiny muted">${c.name} · ${c.subscription.status}</div></div><div class="banner warn"><span class="b">⚠️</span><div>This company’s subscription is <b>${c.subscription.status}</b>. Operations are locked until it is reactivated.</div></div>${admin?`<button class="btn primary" onclick="renderBilling()">💳 Go to billing & reactivate</button>`:`<p class="tiny muted center">Please contact your administrator to reactivate the subscription.</p>`}<button class="btn ghost sm" style="margin-top:8px" onclick="doLogout()">⎋ Sign out</button></div>`; }
+function planById(id){ return PLANS.find(p=>p.id===id)||PLANS[0]; }
+const PLANS=[{id:'trial',name:'Free Trial (14 days)',monthly:0,seats:5,stations:1,tag:'Try it'},{id:'standard',name:'Standard',monthly:250000,seats:15,stations:2,tag:'Single station'},{id:'pro',name:'Pro',monthly:600000,seats:50,stations:10,tag:'Growing operator'},{id:'enterprise',name:'Enterprise',monthly:0,seats:9999,stations:9999,custom:true,tag:'Custom / contact us'}];
+function renderBilling(){ stopFocalLive(); $('#navbar').innerHTML= state.role==='admin'?adminNavHTML():managerNavHTML(); const c=state.company; const s=c.subscription; const pl=planById(s.plan); const users=state.users.filter(u=>u.companyId===c.id).length, stations=c.stations.length; const dleft=subDaysLeft(c); const stat = s.status==='Active'?'<span class="pill ok">Active</span>':(s.status==='Trial'?('<span class="pill warn">Trial'+(dleft!==null?' · '+(dleft>=0?dleft+' days left':'expired'):'')+'</span>'):'<span class="pill bad">'+s.status+'</span>'); const nextBill = s.status==='Active'?new Date(Date.now()+30*864e5).toISOString().slice(0,10):'—'; const planCards=PLANS.map(p=>`<div class="kpi" style="${p.id===s.plan?'border-color:#1B7A3D;background:var(--green-l)':''};cursor:pointer" onclick="choosePlan('${p.id}')"><div class="k">${p.name}</div><div class="v" style="font-size:16px;color:var(--green-d)">${p.custom?'Custom':(p.monthly?money(p.monthly)+'/mo':'Free')}</div><div class="u">${p.stations>999?'∞':p.stations} station(s) · ${p.seats>999?'∞':p.seats} users${p.id===s.plan?' · current':''}</div></div>`).join(''); $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">💳 Subscription & billing · ${c.name}</h3><div class="card"><div class="rowb"><span>Current plan</span><b>${pl.name}</b></div><div class="rowb"><span>Status</span><b>${stat}</b></div><div class="rowb"><span>Monthly</span><b>${s.monthly?money(s.monthly):(s.status==='Trial'?'Free during trial':'—')}</b></div><div class="rowb"><span>Next billing date</span><b>${nextBill}</b></div><div class="rowb"><span>Usage</span><b>${stations} station(s) · ${users} user(s)</b></div></div><div class="sec" style="margin:6px 0">Choose a plan</div><div class="kpis">${planCards}</div><div class="grid2" style="margin-top:10px"><button class="btn primary sm" onclick="payNow()">✅ ${s.status==='Active'?'Renew / Pay now':'Activate subscription'}</button><button class="btn red sm" onclick="suspendSub()">⏸ Suspend</button></div><div class="banner ok" style="background:#eff6ff;border-color:#bfdbfe"><span class="b">ℹ️</span><div>Demo billing — “Pay now” simulates a successful charge. Production connects a real payment provider.</div></div><button class="btn ghost sm" style="margin-top:8px" onclick="${state.role==='admin'?'renderAdmin':'renderMgr'}()">← Back</button></div>`; }
 function choosePlan(id){ const p=planById(id); state.company.subscription.plan=id; state.company.subscription.monthly=p.monthly; toast('Selected '+p.name+' — click “Activate/Pay now” to confirm'); renderBilling(); }
 function payNow(){ const s=state.company.subscription; s.status='Active'; if(!s.since)s.since=new Date().toISOString().slice(0,10); s.trialEndsOn=''; toast('✅ Payment received — subscription activated'); renderBilling(); }
 function suspendSub(){ state.company.subscription.status='Suspended'; toast('⏸ Subscription suspended'); renderBilling(); }
-
-/* ================= START/ROLE SCREEN HOOKS ================= */
-function refreshTop(){
-  const tb=$('#topbar'); if(!tb) return;
-  const color = state.station?.color || state.company?.color || '#1B7A3D';
-  const dark = state.station?.colorDark || state.company?.colorD || '#14532D';
-  tb.style.background = `linear-gradient(135deg, ${color} 0%, ${dark} 100%)`;
-  const who = state.currentUser ? state.currentUser.fullName : (state.role==='attendant' ? state.attendant : (state.role==='manager' ? STATION_MANAGER : 'System'));
-  const roleLabel = state.role ? state.role.charAt(0).toUpperCase() + state.role.slice(1) : 'Platform';
-  tb.innerHTML=`<div class="row"><div class="brand"><div class="logo">${logoLetters()}</div><div>${state.company?state.company.name:PLATFORM_NAME}</div></div><div class="who"><b>${roleLabel}</b>${state.station?state.station.name:'Platform'}</div></div>${state.role ? `<div class="shiftchip"><span><span class="dot"></span>${state.role==='attendant' ? state.shift : 'Live'}</span><span>${state.station?state.station.code:'—'}</span></div>` : ''}`;
-}
-function renderStart(){
-  state.view='home';
-  refreshTop();
-  $('#navbar').innerHTML=attendantNavHTML('home');
-  $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">${state.station?state.station.name:''} · Shift start</h3>
-    <div class="card">
-      <label class="fl">Attendant</label>
-      <select class="txt sel" id="shiftAtt" onchange="state.attendant=this.value">${ATTENDANTS.map(a=>`<option ${a===state.attendant?'selected':''}>${a}</option>`).join('')}</select>
-      <label class="fl" style="margin-top:10px">Shift</label>
-      <select class="txt sel" id="shiftName" onchange="state.shift=this.value">${SHIFTS.map(s=>`<option ${s.name===state.shift?'selected':''}>${s.name}</option>`).join('')}</select>
-      <label class="fl" style="margin-top:10px">Shift date</label>
-      <input class="txt" type="date" id="shiftDate" value="${state.shiftDate}" onchange="state.shiftDate=this.value; if(!state.shiftDate) state.shiftDate=TODAY;">
-      <label class="fl" style="margin-top:10px">Shift start time</label>
-      <input class="txt" type="time" id="shiftStart" value="${state.shiftStart}" onchange="state.shiftStart=this.value;">
-    </div>
-    <button class="btn primary" onclick="startShift()">Start shift</button>
-    <button class="btn ghost sm" style="margin-top:8px" onclick="renderAttendantMenu()">Main menu</button></div>`;
-}
-function startShift(){
-  state.shiftStarted = true;
-  state.attendant = $('#shiftAtt') ? $('#shiftAtt').value : state.attendant;
-  state.shift = $('#shiftName') ? $('#shiftName').value : state.shift;
-  state.shiftDate = $('#shiftDate') ? $('#shiftDate').value || TODAY : TODAY;
-  state.shiftStart = $('#shiftStart') ? $('#shiftStart').value || '08:00' : '08:00';
-  renderAttendantMenu();
-}
-
-function attendantNavHTML(active){
-  return `<button class="${active==='home'?'on':''}" onclick="nav('home')"><span class="ic">▦</span>Home</button>
-    <button class="${active==='list'?'on':''}" onclick="nav('list')"><span class="ic">☰</span>List</button>
-    <button class="${active==='report'?'on':''}" onclick="nav('report')"><span class="ic">▤</span>Report</button>
-    <button class="${active==='menu'?'on':''}" onclick="renderAttendantMenu()"><span class="ic">☰</span>Menu</button>`;
-}
-function managerNavHTML(){
-  return `<button class="on" onclick="renderMgr()"><span class="ic">▦</span>Dashboard</button>
-    <button onclick="renderFocal()"><span class="ic">🛰️</span>Focal</button>
-    <button onclick="renderUsers()"><span class="ic">👥</span>Users</button>
-    <button onclick="renderSettings()"><span class="ic">⚙️</span>Config</button>`;
-}
-
-// initialize first load
+function renderAdmin(){ stopFocalLive(); state.view='admin'; $('#navbar').innerHTML=adminNavHTML(); $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">Administration · ${state.company.name}</h3><div class="tiny muted" style="margin-bottom:6px">${state.currentUser?state.currentUser.fullName:''} · Administrator · ${state.station.name}</div><div class="banner ${state.company.subscription.status==='Active'?'ok':'warn'}" style="margin-bottom:10px"><span class="b">💳</span><div>Subscription: <b>${state.company.subscription.status}</b>. Manage billing, users, and module activation.</div></div><button class="btn primary" onclick="renderFocal()">🛰️ Real-Time Focal Point</button><button class="btn ghost" style="margin-top:8px" onclick="renderBilling()">💳 Subscription & billing</button><button class="btn ghost" style="margin-top:8px" onclick="renderUsers()">👥 User management</button><button class="btn ghost" style="margin-top:8px" onclick="renderHealth()">🔌 Integration & module health</button><button class="btn ghost" style="margin-top:8px" onclick="renderRecon()">🧮 Reconciliation calculators</button><button class="btn ghost" style="margin-top:8px" onclick="renderRfid()">📡 RFID management</button><button class="btn ghost" style="margin-top:8px" onclick="renderActivationReport()">📄 Module activation report</button><button class="btn ghost" style="margin-top:8px" onclick="renderSettings()">⚙️ Configuration center</button><button class="btn ghost" style="margin-top:8px" onclick="renderGasRecon()">🛢️ Gas reconciliation</button><button class="btn ghost sm" style="margin-top:12px" onclick="doLogout()">⎋ Logout</button></div>`; }
 renderTenantPicker();
-
 </script>
 </body>
 </html>
