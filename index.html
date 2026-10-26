@@ -7,7 +7,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#1B7A3D">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-acquirable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Energy Station">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -17,11 +17,13 @@
     --amber:#B45309; --amber-l:#FEF3C7; --red:#B91C1C; --red-l:#FEE2E2;
     --ink:#1F2937; --muted:#6B7280; --line:#E5E7EB; --white:#fff;
     --blue:#1D4E89;
+    --shadow-sm: 0 8px 20px rgba(15, 23, 42, 0.08);
+    --shadow-md: 0 16px 35px rgba(15, 23, 42, 0.12);
+    --radius: 18px;
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   html,body{margin:0;padding:0}
-  body{font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0f172a;color:var(--ink);
-    display:flex;flex-wrap:wrap;gap:28px;justify-content:center;align-items:flex-start;padding:28px 14px;min-height:100vh}
+  body{font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(circle at top, #1d4e3b 0%, #0f172a 48%, #020817 100%);color:var(--ink);display:flex;flex-wrap:wrap;gap:28px;justify-content:center;align-items:flex-start;padding:28px 14px;min-height:100vh}
   .stage{display:flex;flex-direction:column;align-items:center;gap:14px}
   .stage h2{color:#e2e8f0;font-size:14px;font-weight:600;margin:0;letter-spacing:.3px}
   .stage p.sub{color:#94a3b8;font-size:12px;margin:0 0 2px;max-width:360px;text-align:center}
@@ -30,20 +32,19 @@
   .notch{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:150px;height:26px;background:#000;border-radius:0 0 18px 18px;z-index:40}
   .screen{width:100%;height:100%;background:#F7F9F8;border-radius:33px;overflow:hidden;position:relative;display:flex;flex-direction:column}
 
-  .topbar{background:linear-gradient(135deg,var(--green) 0%,var(--green-d) 100%);color:#fff;padding:34px 18px 14px;flex-shrink:0}
+  .topbar{background:linear-gradient(135deg,var(--green) 0%,var(--green-d) 100%);color:#fff;padding:28px 18px 16px;flex-shrink:0;box-shadow:inset 0 -1px 0 rgba(255,255,255,.08)}
   .topbar .row{display:flex;justify-content:space-between;align-items:center}
   .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px}
-  .logo{width:30px;height:30px;border-radius:8px;background:#fff;color:var(--green);display:grid;place-items:center;font-weight:800;font-size:14px}
-  .who{font-size:11px;opacity:.9;text-align:right;line-height:1.35}
+  .logo{width:30px;height:30px;border-radius:10px;background:#fff;color:var(--green);display:grid;place-items:center;font-weight:800;font-size:14px;box-shadow:0 4px 10px rgba(15,23,42,.18)}
+  .who{font-size:11px;opacity:.92;text-align:right;line-height:1.35}
   .who b{display:block;font-size:12px}
-  .shiftchip{margin-top:12px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);border-radius:12px;
-    padding:9px 12px;display:flex;justify-content:space-between;align-items:center;font-size:12px}
-  .shiftchip .dot{width:8px;height:8px;border-radius:50%;background:#86efac;display:inline-block;margin-right:6px;box-shadow:0 0 0 3px rgba(134,239,172,.3)}
+  .shiftchip{margin-top:12px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.24);border-radius:12px;padding:9px 12px;display:flex;justify-content:space-between;align-items:center;font-size:12px}
+  .shiftchip .dot{width:8px;height:8px;border-radius:50%;background:#86efac;display:inline-block;margin-right:6px;box-shadow:0 0 0 3px rgba(134,239,172,.25)}
 
-  .body{flex:1;overflow-y:auto;padding:16px 16px 90px}
+  .body{flex:1;overflow-y:auto;padding:16px 16px 95px;background:linear-gradient(180deg,#f5faf7 0%, #edf5f1 100%)}
   .body::-webkit-scrollbar{width:0}
 
-  .nav{position:absolute;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:9px 6px 16px;flex-shrink:0;z-index:30}
+  .nav{position:absolute;bottom:0;left:0;right:0;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-top:1px solid rgba(15,23,42,.08);display:flex;justify-content:space-around;padding:9px 6px 16px;flex-shrink:0;z-index:30;box-shadow:0 -12px 20px rgba(15,23,42,.04)}
   .nav button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--muted);font-size:10px;font-weight:600;cursor:pointer;flex:1}
   .nav button .ic{font-size:19px;line-height:1}
   .nav button.on{color:var(--green)}
@@ -51,9 +52,10 @@
   .fab:active{transform:scale(.96)}
 
   h3.sec{font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin:4px 0 10px;font-weight:700}
-  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:14px;margin-bottom:12px;box-shadow:var(--shadow-sm)}
+  .card.soft{background:linear-gradient(180deg,#fff,#f8fafc)}
   .btn{width:100%;border:0;border-radius:14px;padding:15px;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
-  .btn.primary{background:linear-gradient(135deg,var(--green),var(--green-d));color:#fff;box-shadow:0 6px 14px rgba(27,122,61,.35)}
+  .btn.primary{background:linear-gradient(135deg,var(--green),var(--green-d));color:#fff;box-shadow:0 10px 18px rgba(27,122,61,.2)}
   .btn.dark{background:var(--green-d);color:#fff}
   .btn.ghost{background:#fff;color:var(--green);border:2px solid var(--green)}
   .btn.amber{background:var(--amber);color:#fff}
@@ -87,11 +89,11 @@
   .pill.bad{background:var(--red-l);color:var(--red)}
 
   .kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:18px;padding:13px;box-shadow:var(--shadow-sm)}
   .kpi .k{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:700}
   .kpi .v{font-size:22px;font-weight:800;color:var(--green-d);margin-top:3px;line-height:1}
   .kpi .u{font-size:11px;color:var(--muted);font-weight:600}
-  .kpi.wide{grid-column:1/3;background:linear-gradient(135deg,var(--green),var(--green-d));border:0;color:#fff}
+  .kpi.wide{grid-column:1/3;background:linear-gradient(135deg,var(--green),var(--green-d));border:0;color:#fff;box-shadow:0 18px 30px rgba(20,110,70,.22)}
   .kpi.wide .k{color:rgba(255,255,255,.85)}.kpi.wide .v{color:#fff;font-size:28px}.kpi.wide .u{color:rgba(255,255,255,.85)}
 
   .cam{background:#111827;border-radius:16px;height:210px;position:relative;overflow:hidden;display:grid;place-items:center;margin-bottom:12px}
@@ -110,9 +112,7 @@
   .txn .amt2{font-weight:800;color:var(--green-d);font-size:14px;text-align:right}
   .txn .amt2 .m{font-size:10px;color:var(--muted);font-weight:600}
 
-  .toast{position:absolute;left:14px;right:14px;bottom:78px;background:var(--green-d);color:#fff;border-radius:14px;padding:13px 15px;
-    font-size:13px;font-weight:600;box-shadow:0 10px 26px rgba(0,0,0,.35);z-index:50;display:flex;gap:10px;align-items:center;
-    opacity:0;transform:translateY(12px);transition:.28s;pointer-events:none}
+  .toast{position:absolute;left:14px;right:14px;bottom:78px;background:var(--green-d);color:#fff;border-radius:14px;padding:13px 15px;font-size:13px;font-weight:600;box-shadow:0 10px 26px rgba(0,0,0,.35);z-index:50;display:flex;gap:10px;align-items:center;opacity:0;transform:translateY(12px);transition:.28s;pointer-events:none}
   .toast.show{opacity:1;transform:translateY(0)}
   .toast .big{font-size:20px}
 
@@ -134,6 +134,30 @@
   .camimg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#0b1220;border-radius:16px}
   .thumb{width:46px;height:46px;border-radius:9px;object-fit:cover;flex-shrink:0;border:1px solid var(--line)}
 
+  .hero{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:4px 0 12px}
+  .eyebrow{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .live-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(22,163,74,.12);color:var(--green-d);padding:8px 10px;border-radius:999px;font-size:11px;font-weight:700;border:1px solid rgba(22,163,74,.2)}
+  .summary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:12px}
+  .metric-card{background:linear-gradient(180deg,#fff,#f8fafc);border:1px solid var(--line);border-radius:18px;padding:13px;box-shadow:var(--shadow-sm)}
+  .metric-card.primary{background:linear-gradient(135deg,var(--green),var(--green-d));color:#fff;border:none}
+  .metric-card .label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;opacity:.8}
+  .metric-card .value{font-size:23px;font-weight:800;margin-top:6px;letter-spacing:-.04em}
+  .metric-card .sub{font-size:11px;opacity:.8;margin-top:4px}
+  .panel-row{display:grid;grid-template-columns:1.4fr .9fr;gap:10px}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px;box-shadow:var(--shadow-sm)}
+  .panel-head{display:flex;justify-content:space-between;align-items:center;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;margin-bottom:8px}
+  .small-pill{display:inline-flex;align-items:center;background:var(--green-l);color:var(--green-d);padding:4px 8px;border-radius:999px;font-size:10px;font-weight:700}
+  .activity-item{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 0;border-top:1px solid #edf2f7}
+  .activity-item:first-child{border-top:0;padding-top:0}
+  .activity-main{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .activity-main strong{font-size:13px;color:var(--ink)}
+  .activity-main span{font-size:11px;color:var(--muted)}
+  .module-list{display:flex;flex-direction:column;gap:8px}
+  .module-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid #edf2f7}
+  .module-row:first-child{border-top:0;padding-top:0}
+  .module-row span{font-size:12px;color:var(--ink);font-weight:600}
+  .module-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(27,122,61,.12)}
+
   @media (max-width:820px){
     body{padding:0;gap:0;background:var(--green-d);display:block}
     .stage{width:100%;gap:0;margin-bottom:0}
@@ -144,6 +168,7 @@
     .screen{border-radius:0;height:100%}
     .topbar{padding-top:16px}
     .body{padding-bottom:96px}
+    .panel-row{grid-template-columns:1fr}
   }
   @media (max-width:820px) and (display-mode:standalone){
     .phone{height:100vh}
@@ -178,6 +203,7 @@
     .who { font-size: 10px; }
     .amt { font-size: 28px; }
     input.big { font-size: 20px; }
+    .summary-grid { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 420px) {
     .phone { width: 100%; height: 100dvh; min-height: 100dvh; border-radius: 0; }
@@ -185,6 +211,7 @@
     .topbar { padding: 18px 12px 12px; }
     .body { padding: 10px 8px 86px; }
     .kpis { grid-template-columns: 1fr; }
+    .summary-grid { grid-template-columns: 1fr; }
     .card { padding: 10px; }
     .btn { font-size: 13px; }
   }
@@ -353,7 +380,79 @@ function renderRecon(){ $('#appBody').innerHTML='<div class="fade"><h3 class="se
 function renderGas(){ $('#appBody').innerHTML='<div class="fade"><h3 class="sec">Gas</h3><div class="card">Gas module is active and ready.</div></div>'; }
 function renderBilling(){ $('#appBody').innerHTML='<div class="fade"><h3 class="sec">Billing</h3><div class="card">Billing module is active and ready.</div></div>'; }
 function renderAdmin(){ state.view='admin'; refreshTop(); $('#navbar').innerHTML='<button class="on" onclick="renderAdmin()"><span class="ic">⚙️</span>Admin</button><button onclick="renderSettings()"><span class="ic">⚙️</span>Settings</button>'; $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">Administration</h3><div class="card"><div class="kv"><span class="l">All modules</span><b>Enabled</b></div><div class="kv"><span class="l">System mode</span><b>Live</b></div></div></div>`; }
-function renderMgr(){ state.view='dashboard'; refreshTop(); $('#navbar').innerHTML='<button class="on" onclick="renderMgr()"><span class="ic">▦</span>Dashboard</button><button onclick="renderSettings()"><span class="ic">⚙️</span>Settings</button>'; const m=metrics(scopeTxns()); $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">Station Dashboard</h3><div class="kpis"><div class="kpi wide"><div class="k">Revenue</div><div class="v">${money(m.sales)}</div><div class="u">${m.txns} processed</div></div><div class="kpi"><div class="k">CNG</div><div class="v">${m.cng.toFixed(1)}</div><div class="u">kg</div></div><div class="kpi"><div class="k">3-Wheeler</div><div class="v">${m.three}</div><div class="u">sales</div></div><div class="kpi"><div class="k">4-Wheeler</div><div class="v">${m.four}</div><div class="u">sales</div></div><div class="kpi"><div class="k">Denied</div><div class="v">${m.denied}</div><div class="u">entries</div></div><div class="kpi"><div class="k">Unique</div><div class="v">${m.unique}</div><div class="u">vehicles</div></div></div><div class="card"><div class="kv"><span class="l">Modules</span><b>${MODULES.filter(moduleIsActive).length}/${MODULES.length}</b></div><div class="kv"><span class="l">Status</span><b>All active</b></div></div></div>`; }
+function renderMgr(){
+  state.view='dashboard';
+  refreshTop();
+  $('#navbar').innerHTML='<button class="on" onclick="renderMgr()"><span class="ic">▦</span>Dashboard</button><button onclick="renderSettings()"><span class="ic">⚙️</span>Settings</button>';
+  const m=metrics(scopeTxns());
+  const recent=[...scopeTxns()].slice(-4).reverse();
+  $('#appBody').innerHTML=`<div class="fade">
+    <div class="hero">
+      <div>
+        <div class="eyebrow">Operations overview</div>
+        <h3 class="sec" style="margin:2px 0 0;">Station Dashboard</h3>
+      </div>
+      <div class="live-badge" id="liveStamp">System Status: 🟢 Live · Connected</div>
+    </div>
+    <div class="summary-grid">
+      <div class="metric-card primary">
+        <div class="label">Revenue</div>
+        <div class="value">${money(m.sales)}</div>
+        <div class="sub">${m.txns} transactions processed</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">CNG</div>
+        <div class="value" style="color:var(--green-d)">${m.cng.toFixed(1)}</div>
+        <div class="sub">kg sold</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">3-Wheeler</div>
+        <div class="value" style="color:var(--green-d)">${m.three}</div>
+        <div class="sub">sales</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">4-Wheeler</div>
+        <div class="value" style="color:var(--green-d)">${m.four}</div>
+        <div class="sub">sales</div>
+      </div>
+    </div>
+    <div class="panel-row">
+      <div class="panel">
+        <div class="panel-head">
+          <span>Recent activity</span>
+          <span class="small-pill">Live</span>
+        </div>
+        ${recent.map(x => `
+          <div class="activity-item">
+            <div class="activity-main">
+              <strong>${x.plate}</strong>
+              <span>${x.att || 'Unassigned'} • ${x.time || '--'} • ${x.pay || 'Cash'}</span>
+            </div>
+            <div class="amt2">${money(x.amount || x.kg * price())}</div>
+          </div>
+        `).join('') || '<div class="activity-item"><div class="activity-main"><strong>No activity</strong><span>Transactions will appear here.</span></div></div>'}
+      </div>
+      <div class="panel">
+        <div class="panel-head">
+          <span>Modules</span>
+          <span class="small-pill">${MODULES.filter(moduleIsActive).length}/${MODULES.length}</span>
+        </div>
+        <div class="module-list">
+          ${MODULES.map(m => `
+            <div class="module-row">
+              <span>${m.label}</span>
+              <span class="module-dot" style="background:${moduleIsActive(m)?'var(--green)':'#cbd5e1'};box-shadow:0 0 0 4px ${moduleIsActive(m)?'rgba(27,122,61,.12)':'rgba(148,163,184,.12)'};"></span>
+            </div>`).join('')}
+        </div>
+      </div>
+    </div>
+    <div class="card soft" style="margin-top:12px;">
+      <div class="kv"><span class="l">Denied</span><b>${m.denied}</b></div>
+      <div class="kv"><span class="l">Unique vehicles</span><b>${m.unique}</b></div>
+      <div class="kv"><span class="l">Status</span><b>All active</b></div>
+    </div>
+  </div>`;
+}
 
 function autoLoginManager(){
   state.company = companyById('C001');
