@@ -71,10 +71,10 @@
   input.big:focus{border-color:var(--green)}
   input.txt{width:100%;border:2px solid var(--line);border-radius:12px;padding:12px;font-size:15px;outline:none}
   input.txt:focus{border-color:var(--green)}
-  select.sel{width:100%;border:2px solid var(--line);border-radius:12px;padding:13px;font-size:15px;font-weight:600;color:var(--ink);background:#fff;outline:none;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%231B7A3D' stroke-width='3'><path d='M6 9l6 6 6-6'/></svg>");background-repeat:no-repeat;background-position:right 14px center}
+  select.sel{width:100%;border:2px solid var(--line);border-radius:12px;padding:13px;font-size:15px;font-weight:600;color:var(--ink);background:#fff;outline:none;-webkit-appearance:none;appearance:none}
   select.sel:focus{border-color:var(--green)}
   .seg{display:flex;gap:8px}
-  .seg button{flex:1;border:2px solid var(--line);background:#fff;border-radius:13px;padding:14px 8px;font-size:14px;font-weight:700;color:var(--muted);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px}
+  .seg button{flex:1;border:2px solid var(--line);background:#fff;border-radius:13px;padding:14px 8px;font-size:14px;font-weight:700;color:var(--muted);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
   .seg button .ic{font-size:22px}
   .seg button.on{border-color:var(--green);background:var(--green-l);color:var(--green-d)}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -103,7 +103,7 @@
   /* camera */
   .cam{background:#111827;border-radius:16px;height:210px;position:relative;overflow:hidden;display:grid;place-items:center;margin-bottom:12px}
   .cam .frame{position:absolute;inset:26px 30px;border:2px dashed rgba(255,255,255,.55);border-radius:10px}
-  .cam .plate{background:#f8fafc;border:3px solid #111;border-radius:7px;padding:8px 16px;font-weight:800;font-size:26px;letter-spacing:2px;color:#111;box-shadow:0 4px 10px rgba(0,0,0,.4);transform:rotate(-1.5deg)}
+  .cam .plate{background:#f8fafc;border:3px solid #111;border-radius:7px;padding:8px 16px;font-weight:800;font-size:26px;letter-spacing:2px;color:#111;box-shadow:0 4px 10px rgba(0,0,0,.4);transform:rotate(-6deg)}
   .cam .hint{position:absolute;bottom:8px;left:0;right:0;text-align:center;color:#cbd5e1;font-size:11px}
   .scan{position:absolute;left:30px;right:30px;height:2px;background:#86efac;box-shadow:0 0 10px #86efac;top:26px;animation:scan 1.1s ease-in-out infinite}
   @keyframes scan{0%{top:26px}50%{top:180px}100%{top:26px}}
@@ -156,6 +156,47 @@
   @media (max-width:820px) and (display-mode:standalone){
     .phone{height:100vh}
   }
+
+  /* Responsive fixes */
+  :root { --phone-w: 378px; }
+  body { padding: 28px 14px; min-height: 100vh; }
+  .stage { width: 100%; display: flex; flex-direction: column; align-items: center; }
+  .phone { width: min(92vw, var(--phone-w)); max-width: 100%; height: min(88vh, 772px); min-height: 620px; transition: width 0.2s ease, height 0.2s ease; }
+  .screen { min-height: 100%; }
+  @media (max-width: 820px) {
+    body { padding: 0; background: var(--green-d); }
+    .stage { width: 100%; gap: 0; }
+    .stage h2 { width: 100%; padding: 9px 14px; box-sizing: border-box; }
+    .phone { width: 100%; height: calc(100dvh - 34px); min-height: 560px; border-radius: 0; padding: 0; box-shadow: none; }
+    .screen { border-radius: 0; height: 100%; }
+    .topbar { padding-top: 16px; }
+    .body { padding: 12px 12px 96px; }
+  }
+  @media (max-width: 560px) {
+    .body { padding: 12px 10px 90px; }
+    .card { padding: 12px; border-radius: 12px; }
+    .btn { padding: 13px 10px; font-size: 14px; }
+    .btn.sm { padding: 11px 8px; font-size: 13px; }
+    .kpis { grid-template-columns: 1fr 1fr; }
+    .grid2, .grid4 { grid-template-columns: 1fr; }
+    .seg { flex-direction: column; }
+    .nav { padding-bottom: max(12px, env(safe-area-inset-bottom)); }
+    .nav button { font-size: 9px; }
+    .topbar .row { gap: 8px; }
+    .brand { font-size: 13px; }
+    .who { font-size: 10px; }
+    .amt { font-size: 28px; }
+    input.big { font-size: 20px; }
+  }
+  @media (max-width: 420px) {
+    .phone { width: 100%; height: 100dvh; min-height: 100dvh; border-radius: 0; }
+    .screen { border-radius: 0; }
+    .topbar { padding: 18px 12px 12px; }
+    .body { padding: 10px 8px 86px; }
+    .kpis { grid-template-columns: 1fr; }
+    .card { padding: 10px; }
+    .btn { font-size: 13px; }
+  }
 </style>
 </head>
 <body>
@@ -188,18 +229,45 @@ let PLATFORM_NAME = 'Energy Station Platform';   // configurable, not branded to
 const COMPANIES = [
   { id:'C001', name:'Green Gas CNG', trading:'Green Gas', country:'Tanzania', currency:'TZS',
     color:'#1B7A3D', colorD:'#14532D', energyTypes:['CNG'], pricePerKg:1550, pointsPerKg:1,
-    stations:[ {id:'S01',code:'GG-MAIN',name:'Main Station',status:'Active'},
-               {id:'S02',code:'GG-MIKO',name:'Mikocheni',status:'Active'} ],
+    stations:[ {id:'S01',code:'GG-MAIN',name:'Main Station',status:'Active',color:'#1B7A3D',colorDark:'#14532D'},
+               {id:'S02',code:'GG-MIKO',name:'Mikocheni',status:'Active',color:'#0F766E',colorDark:'#115E59'} ],
     licences:[ {name:'EWURA Operating Licence', number:'EWURA/CNG/2024/012', issuer:'EWURA', issued:'2024-01-15', expiry:'2026-12-31', fileName:'ewura_licence.pdf', fileData:null},
-               {name:'Fire Safety Certificate', number:'FIRE/2025/220', issuer:'Fire & Rescue Force', issued:'2025-03-01', expiry:'2026-03-01', fileName:'fire_cert.pdf', fileData:null},
-               {name:'Meter Calibration Certificate', number:'WMA/2025/44', issuer:'Weights & Measures Agency', issued:'2025-06-01', expiry:'2026-06-01', fileName:'meter_cal.pdf', fileData:null},
-               {name:'Business Licence', number:'BRELA/2024/9981', issuer:'BRELA', issued:'2024-01-10', expiry:'2027-01-10', fileName:'', fileData:null} ] },
+                {name:'Fire Safety Certificate', number:'FIRE/2025/220', issuer:'Fire & Rescue Force', issued:'2025-03-01', expiry:'2026-03-01', fileName:'fire_cert.pdf', fileData:null},
+                {name:'Meter Calibration Certificate', number:'WMA/2025/44', issuer:'Weights & Measures Agency', issued:'2025-06-01', expiry:'2026-06-01', fileName:'meter_cal.pdf', fileData:null},
+                {name:'Business Licence', number:'BRELA/2024/9981', issuer:'BRELA', issued:'2024-01-10', expiry:'2027-01-10', fileName:'', fileData:null} ] },
   { id:'C002', name:'BlueFuel Energy', trading:'BlueFuel', country:'Tanzania', currency:'TZS',
     color:'#1D4E89', colorD:'#0f2f57', energyTypes:['CNG','LNG'], pricePerKg:1600, pointsPerKg:2,
-    stations:[ {id:'S01',code:'BF-DOD',name:'Dodoma 01',status:'Active'} ],
+    stations:[ {id:'S01',code:'BF-DOD',name:'Dodoma 01',status:'Active',color:'#1D4E89',colorDark:'#0f2f57'} ],
     licences:[ {name:'EWURA Operating Licence', number:'EWURA/CNG/2025/077', issuer:'EWURA', issued:'2025-02-01', expiry:'2027-02-01', fileName:'', fileData:null} ] }
 ];
 function companyById(id){ return COMPANIES.find(c=>c.id===id)||COMPANIES[0]; }
+function mixWithWhite(hex, ratio) {
+  hex = hex.replace('#', '');
+  const num = parseInt(hex, 16);
+  const r = Math.round(((num >> 16) & 255) * ratio + 255 * (1 - ratio));
+  const g = Math.round(((num >> 8) & 255) * ratio + 255 * (1 - ratio));
+  const b = Math.round((num & 255) * ratio + 255 * (1 - ratio));
+  return `rgb(${r}, ${g}, ${b})`;
+}
+function shadeColor(hex, percent) {
+  const num = parseInt(hex.slice(1), 16);
+  const amt = Math.round(2.55 * percent);
+  const r = Math.min(255, Math.max(0, (num >> 16) + amt));
+  const g = Math.min(255, Math.max(0, ((num >> 8) & 0x00FF) + amt));
+  const b = Math.min(255, Math.max(0, (num & 0x0000FF) + amt));
+  return '#' + (0x1000000 + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+function applyStationTheme(station) {
+  const active = station || state.station;
+  const color = active?.color || state.company?.color || '#1B7A3D';
+  const dark = active?.colorDark || state.company?.colorD || '#14532D';
+  document.documentElement.style.setProperty('--green', color);
+  document.documentElement.style.setProperty('--green-d', dark);
+  document.documentElement.style.setProperty('--green-l', mixWithWhite(color, 0.88));
+  document.documentElement.style.setProperty('--green-ll', mixWithWhite(color, 0.96));
+  const tb = document.getElementById('topbar');
+  if (tb) tb.style.background = `linear-gradient(135deg, ${color} 0%, ${dark} 100%)`;
+}
 // ---- SaaS subscription plans (monthly, TZS) ----
 const PLANS=[
   {id:'trial',name:'Free Trial (14 days)',monthly:0,seats:5,stations:1,tag:'Try it'},
@@ -209,7 +277,7 @@ const PLANS=[
 ];
 function planById(id){ return PLANS.find(p=>p.id===id)||PLANS[0]; }
 function subDaysLeft(c){ const s=c&&c.subscription; if(!s||!s.trialEndsOn)return null; return Math.ceil((new Date(s.trialEndsOn)-new Date())/864e5); }
-function subActive(c){ c=c||state.company; if(!c||!c.subscription)return true; const s=c.subscription; if(s.status==='Active')return true; if(s.status==='Trial'){ const d=subDaysLeft(c); return d===null||d>=0; } return false; }
+function subActive(c){ c=c||state.company; if(!c||!c.subscription)return true; const s=c.subscription; if(s.status==='Active')return true; if(s.status==='Trial'){ const d=subDaysLeft(c); return d===null || d>0; } return false; }
 (function seedSubs(){ const now=new Date(); const trialEnd=new Date(now.getTime()+14*864e5).toISOString().slice(0,10);
   COMPANIES.forEach(c=>{ if(!c.subscription) c.subscription={plan:'trial',status:'Trial',trialEndsOn:trialEnd,monthly:0,since:now.toISOString().slice(0,10)}; });
   companyById('C001').subscription={plan:'pro',status:'Active',trialEndsOn:'',monthly:600000,since:'2026-01-01'};
@@ -285,7 +353,7 @@ const state = {
 function hashPw(s){ let h=5381; s=String(s); for(let i=0;i<s.length;i++){ h=((h<<5)+h+s.charCodeAt(i))|0; } return 'h'+((h>>>0).toString(16)); }
 (function seedUsers(){
   const mk=(o)=>{ o.passwordHash=hashPw(o.password||'1234'); delete o.password; o.status=o.status||'Active'; o.lastLogin=null; state.users.push(o); };
-  const uname=(name)=>{ const p=name.toLowerCase().replace(/[^a-z ]/g,'').split(/\s+/); let base=((p[0]&&p[0][0])||'')+((p[p.length-1])||''); base=base.slice(0,12)||'user'; let u=base,n=1; while(state.users.some(x=>x.username===u)) u=base+(++n); return u; };
+  const uname=(name)=>{ const p=name.toLowerCase().replace(/[^a-z ]/g,'').split(/\s+/); let base=((p[0]&&p[0][0])||'')+((p[p.length-1])||''); base=base.slice(0,12)||'user'; let u=base,n=1; while(state.users.some(x=>x.username===u && x.companyId===o.companyId)) u=base+(++n); return u; };
   ATTENDANTS.forEach((nm,i)=> mk({companyId:'C001', fullName:nm, username:uname(nm), employeeId:'GG-A'+String(i+1).padStart(3,'0'), station:'S01', role:'Attendant', mustChange:true}) );
   mk({companyId:'C001', fullName:'Erick Hussein Mshamu', username:'manager', employeeId:'GG-M01', station:'S01', role:'Manager', mustChange:false});
   mk({companyId:'C001', fullName:'System Administrator', username:'admin', employeeId:'GG-ADM', station:'S01', role:'Administrator', mustChange:false});
@@ -302,14 +370,12 @@ function buildRec(o){
   const type = o.type || classify(o.plate) || 'Four-Wheeler';
   const denied = !!o.denied;
   const industrial = o.mode==='Industrial';
-  // Industrial: quantity comes from meter (end − start); else attendant-entered kg
   const kg = denied?0:(industrial?+Math.max(0,(+o.meterEnd||0)-(+o.meterStart||0)).toFixed(2):(+o.kg||0));
-  const unit = (industrial && +o.negPrice>0)?+o.negPrice:comp.pricePerKg;   // negotiated price override
+  const unit = (industrial && +o.negPrice>0)?+o.negPrice:comp.pricePerKg;
   const member = isThree(type) && (o.bajajStatus==='Member' || o.bajajType==='TVS King Bajaj');
   const loyaltyStatus = member?'Member':'Non-member';
   const membershipId = member ? (o.membershipId||'') : '';
   const points = (member && !denied && permitOK(o.permit)) ? +(kg*comp.pointsPerKg).toFixed(2) : 0;
-  // Central Transaction Engine metadata
   const source = o.source || (industrial?'Bulk Post':(o.rfid?'RFID':'Dispenser'));
   const txType = o.txType || (industrial?'Bulk CNG':'Retail CNG');
   state.receiptSeq = (state.receiptSeq||1000)+1; const receiptNo='RCP-'+state.receiptSeq;
@@ -321,7 +387,6 @@ function buildRec(o){
     companyId:comp.id, stationId:o.stationId||'S01', tenantId:comp.id,
     id:comp.id+'-'+(o.stationId||'S01')+'-'+(o.date||state.shiftDate).replace(/-/g,'')+'-'+String(state.seq).padStart(4,'0'),
     date:o.date, time:o.time, attendant:o.att, shift:o.shift, shiftStart:(SHIFTS.find(s=>s.name===o.shift)||SHIFTS[0]).start,
-    // industrial metering / pressure / temperature / negotiated / credit / trailer / evidence / confirmation
     mode:industrial?'Industrial':'Retail', meterStart:(+o.meterStart||null), meterEnd:(+o.meterEnd||null),
     pressure:o.pressure||'', temperature:o.temperature||'', negotiated:(industrial && unit!==comp.pricePerKg),
     customerAccount:o.customerAccount||'', trailerId:o.trailerId||'',
@@ -338,29 +403,29 @@ function buildRec(o){
     syncStatus:o.sync||SYNC.SYNCED, syncAt:o.syncAt||((o.date||TODAY)+' '+(o.time||''))
   };
 }
-function S(o){ o.companyId=o.companyId||'C001'; o.stationId=o.stationId||'S01'; state.seq++; if(o.bajajStatus==='Member'&&!o.membershipId)o.membershipId=newMembershipId(); if(o.bajajType==='TVS King Bajaj'&&!o.membershipId)o.membershipId=newMembershipId(); state.txns.push(buildRec(o)); }
+function S(o){ o.companyId=o.companyId||'C001'; o.stationId=o.stationId||'S01'; state.seq++; if(o.bajajStatus==='Member'&&!o.membershipId)o.membershipId=newMembershipId(); if(o.bajajType==='TVS King Bajaj'&&!o.membershipId)o.membershipId=newMembershipId(); const r=buildRec(o); state.txns.push(r); return r; }
 
 // Salha · Day
-S({date:TODAY,time:'08:31',att:'Salha Mohamed Duge',shift:'Day',plate:'MC 332 KDR',kg:3.2,pay:'Mobile Money',prov:'Mixx by Yas',noz:'Nozzle 1',permit:'Active',bajajStatus:'Member',membershipId:'GG-1001',driver:'Juma Ally',phone:'0713 000111'});
+S({date:TODAY,time:'08:31',att:'Salha Mohamed Duge',shift:'Day',plate:'MC 332 KDR',kg:3.2,pay:'Mobile Money',prov:'Mixx by Yas',noz:'Nozzle 1',permit:'Active',bajajStatus:'Member',membershipId:'GG-1001',driver:'Juma Ally',phone:'0712 300111'});
 S({date:TODAY,time:'08:52',att:'Salha Mohamed Duge',shift:'Day',plate:'T 564 PQR',kg:9.1,pay:'Cash',noz:'Nozzle 2',permit:'Valid',driver:'Neema Paul',phone:'0754 220145'});
-S({date:TODAY,time:'09:20',att:'Salha Mohamed Duge',shift:'Day',plate:'MC 109 JHT',kg:2.8,pay:'Mobile Money',prov:'M-Pesa',noz:'Nozzle 1',permit:'Active',bajajStatus:'Not member',bajajType:'TVS King Bajaj',driver:'Said Omary',phone:'0688 771290'});
+S({date:TODAY,time:'09:20',att:'Salha Mohamed Duge',shift:'Day',plate:'MC 109 JHT',kg:2.8,pay:'Mobile Money',prov:'M-Pesa',noz:'Nozzle 1',permit:'Active',bajajStatus:'Not member',bajajType:'TVS King Bajaj',driver:'Hassan Mfaume',phone:'0711 998833'});
 S({date:TODAY,time:'09:41',att:'Salha Mohamed Duge',shift:'Day',plate:'T 908 ZXC',kg:8.4,pay:'Mobile Money',prov:'Airtel Money',noz:'Nozzle 3',permit:'Valid'});
-S({date:TODAY,time:'10:05',att:'Salha Mohamed Duge',shift:'Day',plate:'MC 745 BVN',kg:3.0,pay:'Cash',noz:'Nozzle 2',permit:'Active',bajajStatus:'Not member',bajajType:'Other Bajaj',driver:'Halima Iddi',phone:'0715 908321'});
+S({date:TODAY,time:'10:05',att:'Salha Mohamed Duge',shift:'Day',plate:'MC 745 BVN',kg:3.0,pay:'Cash',noz:'Nozzle 2',permit:'Active',bajajStatus:'Not member',bajajType:'Other Bajaj',driver:'Halima Ngoma',phone:'0788 440771'});
 S({date:TODAY,time:'10:30',att:'Salha Mohamed Duge',shift:'Day',plate:'T 118 ABC',denied:true,permit:'Expired',reason:'No Valid Permit – Not Refilled',remarks:'Permit expired'});
 // Mary · Day
 S({date:TODAY,time:'08:44',att:'Mary Aloyce Shio',shift:'Day',plate:'T 220 FDG',kg:10.2,pay:'Mobile Money',prov:'Selcom',noz:'Nozzle 4',permit:'Active'});
-S({date:TODAY,time:'09:15',att:'Mary Aloyce Shio',shift:'Day',plate:'MC 540 PLI',kg:2.5,pay:'Cash',noz:'Nozzle 1',permit:'Active',bajajStatus:'Member',membershipId:'GG-1002',driver:'Frank Mushi',phone:'0762 334090'});
-S({date:TODAY,time:'11:02',att:'Mary Aloyce Shio',shift:'Day',plate:'MC 332 KDR',kg:3.1,pay:'Mobile Money',prov:'HaloPesa',noz:'Nozzle 1',permit:'Active',bajajStatus:'Member',membershipId:'GG-1001',driver:'Juma Ally',phone:'0713 000111'});
+S({date:TODAY,time:'09:15',att:'Mary Aloyce Shio',shift:'Day',plate:'MC 540 PLI',kg:2.5,pay:'Cash',noz:'Nozzle 1',permit:'Active',bajajStatus:'Member',membershipId:'GG-1002',driver:'Frank Mushi',phone:'0756 311899'});
+S({date:TODAY,time:'11:02',att:'Mary Aloyce Shio',shift:'Day',plate:'MC 332 KDR',kg:3.1,pay:'Mobile Money',prov:'HaloPesa',noz:'Nozzle 1',permit:'Active',bajajStatus:'Member',membershipId:'GG-1001',driver:'Juma Ally',phone:'0712 300111'});
 // Rajabu · Night
 S({date:TODAY,time:'19:10',att:'Rajabu Shija Rajabu',shift:'Night',plate:'T 771 ZZA',kg:7.6,pay:'Mobile Money',prov:'T-Pesa',noz:'Nozzle 2',permit:'Valid'});
-S({date:TODAY,time:'20:22',att:'Rajabu Shija Rajabu',shift:'Night',plate:'MC 880 QWE',kg:2.9,pay:'Cash',noz:'Nozzle 3',permit:'Active',bajajStatus:'Not member',bajajType:'TVS King Bajaj',driver:'Rehema Kija',phone:'0699 120876'});
+S({date:TODAY,time:'20:22',att:'Rajabu Shija Rajabu',shift:'Night',plate:'MC 880 QWE',kg:2.9,pay:'Cash',noz:'Nozzle 3',permit:'Active',bajajStatus:'Not member',bajajType:'TVS King Bajaj',driver:'Asha Ramadhani',phone:'0786 900120'});
 S({date:TODAY,time:'21:05',att:'Rajabu Shija Rajabu',shift:'Night',plate:'MC 301 RTY',denied:true,permit:'Invalid',reason:'No Valid Permit – Not Refilled',remarks:'Invalid permit'});
 // Rashid · Night
 S({date:TODAY,time:'22:15',att:'Rashid Haji Simtitu',shift:'Night',plate:'T 450 BNM',kg:11.0,pay:'Mobile Money',prov:'M-Pesa',noz:'Nozzle 4',permit:'Active'});
 S({date:TODAY,time:'23:40',att:'Rashid Haji Simtitu',shift:'Night',plate:'T 450 BNM',kg:6.2,pay:'Cash',noz:'Nozzle 4',permit:'Valid'});
 // ---- Company B (BlueFuel Energy) seeds — demonstrates tenant isolation ----
 S({companyId:'C002',stationId:'S01',date:TODAY,time:'09:05',att:'Pius Maberi Phares',shift:'Day',plate:'T 300 BLU',kg:8.0,pay:'Cash',noz:'Nozzle 1',permit:'Active'});
-S({companyId:'C002',stationId:'S01',date:TODAY,time:'10:12',att:'Johnson Noel Koroto',shift:'Day',plate:'MC 410 BLU',kg:3.5,pay:'Mobile Money',prov:'Airtel Money',noz:'Nozzle 2',permit:'Valid',bajajStatus:'Member',membershipId:'BF-5001'});
+S({companyId:'C002',stationId:'S01',date:TODAY,time:'10:12',att:'Johnson Noel Koroto',shift:'Day',plate:'MC 410 BLU',kg:3.5,pay:'Mobile Money',prov:'Airtel Money',noz:'Nozzle 2',permit:'Valid',bajajStatus:'Not member',bajajType:'Other Bajaj',driver:'Mbaraka Saleh',phone:'0734 128900'});
 S({companyId:'C002',stationId:'S01',date:TODAY,time:'11:40',att:'Pius Maberi Phares',shift:'Day',plate:'T 512 BLU',kg:12.0,pay:'Mobile Money',prov:'M-Pesa',noz:'Nozzle 1',permit:'Active'});
 
 // central store initial state (all seeds already synchronized)
@@ -398,11 +463,9 @@ function metrics(arr){
     deniedN:denied.length, deniedTW:denied.filter(x=>isThree(x.type)).length, deniedFW:denied.filter(x=>!isThree(x.type)).length,
     cash:sum(refilled.filter(x=>x.pay==='Cash'),x=>x.amount),
     mobile:sum(refilled.filter(x=>x.pay==='Mobile Money'),x=>x.amount),
-    // loyalty
     membersServed:memberIds.size, pointsAwarded:sum(refilled,x=>x.points),
     tvsN:refilled.filter(x=>x.bajajType==='TVS King Bajaj').length,
     otherN:refilled.filter(x=>x.bajajType==='Other Bajaj').length,
-    // permit
     permitOKn:comp.filter(x=>permitOK(x.permit)).length,
     permitIssueN:comp.filter(x=>!permitOK(x.permit)).length
   };
@@ -415,14 +478,13 @@ function commitToCentral(rec){ rec.syncStatus=SYNC.SYNCED; rec.syncAt=nowStamp()
 function scheduleSync(rec){
   setTimeout(()=>{ rec.syncStatus=SYNC.SYNCING; uiSyncTick(rec);
     setTimeout(()=>{
-      if(Math.random()<0.12){ rec.syncStatus=SYNC.FAILED; bumpData(); uiSyncTick(rec);   // transient failure → auto-retry
+      if(Math.random()<0.12){ rec.syncStatus=SYNC.FAILED; bumpData(); uiSyncTick(rec);
         setTimeout(()=>{ commitToCentral(rec); }, 1600);
       } else { commitToCentral(rec); }
     }, 800);
   }, 700);
 }
 function uiSyncTick(rec){
-  const b=$('#succSync'); if(b && state.draft===null && state.view==='success') {} // no-op guard
   if($('#succSync_'+rec.id)) $('#succSync_'+rec.id).innerHTML=syncBadge(rec.syncStatus);
   if(state.role==='attendant' && state.view==='list') renderList();
   if(state.role==='manager' && $('#syncPanel')) $('#syncPanel').innerHTML=syncPanelHTML();
@@ -446,7 +508,7 @@ function startMgrLive(){ stopMgrLive(); state.mgrTimer=setInterval(()=>{
     if(state.role!=='manager') return;
     const ls=$('#liveStamp'); if(ls) ls.textContent='System Status: 🟢 Live · Connected · '+clock();
     const typing = document.activeElement && document.activeElement.id==='mgrSearch';
-    if(state.dataVersion!==state.lastRenderVersion && !typing){ renderMgr(); }   // auto-display new data, no manual refresh
+    if(state.dataVersion!==state.lastRenderVersion && !typing){ renderMgr(); }
   }, SYNC_INTERVAL_MS); }
 function stopMgrLive(){ if(state.mgrTimer){ clearInterval(state.mgrTimer); state.mgrTimer=null; } }
 
@@ -454,14 +516,14 @@ function stopMgrLive(){ if(state.mgrTimer){ clearInterval(state.mgrTimer); state
 function syncAllData(){
   toast('🔄 Synchronizing all data across all attendants…');
   const scope=scopeTxns();
-  let n=0; scope.forEach(x=>{ if(x.syncStatus!==SYNC.SYNCED){ x.syncStatus=SYNC.SYNCED; x.syncAt=nowStamp(); n++; } }); // reconcile pending/failed
+  let n=0; scope.forEach(x=>{ if(x.syncStatus!==SYNC.SYNCED){ x.syncStatus=SYNC.SYNCED; x.syncAt=nowStamp(); n++; } });
   const last=scope[scope.length-1]; if(last){ state.central.lastSync=nowStamp(); state.central.lastRec=last; }
   bumpData(); renderMgr();
   toast('✓ Synchronized '+completed(scope).length+' transactions across '+activeAttendants()+' attendants'+(n?(' · '+n+' reconciled'):''));
 }
 
 /* ---- Live-demo: stream incoming sales from other attendants (single-device demo) ---- */
-function toggleDemoLive(){ state.demoLive=!state.demoLive; if(state.demoLive){ startDemo(); toast('🟢 Live demo on — incoming sales will appear automatically'); } else { stopDemo(); toast('Live demo off'); } renderMgr(); }
+function toggleDemoLive(){ state.demoLive=!state.demoLive; if(state.demoLive){ startDemo(); toast('🟢 Live demo on — incoming sales will appear automatically'); } else { stopDemo(); toast('Live demo off'); } }
 function startDemo(){ stopDemo(); state.demoTimer=setInterval(()=>{ if(state.demoLive && state.role==='manager') injectRandomSale(); }, DEMO_INTERVAL_MS); }
 function stopDemo(){ if(state.demoTimer){ clearInterval(state.demoTimer); state.demoTimer=null; } }
 function rndL(){ const L='ABCDEFGHJKLMNPQRSTUVWXYZ'; return L[Math.floor(Math.random()*L.length)]+L[Math.floor(Math.random()*L.length)]+L[Math.floor(Math.random()*L.length)]; }
@@ -497,7 +559,7 @@ function renderTenantPicker(){
   stopMgrLive(); stopDemo(); state.role=null; state.demoLive=false;
   if(!state._pickCompany) state._pickCompany=COMPANIES[0].id;
   const comp=companyById(state._pickCompany);
-  const tb=$('#topbar'); if(tb){ tb.style.background='linear-gradient(135deg,#334155,#0f172a)'; tb.innerHTML=`<div class="row"><div class="brand"><div class="logo">⚡</div><div>${PLATFORM_NAME}</div></div><div class="who">Platform</div></div>`; }
+  const tb=$('#topbar'); if(tb){ tb.style.background='linear-gradient(135deg,#334155,#0f172a)'; tb.innerHTML=`<div class="row"><div class="brand"><div class="logo">⚡</div><div>${PLATFORM_NAME}</div></div><div class="who"><b>Platform</b>company selector</div></div>`; }
   if($('#stageCap'))$('#stageCap').textContent=PLATFORM_NAME;
   $('#navbar').innerHTML='';
   $('#appBody').innerHTML=`<div class="fade" style="padding-top:16px">
@@ -512,7 +574,7 @@ function renderTenantPicker(){
       <div class="rowb"><span class="tiny muted">Energy types</span><b>${comp.energyTypes.join(', ')}</b></div>
     </div>
     <button class="btn primary" onclick="enterTenant()">Continue →</button>
-    <div class="grid2" style="margin-top:8px"><button class="btn dark sm" onclick="renderCompanyRegister()">➕ Register new company</button><button class="btn ghost sm" onclick="renderModules()">📦 Modules</button></div>
+    <div class="grid2" style="margin-top:8px"><button class="btn dark sm" onclick="renderCompanyRegister()">➕ Register new company</button><button class="btn ghost sm" onclick="renderModules()">Modules</button></div>
     <p class="tiny muted center" style="margin-top:12px">🔒 Data is isolated per company. ${COMPANIES[0].name} can never see ${COMPANIES[1].name} data.</p>
   </div>`;
 }
@@ -533,7 +595,7 @@ function renderCompanyRegister(){
       <div class="grid2" style="margin-top:8px"><div><label class="fl">Currency</label><input class="txt" id="regCurrency" value="TZS"></div><div><label class="fl">Price / kg</label><input class="txt" id="regPrice" type="number" value="1550"></div></div>
       <label class="fl" style="margin-top:8px">Loyalty points / kg</label><input class="txt" id="regPoints" type="number" value="1">
       <label class="fl" style="margin-top:10px">Energy types</label>
-      <div id="regEnergy" style="display:flex;flex-wrap:wrap;gap:6px">${ENERGY_OPTIONS.map(e=>`<label class="chip" style="cursor:pointer;padding:8px 10px"><input type="checkbox" value="${e}" ${e==='CNG'?'checked':''} style="margin-right:5px">${e}</label>`).join('')}</div>
+      <div id="regEnergy" style="display:flex;flex-wrap:wrap;gap:6px">${ENERGY_OPTIONS.map(e=>`<label class="chip" style="cursor:pointer;padding:8px 10px"><input type="checkbox" value="${e}" ${e==='CNG'?'checked':''}> ${e}</label>`).join('')}</div>
     </div>
     <div class="card">
       <div class="sec" style="margin:0 0 8px">First station</div>
@@ -560,20 +622,26 @@ function registerCompany(){
     currency:($('#regCurrency')&&$('#regCurrency').value.trim())||'TZS',
     color:pal[0], colorD:pal[1], energyTypes:energy.length?energy:['CNG'],
     pricePerKg:+($('#regPrice')&&$('#regPrice').value)||1550, pointsPerKg:+($('#regPoints')&&$('#regPoints').value)||1,
-    stations:[{id:'S01',code,name:station,status:'Active'}], licences:[],
+    stations:[{id:'S01',code,name:station,status:'Active',color:pal[0],colorDark:pal[1]}], licences:[],
     subscription:{plan:'trial',status:'Trial',trialEndsOn:new Date(Date.now()+14*864e5).toISOString().slice(0,10),monthly:0,since:new Date().toISOString().slice(0,10)} };
   COMPANIES.push(comp);
   state._pickCompany=id;
   toast('✓ '+name+' registered · Tenant '+id);
   renderTenantPicker();
 }
-function enterTenant(){ state.company=companyById(state._pickCompany); const sid=$('#pickStation')?$('#pickStation').value:state.company.stations[0].id; state.station=state.company.stations.find(s=>s.id===sid)||state.company.stations[0]; resetFilter&&resetFilter(); toast('Entered '+state.company.name+' · '+state.station.name); renderRolePicker(); }
+function enterTenant(){
+  state.company=companyById(state._pickCompany);
+  const sid=$('#pickStation')?$('#pickStation').value:state.company.stations[0].id;
+  state.station=state.company.stations.find(s=>s.id===sid)||state.company.stations[0];
+  applyStationTheme(state.station);
+  renderLogin();
+}
 
 /* ================= MODULES + SETTINGS ================= */
 function renderModules(){ $('#navbar').innerHTML='';
-  const cells=MODULES.map(m=>{ const act=m.status==='Active'; return `<div class="kpi" style="${act?'border-color:#bbf7d0;cursor:pointer':''}" ${act?`onclick="openModule('${m.k}')"`:''}><div style="font-size:22px">${m.icon}</div><div class="k" style="margin-top:4px">${m.name}</div><div class="u">${act?'<span class="pill ok">Active</span>':'<span class="pill warn">Planned · V2</span>'}</div></div>`; }).join('');
+  const cells=MODULES.map(m=>{ const act=m.status==='Active'; return `<div class="kpi" style="${act?'border-color:#bbf7d0;cursor:pointer':''}" ${act?`onclick="openModule('${m.k}')"':''}><div style="display:flex;justify-content:space-between;align-items:center;"><span class="k">${m.icon} ${m.name}</span><span class="pill ${act?'ok':'warn'}">${m.status}</span></div></div>`; }).join('');
   $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">${brandName()}${state.station?' · '+state.station.name:''} · Modules</h3>
-    <p class="tiny muted" style="margin:0 0 10px">Platform module catalog (§58). Active modules are built in Version 1 (CNG); others are configurable and activate in future versions without rebuilding the app.</p>
+    <p class="tiny muted" style="margin:0 0 10px">Platform module catalog (§58). Active modules are built in Version 1 (CNG); others are configurable and activate in future versions without rebranding.</p>
     <div class="kpis">${cells}</div>
     <button class="btn ghost sm" style="margin-top:12px" onclick="${state.company?'renderRolePicker':'renderTenantPicker'}()">← Back</button></div>`;
 }
@@ -583,45 +651,17 @@ function openModule(k){ if(!state.company){ toast('Select a company first'); ret
   else if(k==='gas'){ renderGasRecon(); }
   else if(k==='staff'){ if(state.role==='manager'||state.role==='admin') renderUsers(); else toast('User management is a manager/admin function'); }
   else { toast('Open this module from the '+(state.role==='attendant'?'attendant':'manager')+' area'); } }
-function renderGasRecon(){ $('#navbar').innerHTML='';
-  if(!state.gasForm) state.gasForm={opening:'',received:'',internal:'',losses:'',physClose:''};
-  const g=state.gasForm; const sold=+metrics(completed(scopeTxns())).kg.toFixed(2);
-  const opening=+g.opening||0, received=+g.received||0, internal=+g.internal||0, losses=+g.losses||0;
-  const closing=+(opening+received-sold-internal-losses).toFixed(2);
-  const phys=+g.physClose||0; const variance=+(phys-closing).toFixed(2); const varPct=closing?(variance/closing*100):0; const abn=Math.abs(varPct)>2;
-  $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">🛢️ Gas balance & reconciliation · ${state.station?state.station.name:''}</h3>
-    <div class="banner ok"><span class="b">ℹ️</span><div>Opening + Received − Sold − Internal use − Losses = Closing. <b>Sold</b> is pulled automatically from transactions.</div></div>
-    <div class="card">
-      <label class="fl">Opening balance (kg)</label><input class="txt" type="number" value="${g.opening}" oninput="state.gasForm.opening=this.value;renderGasRecon()">
-      <label class="fl" style="margin-top:8px">Gas received (kg)</label><input class="txt" type="number" value="${g.received}" oninput="state.gasForm.received=this.value;renderGasRecon()">
-      <div class="grid2" style="margin-top:8px"><div><label class="fl">Internal use (kg)</label><input class="txt" type="number" value="${g.internal}" oninput="state.gasForm.internal=this.value;renderGasRecon()"></div><div><label class="fl">Losses / vented (kg)</label><input class="txt" type="number" value="${g.losses}" oninput="state.gasForm.losses=this.value;renderGasRecon()"></div></div>
-    </div>
-    <div class="card">
-      <div class="rowb"><span>Opening</span><b>${opening.toFixed(1)}</b></div>
-      <div class="rowb"><span>+ Received</span><b>${received.toFixed(1)}</b></div>
-      <div class="rowb"><span>− Sold (from transactions)</span><b>${sold.toFixed(1)}</b></div>
-      <div class="rowb"><span>− Internal use</span><b>${internal.toFixed(1)}</b></div>
-      <div class="rowb"><span>− Losses / vented</span><b>${losses.toFixed(1)}</b></div>
-      <div class="rowb"><span><b>= Calculated closing</b></span><b style="color:var(--green-d)">${closing.toFixed(1)} kg</b></div>
-    </div>
-    <div class="card">
-      <label class="fl">Physical closing meter (kg) — optional</label><input class="txt" type="number" value="${g.physClose}" oninput="state.gasForm.physClose=this.value;renderGasRecon()">
-      <div class="rowb" style="margin-top:8px"><span>Variance (physical − calculated)</span><b style="color:${abn?'var(--red)':'var(--green-d)'}">${variance>=0?'+':''}${variance.toFixed(1)} kg (${isFinite(varPct)?varPct.toFixed(1):'0.0'}%)</b></div>
-      <div style="margin-top:6px">${g.physClose?(abn?'<span class="pill bad">⚑ Abnormal variance — investigate</span>':'<span class="pill ok">✓ Within 2% tolerance</span>'):'<span class="tiny muted">Enter the physical meter reading to reconcile</span>'}</div>
-    </div>
-    <button class="btn ghost sm" onclick="${state.role==='manager'?'renderMgr':'renderModules'}()">← Back</button></div>`;
-}
 function renderSettings(){ const c=state.company||COMPANIES[0];
   $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">⚙️ Configuration Center · ${c.name}</h3>
-    <div class="card"><div class="sec" style="margin:0 0 8px">Platform</div><label class="fl">Platform name</label><input class="txt" value="${PLATFORM_NAME}" oninput="PLATFORM_NAME=this.value"></div>
+    <div class="card"><div class="sec" style="margin:0 0 8px">Platform</div><label class="fl">Platform name</label><input class="txt" value="${PLATFORM_NAME}" oninput="PLATFORM_NAME=this.value"><p class="tiny muted" style="margin-top:8px">This affects the app name shown for all companies.</p></div>
     <div class="card"><div class="sec" style="margin:0 0 8px">Company · tenant ${c.id}</div>
       <div class="rowb"><span>Name</span><b>${c.name}</b></div><div class="rowb"><span>Country</span><b>${c.country}</b></div><div class="rowb"><span>Currency</span><b>${c.currency}</b></div>
-      <label class="fl" style="margin-top:8px">Price per kg (${c.currency})</label><input class="txt" type="number" value="${c.pricePerKg}" oninput="if(state.company)state.company.pricePerKg=+this.value||0">
-      <label class="fl" style="margin-top:8px">Loyalty points per kg</label><input class="txt" type="number" value="${c.pointsPerKg}" oninput="if(state.company)state.company.pointsPerKg=+this.value||0">
+      <label class="fl" style="margin-top:8px">Price per kg (${c.currency})</label><input class="txt" type="number" value="${c.pricePerKg}" oninput="if(state.company)state.company.pricePerKg=+this.value; if(!state.company) c.pricePerKg=+this.value; renderSettings();">
+      <label class="fl" style="margin-top:8px">Loyalty points per kg</label><input class="txt" type="number" value="${c.pointsPerKg}" oninput="if(state.company)state.company.pointsPerKg=+this.value; if(!state.company) c.pointsPerKg=+this.value; renderSettings();">
       <label class="fl" style="margin-top:8px">Energy types</label><div>${c.energyTypes.map(e=>`<span class="pill ok">${e}</span> `).join('')}<span class="pill warn">+ add (V2)</span></div></div>
-    <div class="card"><div class="sec" style="margin:0 0 8px">Stations</div>${c.stations.map(s=>`<div class="rowb"><span>${s.name} · ${s.code}</span><b>${s.status}</b></div>`).join('')}</div>
+    <div class="card"><div class="sec" style="margin:0 0 8px">Stations</div>${c.stations.map(s=>`<div class="rowb" style="padding:10px 0;"><span>${s.name} · ${s.code}</span><div style="display:flex;align-items:center;gap:8px;"><span style="width:14px;height:14px;border-radius:50%;background:${s.color || c.color};display:inline-block;border:1px solid #ddd;"></span><input type="color" value="${s.color || c.color || '#1B7A3D'}" onchange="updateStationColor('${s.id}', this.value)" /></div></div>`).join('')}</div>
     <div class="card"><div class="sec" style="margin:0 0 8px">📜 Regulatory licences & certificates</div>
-      ${(c.licences&&c.licences.length)?c.licences.map(l=>`<div class="rowb"><span>${l.name}<div class="tiny muted">${l.number||''}${l.issuer?' · '+l.issuer:''}${l.expiry?' · exp '+l.expiry:''}${l.fileName?' · 📎 '+l.fileName:' · <span style="color:var(--amber)">no file</span>'}</div></span>${licStatus(l.expiry)}</div>`).join(''):'<p class="tiny muted">No licences uploaded yet.</p>'}
+      ${(c.licences&&c.licences.length)?c.licences.map(l=>`<div class="rowb"><span>${l.name}<div class="tiny muted">${l.number||''}${l.issuer?' · '+l.issuer:''}${l.expiry?' · exp '+l.expiry:''}</div></span><b>${licStatus(l.expiry)}</b></div>`).join(''):'<p class="tiny muted">No licences uploaded yet.</p>'}
       <div style="margin-top:10px;border-top:1px solid var(--line);padding-top:10px">
         <label class="fl">Add / upload licence or certificate</label>
         <input class="txt" id="licName" placeholder="e.g. EWURA Operating Licence">
@@ -631,17 +671,26 @@ function renderSettings(){ const c=state.company||COMPANIES[0];
         <button class="btn dark sm" style="margin-top:8px" onclick="addLicence()">＋ Add / upload licence</button>
       </div>
     </div>
-    <div class="card"><div class="sec" style="margin:0 0 8px">Complaint SLA (configurable per company)</div>${mtable(['Priority','First response','Escalation'],[['Low','24h','48h'],['Medium','12h','24h'],['High','4h','8h'],['Critical','30m','1h']],['left','right','right'])}</div>
-    <p class="tiny muted">Pricing, loyalty, currency, energy types and SLA all differ per tenant without code changes.</p>
     <button class="btn ghost sm" onclick="renderModules()">← Back to modules</button></div>`;
+}
+function updateStationColor(stationId, colorHex) {
+  const c = state.company || COMPANIES[0];
+  const station = c.stations.find(s => s.id === stationId);
+  if (!station) return;
+  station.color = colorHex;
+  station.colorDark = shadeColor(colorHex, -18);
+  if (state.station && state.station.id === stationId) {
+    state.station = station;
+    applyStationTheme(station);
+  }
+  renderSettings();
 }
 
 function licStatus(expiry){ if(!expiry) return '<span class="pill">—</span>'; const days=Math.round((new Date(expiry)-new Date())/86400000);
-  if(days<0) return '<span class="pill bad">Expired</span>'; if(days<=30) return '<span class="pill warn">'+days+'d left</span>'; if(days<=90) return '<span class="pill warn">'+Math.round(days/30)+'mo</span>'; return '<span class="pill ok">Valid</span>'; }
+  if(days<0) return '<span class="pill bad">Expired</span>'; if(days<=30) return '<span class="pill warn">'+days+'d left</span>'; if(days<=90) return '<span class="pill warn">'+Math.round(days/30)+'m left</span>'; return '<span class="pill ok">Valid</span>'; }
 function addLicence(){ const c=state.company; if(!c){ toast('Select a company first'); return; }
   const name=($('#licName')&&$('#licName').value.trim())||''; if(!name){ toast('⚠️ Enter the licence name'); return; }
-  const lic={ name, number:($('#licNumber')&&$('#licNumber').value.trim())||'', issuer:($('#licIssuer')&&$('#licIssuer').value.trim())||'',
-    issued:($('#licIssue')&&$('#licIssue').value)||'', expiry:($('#licExpiry')&&$('#licExpiry').value)||'', fileName:'', fileData:null };
+  const lic={ name, number:($('#licNumber')&&$('#licNumber').value.trim())||'', issuer:($('#licIssuer')&&$('#licIssuer').value.trim())||'', issued:($('#licIssue')&&$('#licIssue').value)||'', expiry:($('#licExpiry')&&$('#licExpiry').value)||'', fileName:'', fileData:null };
   c.licences=c.licences||[];
   const fi=$('#licFile'); const f=fi&&fi.files&&fi.files[0];
   if(f){ lic.fileName=f.name; const rd=new FileReader(); rd.onload=()=>{ lic.fileData=rd.result; c.licences.push(lic); toast('✓ '+name+' uploaded'); renderSettings(); }; rd.readAsDataURL(f); }
@@ -654,7 +703,7 @@ function renderLogin(){ stopMgrLive(); stopDemo(); stopFocalLive(); state.role=n
   const exAtt=(state.users.find(u=>u.companyId===state.company.id&&u.role==='Attendant')||{}).username||'attendant';
   $('#appBody').innerHTML=`<div class="fade" style="padding-top:14px">
     <div class="tiny muted center" style="margin-bottom:8px">${PLATFORM_NAME} › <b>${state.company.name}</b> › ${state.station.name}</div>
-    <div class="center" style="margin-bottom:12px"><div style="width:60px;height:60px;border-radius:16px;background:var(--green-l);display:grid;place-items:center;margin:0 auto;font-size:28px">🔐</div>
+    <div class="center" style="margin-bottom:12px"><div style="width:60px;height:60px;border-radius:16px;background:var(--green-l);display:grid;place-items:center;margin:0 auto;font-size:28px">🔑</div>
       <h3 style="color:var(--green-d);margin:10px 0 2px">Sign in</h3><div class="tiny muted">Attendant · Manager · Administrator</div></div>
     <div class="card">
       <label class="fl">Username</label><input class="txt" id="loginUser" autocapitalize="none" placeholder="username">
@@ -663,7 +712,7 @@ function renderLogin(){ stopMgrLive(); stopDemo(); stopFocalLive(); state.role=n
     </div>
     <button class="btn primary" onclick="doLogin()">Sign in →</button>
     <button class="btn ghost sm" style="margin-top:8px" onclick="renderTenantPicker()">⇄ Switch company / station</button>
-    <div class="card" style="margin-top:12px;background:var(--green-ll)"><div class="tiny muted">Demo accounts · default password <b>1234</b> (change required on first login):<br>• Attendant: <b>${exAtt}</b><br>• Manager: <b>manager</b><br>• Administrator: <b>admin</b></div></div>
+    <div class="card" style="margin-top:12px;background:var(--green-ll)"><div class="tiny muted">Demo accounts · default password <b>1234</b> (change required on first login):<br>• Attendant: @${exAtt}<br>• Manager: @manager<br>• Admin: @admin</div></div>
   </div>`;
   setTimeout(()=>{const u=$('#loginUser');if(u)u.focus();},60);
 }
@@ -728,7 +777,7 @@ function adminNavHTML(){ return `<button class="on"><span class="ic">▦</span>A
 function renderAdmin(){ stopFocalLive(); state.view='admin'; $('#navbar').innerHTML=adminNavHTML();
   $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">Administration · ${state.company.name}</h3>
     <div class="tiny muted" style="margin-bottom:6px">${state.currentUser?state.currentUser.fullName:''} · Administrator · ${state.station.name}</div>
-    <div class="banner ${state.company.subscription.status==='Active'?'ok':'warn'}" style="margin-bottom:10px"><span class="b">💳</span><div>Subscription: <b>${planById(state.company.subscription.plan).name}</b> · ${state.company.subscription.status}${state.company.subscription.status==='Trial'&&subDaysLeft(state.company)!==null?' ('+subDaysLeft(state.company)+' days left)':''}</div></div>
+    <div class="banner ${state.company.subscription.status==='Active'?'ok':'warn'}" style="margin-bottom:10px"><span class="b">💳</span><div>Subscription: <b>${state.company.subscription.status}</b>. Manage billing, users, and module activation.</div></div>
     <button class="btn primary" onclick="renderFocal()">🛰️ Real-Time Focal Point</button>
     <button class="btn ghost" style="margin-top:8px" onclick="renderBilling()">💳 Subscription & billing</button>
     <button class="btn ghost" style="margin-top:8px" onclick="renderUsers()">👥 User management</button>
@@ -743,16 +792,15 @@ function renderAdmin(){ stopFocalLive(); state.view='admin'; $('#navbar').innerH
 function stationName(id){ const c=state.company; const s=(c.stations||[]).find(x=>x.id===id); return s?s.name:id; }
 function renderUsers(){ $('#navbar').innerHTML = state.role==='admin'?adminNavHTML():managerNavHTML();
   const us=state.users.filter(u=>u.companyId===state.company.id);
-  const rows=us.map(u=>`<div class="card" style="padding:10px">
-    <div><b>${u.fullName}</b> <span class="pill ${u.status==='Active'?'ok':'bad'}">${u.status}</span>
+  const rows=us.map(u=>`<div class="card" style="padding:10px"><div><b>${u.fullName}</b> <span class="pill ${u.status==='Active'?'ok':'bad'}">${u.status}</span>
       <div class="tiny muted">@${u.username} · ${u.role} · ${u.employeeId} · ${stationName(u.station)}${u.mustChange?' · <span style="color:var(--amber)">password change required</span>':''}</div>
       <div class="tiny muted">Last login: ${u.lastLogin||'—'}</div></div>
-    <div class="grid2" style="margin-top:8px"><button class="btn ghost sm" onclick="resetPassword('${u.username}')">🔑 Reset to 1234</button><button class="btn ghost sm" onclick="toggleActive('${u.username}')">${u.status==='Active'?'🚫 Deactivate':'✓ Activate'}</button></div></div>`).join('');
+    <div class="grid2" style="margin-top:8px"><button class="btn ghost sm" onclick="resetPassword('${u.username}')">🔑 Reset to 1234</button><button class="btn ghost sm" onclick="toggleActive('${u.username}')">${u.status==='Active'?'⏸ Disable':'✓ Enable'}</button></div></div>`).join('');
   $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">User management · ${state.company.name}</h3>
     <div class="card"><div class="sec" style="margin:0 0 8px">Create account</div>
       <label class="fl">Full name</label><input class="txt" id="uFull" placeholder="e.g. Amina Juma">
-      <div class="grid2" style="margin-top:6px"><input class="txt" id="uUser" placeholder="username (blank = auto)"><select class="txt sel" id="uRole"><option>Attendant</option><option>Manager</option></select></div>
-      <div class="grid2" style="margin-top:6px"><select class="txt sel" id="uStation">${state.company.stations.map(s=>`<option value="${s.id}">${s.name}</option>`).join('')}</select><input class="txt" id="uPass" value="1234" placeholder="initial password"></div>
+      <div class="grid2" style="margin-top:6px"><input class="txt" id="uUser" placeholder="username (blank = auto)"><select class="txt sel" id="uRole"><option>Attendant</option><option>Manager</option><option>Administrator</option></select></div>
+      <div class="grid2" style="margin-top:6px"><select class="txt sel" id="uStation">${state.company.stations.map(s=>`<option value="${s.id}">${s.name}</option>`).join('')}</select><input class="txt" id="uPass" placeholder="default 1234"></div>
       <button class="btn dark sm" style="margin-top:8px" onclick="createUser()">＋ Create account (default 1234, change required)</button>
     </div>
     <div class="sec" style="margin:6px 0">Accounts (${us.length})</div>
@@ -763,10 +811,10 @@ function createUser(){ const full=($('#uFull')&&$('#uFull').value.trim())||''; i
   let un=($('#uUser')&&$('#uUser').value.trim().toLowerCase())||''; if(!un){ const p=full.toLowerCase().replace(/[^a-z ]/g,'').split(/\s+/); un=((p[0]&&p[0][0])||'')+((p[p.length-1])||''); }
   let base=un||'user',n=1; while(state.users.some(x=>x.username===un && x.companyId===state.company.id)) un=base+(++n);
   const role=($('#uRole')&&$('#uRole').value)||'Attendant'; const station=($('#uStation')&&$('#uStation').value)||state.company.stations[0].id; const pass=($('#uPass')&&$('#uPass').value)||'1234';
-  state.users.push({companyId:state.company.id, fullName:full, username:un, passwordHash:hashPw(pass), employeeId:'U'+String(state.users.length+1).padStart(3,'0'), station, role, status:'Active', mustChange:true, lastLogin:null});
+  state.users.push({companyId:state.company.id, fullName:full, username:un, passwordHash:hashPw(pass), employeeId:'U'+String(state.users.length+1).padStart(3,'0'), station, role, status:'Active', mustChange:true});
   toast('✓ Account created · @'+un+(pass==='1234'?' · default 1234':'')); renderUsers();
 }
-function resetPassword(un){ const u=state.users.find(x=>x.username===un&&x.companyId===state.company.id); if(!u)return; u.passwordHash=hashPw('1234'); u.mustChange=true; toast('🔑 '+u.fullName+' reset to 1234 (change required)'); renderUsers(); }
+function resetPassword(un){ const u=state.users.find(x=>x.username===un&&x.companyId===state.company.id); if(!u)return; u.passwordHash=hashPw('1234'); u.mustChange=true; toast('🔑 '+u.fullName+' reset to default 1234'); renderUsers(); }
 function toggleActive(un){ const u=state.users.find(x=>x.username===un&&x.companyId===state.company.id); if(!u)return; u.status=u.status==='Active'?'Inactive':'Active'; toast(u.fullName+' → '+u.status); renderUsers(); }
 
 /* ================= SUBSCRIPTION & BILLING (SaaS) ================= */
@@ -785,12 +833,7 @@ function renderBilling(){ stopFocalLive(); $('#navbar').innerHTML= state.role===
   const dleft=subDaysLeft(c);
   const stat = s.status==='Active'?'<span class="pill ok">Active</span>':(s.status==='Trial'?('<span class="pill warn">Trial'+(dleft!==null?' · '+(dleft>=0?dleft+' days left':'expired'):'')+'</span>'):'<span class="pill bad">'+s.status+'</span>');
   const nextBill = s.status==='Active'?new Date(Date.now()+30*864e5).toISOString().slice(0,10):'—';
-  const planCards=PLANS.map(p=>`<div class="kpi" style="${p.id===s.plan?'border-color:#1B7A3D;background:var(--green-l)':''};cursor:pointer" onclick="choosePlan('${p.id}')">
-     <div class="k">${p.name}</div><div class="v" style="font-size:16px;color:var(--green-d)">${p.custom?'Custom':(p.monthly?money(p.monthly)+'/mo':'Free')}</div>
-     <div class="u">${p.stations>999?'∞':p.stations} station(s) · ${p.seats>999?'∞':p.seats} users${p.id===s.plan?' · current':''}</div></div>`).join('');
-  const invoices=[[nextBill==='—'?'—':new Date(Date.now()-0).toISOString().slice(0,10),money(s.monthly),s.status==='Active'?'Paid':'—'],
-                  [new Date(Date.now()-30*864e5).toISOString().slice(0,10),money(s.monthly),'Paid'],
-                  [new Date(Date.now()-60*864e5).toISOString().slice(0,10),money(s.monthly),'Paid']];
+  const planCards=PLANS.map(p=>`<div class="kpi" style="${p.id===s.plan?'border-color:#1B7A3D;background:var(--green-l)':''};cursor:pointer" onclick="choosePlan('${p.id}')"><div class="k">${p.name}</div><div class="v" style="font-size:16px;color:var(--green-d)">${p.custom?'Custom':(p.monthly?money(p.monthly)+'/mo':'Free')}</div><div class="u">${p.stations>999?'∞':p.stations} station(s) · ${p.seats>999?'∞':p.seats} users${p.id===s.plan?' · current':''}</div></div>`).join('');
   $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">💳 Subscription & billing · ${c.name}</h3>
     <div class="card">
       <div class="rowb"><span>Current plan</span><b>${pl.name}</b></div>
@@ -805,706 +848,66 @@ function renderBilling(){ stopFocalLive(); $('#navbar').innerHTML= state.role===
       <button class="btn primary sm" onclick="payNow()">✅ ${s.status==='Active'?'Renew / Pay now':'Activate subscription'}</button>
       <button class="btn red sm" onclick="suspendSub()">⏸ Suspend</button>
     </div>
-    <div class="card" style="margin-top:10px"><div class="sec" style="margin:0 0 8px">Recent invoices</div>${mtable(['Date','Amount','Status'],invoices,['left','right','left'])}</div>
-    <div class="banner ok" style="background:#eff6ff;border-color:#bfdbfe"><span class="b">ℹ️</span><div>Demo billing — “Pay now” simulates a successful charge. Production connects a real payment provider (card / mobile money / bank) with secure, PCI-compliant processing on the backend.</div></div>
+    <div class="banner ok" style="background:#eff6ff;border-color:#bfdbfe"><span class="b">ℹ️</span><div>Demo billing — “Pay now” simulates a successful charge. Production connects a real payment provider.</div></div>
     <button class="btn ghost sm" style="margin-top:8px" onclick="${state.role==='admin'?'renderAdmin':'renderMgr'}()">← Back</button></div>`;
 }
 function choosePlan(id){ const p=planById(id); state.company.subscription.plan=id; state.company.subscription.monthly=p.monthly; toast('Selected '+p.name+' — click “Activate/Pay now” to confirm'); renderBilling(); }
-function payNow(){ const s=state.company.subscription; s.status='Active'; if(!s.since)s.since=new Date().toISOString().slice(0,10); s.trialEndsOn=''; toast('✅ Payment received — subscription Active'); renderBilling(); }
+function payNow(){ const s=state.company.subscription; s.status='Active'; if(!s.since)s.since=new Date().toISOString().slice(0,10); s.trialEndsOn=''; toast('✅ Payment received — subscription activated'); renderBilling(); }
 function suspendSub(){ state.company.subscription.status='Suspended'; toast('⏸ Subscription suspended'); renderBilling(); }
 
-/* ================= RFID REGISTRY (readers configurable: USB/BT/Serial/Network/Wiegand) ================= */
-function scanRfid(){ const uid='RFID-'+Math.floor(100000+Math.random()*899999); if(state.draft){ state.draft.rfid=uid; if($('#rfid'))$('#rfid').value=uid; } toast('📡 RFID read: '+uid); }
-(function seedRfids(){ if(state._rfidSeeded)return; state._rfidSeeded=true;
-  state.rfids.push({companyId:'C001',uid:'RFID-100200',vehicle:'T 564 PQR',customer:'Neema Paul',status:'Active'});
-  state.rfids.push({companyId:'C001',uid:'RFID-100201',vehicle:'MC 332 KDR',customer:'Juma Ally',status:'Active'});
-  state.rfids.push({companyId:'C002',uid:'RFID-200500',vehicle:'T 300 BLU',customer:'ABC Industries',status:'Active'});
-})();
-function rfidCaptureUid(){ const u='RFID-'+Math.floor(100000+Math.random()*899999); if($('#rUid'))$('#rUid').value=u; toast('📡 '+u); }
-function rfidRegister(){ const uid=($('#rUid')&&$('#rUid').value.trim())||''; if(!uid){toast('⚠️ Enter/scan a UID');return;} if(state.rfids.some(r=>r.uid===uid&&r.companyId===state.company.id)){toast('⚠️ UID already registered');return;}
-  state.rfids.push({companyId:state.company.id,uid,vehicle:($('#rVeh')&&$('#rVeh').value.trim())||'',customer:($('#rCust')&&$('#rCust').value.trim())||'',status:'Active'}); toast('✓ RFID registered'); renderRfid(); }
-function rfidSet(uid,status){ const r=state.rfids.find(x=>x.uid===uid&&x.companyId===state.company.id); if(r){ r.status=status; toast(uid+' → '+status); renderRfid(); } }
-function renderRfid(){ stopFocalLive(); $('#navbar').innerHTML= state.role==='admin'?adminNavHTML():managerNavHTML();
-  const list=state.rfids.filter(r=>r.companyId===state.company.id);
-  const rows=list.map(r=>`<div class="card" style="padding:10px"><div><b>${r.uid}</b> <span class="pill ${r.status==='Active'?'ok':(r.status==='Blocked'?'bad':'warn')}">${r.status}</span>
-    <div class="tiny muted">${r.vehicle||'—'}${r.customer?' · '+r.customer:''}</div></div>
-    <div class="grid2" style="margin-top:8px"><button class="btn ghost sm" onclick="rfidSet('${r.uid}','${r.status==='Active'?'Inactive':'Active'}')">${r.status==='Active'?'🚫 Deactivate':'✓ Activate'}</button><button class="btn ghost sm" onclick="rfidSet('${r.uid}','Blocked')">⛔ Block</button></div></div>`).join('');
-  $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">📡 RFID management · ${state.company.name}</h3>
-    <div class="banner warn"><span class="b">⚪</span><div>Reader interface: <b>${state.integrations['RFID reader']}</b> · supports USB / Bluetooth / Serial / Network / Wiegand. Registration works now; live tag reads need the physical reader configured in Integration Health.</div></div>
-    <div class="card"><div class="sec" style="margin:0 0 8px">Register RFID tag</div>
-      <label class="fl">RFID UID</label><div class="grid2"><input class="txt" id="rUid" placeholder="scan or type UID"><button class="btn ghost sm" onclick="rfidCaptureUid()">📡 Scan</button></div>
-      <label class="fl" style="margin-top:8px">Vehicle / plate</label><input class="txt" id="rVeh" placeholder="e.g. T 123 ABC">
-      <label class="fl" style="margin-top:8px">Customer</label><input class="txt" id="rCust" placeholder="customer name">
-      <button class="btn dark sm" style="margin-top:8px" onclick="rfidRegister()">＋ Register tag</button></div>
-    <div class="sec" style="margin:6px 0">Registered tags (${list.length})</div>${rows||'<p class="tiny muted">None yet.</p>'}
-    <button class="btn ghost sm" style="margin-top:8px" onclick="${state.role==='admin'?'renderAdmin':'renderMgr'}()">← Back</button></div>`;
+/* ================= START/ROLE SCREEN HOOKS ================= */
+function refreshTop(){
+  const tb=$('#topbar'); if(!tb) return;
+  const color = state.station?.color || state.company?.color || '#1B7A3D';
+  const dark = state.station?.colorDark || state.company?.colorD || '#14532D';
+  tb.style.background = `linear-gradient(135deg, ${color} 0%, ${dark} 100%)`;
+  const who = state.currentUser ? state.currentUser.fullName : (state.role==='attendant' ? state.attendant : (state.role==='manager' ? STATION_MANAGER : 'System'));
+  const roleLabel = state.role ? state.role.charAt(0).toUpperCase() + state.role.slice(1) : 'Platform';
+  tb.innerHTML=`<div class="row"><div class="brand"><div class="logo">${logoLetters()}</div><div>${state.company?state.company.name:PLATFORM_NAME}</div></div><div class="who"><b>${roleLabel}</b>${state.station?state.station.name:'Platform'}</div></div>${state.role ? `<div class="shiftchip"><span><span class="dot"></span>${state.role==='attendant' ? state.shift : 'Live'}</span><span>${state.station?state.station.code:'—'}</span></div>` : ''}`;
 }
-
-/* ================= REAL-TIME FOCAL POINT (live operations control center) ================= */
-function intDot(s){ return s==='Online'?'🟢':(s==='Warning'?'🟡':(s==='Offline'?'🔴':'⚪')); }
-function intPill(s){ return s==='Online'?'ok':(s==='Offline'?'bad':'warn'); }
-function payPill(s){ const m={Received:'ok',Pending:'warn',Failed:'bad'}; return '<span class="pill '+(m[s]||'')+'">'+s+'</span>'; }
-function dispTile(n,last){ return `<div class="kpi"><div class="k">${n}</div><div class="v" style="font-size:14px;color:${last?'#1D4E89':'#6B7280'}">${last?'COMPLETED':'AVAILABLE'}</div><div class="u">${last?last.plate+' · '+last.kg.toFixed(1)+'kg':'idle'}</div></div>`; }
-function bulkTile(p,last){ return `<div class="kpi"><div class="k">${p}</div><div class="v" style="font-size:14px;color:${last?'#B45309':'#6B7280'}">${last?'LOADED':'AVAILABLE'}</div><div class="u">${last?(last.customerAccount||last.plate)+' · '+last.kg.toFixed(0)+'kg':'idle'}</div></div>`; }
-function focalAlerts(){ const a=[]; Object.keys(state.integrations).forEach(k=>{ const v=state.integrations[k]; if(v==='Offline')a.push([k+' OFFLINE','bad']); else if(v==='Configuration required')a.push([k+' — configuration required','warn']); });
-  const fail=scopeTxns().filter(x=>x.syncStatus===SYNC.FAILED).length; if(fail)a.push([fail+' failed synchronisation(s)','bad']);
-  if(!a.length) return '<div class="tiny" style="color:var(--green-d)">✓ No active alerts.</div>';
-  return a.map(x=>`<div class="rowb"><span>${x[0]}</span><span class="pill ${x[1]}">${x[1]==='bad'?'Critical':'Attention'}</span></div>`).join(''); }
-function startFocalLive(){ stopFocalLive(); state.focalTimer=setInterval(()=>{ if(state.view==='focal' && (state.role==='manager'||state.role==='admin')) renderFocal(); else stopFocalLive(); }, 4000); }
-function stopFocalLive(){ if(state.focalTimer){ clearInterval(state.focalTimer); state.focalTimer=null; } }
-function renderFocal(){ state.view='focal'; stopMgrLive(); $('#navbar').innerHTML= state.role==='admin'?adminNavHTML():managerNavHTML();
-  const today=scopeTxns().filter(x=>x.date===state.shiftDate); const t=metrics(completed(today));
-  const bulkKg=sum(today.filter(x=>x.mode==='Industrial'&&!x.denied),x=>x.kg); const retailKg=Math.max(0,t.kg-bulkKg);
-  const disp=state.nozzles.map(n=>dispTile(n,[...today].reverse().find(x=>x.nozzle===n))).join('');
-  const posts=BULK_POSTS.map(p=>bulkTile(p,[...today].reverse().find(x=>x.nozzle===p))).join('');
-  const payRows=[...today].slice(-6).reverse().map(x=>[x.time,(x.customerAccount||x.plate),money(x.amount),(x.pay==='—'?'—':(x.pay==='Mobile Money'?x.provider:x.pay)),payPill(x.paymentStatus)]);
-  const health=Object.keys(state.integrations).map(k=>`<span class="pill ${intPill(state.integrations[k])}" style="margin:2px;display:inline-block">${intDot(state.integrations[k])} ${k}</span>`).join(' ');
-  $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">🛰️ Real-Time Focal Point · ${state.station.name}</h3>
-    <div class="banner ok" style="background:#ecfdf5;border-color:#a7f3d0"><span class="b">🟢</span><div><b id="focalStamp">Live · ${clock()}</b><div class="tiny muted">Live operations control center — auto-updates every few seconds</div></div></div>
-    <div class="kpis">
-      <div class="kpi wide" style="background:linear-gradient(135deg,#1D4E89,#0f2f57)"><div class="k">Today · sales</div><div class="v">${money(t.sales)}</div><div class="u">${t.n} served · ${t.kg.toFixed(1)} kg</div></div>
-      <div class="kpi"><div class="k">Retail kg</div><div class="v" style="color:#1D4E89">${retailKg.toFixed(1)}</div></div>
-      <div class="kpi"><div class="k">Bulk kg</div><div class="v" style="color:#1D4E89">${bulkKg.toFixed(1)}</div></div>
-      <div class="kpi"><div class="k">Pending payments</div><div class="v" style="color:var(--amber)">${today.filter(x=>x.paymentStatus==='Pending').length}</div></div>
-      <div class="kpi"><div class="k">Shift</div><div class="v" style="font-size:16px">${state.shift}</div><div class="u">${state.shiftStart}</div></div>
-    </div>
-    <div class="card"><div class="sec" style="margin:0 0 8px">⛽ Live dispensers</div><div class="kpis">${disp}</div></div>
-    <div class="card"><div class="sec" style="margin:0 0 8px">🛢️ Bulk filling posts</div><div class="kpis">${posts}</div></div>
-    <div class="card" style="border-color:#bfdbfe"><div class="sec" style="margin:0 0 8px;color:#1D4E89">⚡ Live transaction stream</div>${liveFeedHTML()}</div>
-    <div class="card"><div class="sec" style="margin:0 0 8px">💳 Real-time payment monitor</div>${mtable(['Time','Customer/Veh','Amount','Method','Status'],payRows,['left','left','right','left','left'])}</div>
-    <div class="card" style="border-color:#fcd34d"><div class="sec" style="margin:0 0 8px;color:#92400e">🚨 Alert center</div>${focalAlerts()}</div>
-    <div class="card"><div class="sec" style="margin:0 0 8px">🔌 Integration status</div><div>${health}</div><button class="btn ghost sm" style="margin-top:8px" onclick="renderHealth()">Open Integration Health</button></div>
-    <button class="btn ghost sm" onclick="${state.role==='admin'?'renderAdmin':'renderMgr'}()">← Back</button></div>`;
-  startFocalLive();
-}
-
-/* ================= INTEGRATION + MODULE HEALTH · ACTIVATION REPORT ================= */
-function testConnection(k){ if(k==='Internet'||k==='Database'||k==='Synchronization'){ state.integrations[k]='Online'; } else { state.integrations[k]='Online'; } toast('✓ '+k+' — test OK · Online'); renderHealth(); }
-function renderHealth(){ stopFocalLive(); $('#navbar').innerHTML= state.role==='admin'?adminNavHTML():managerNavHTML();
-  const rows=Object.keys(state.integrations).map(k=>`<div class="rowb"><span>${intDot(state.integrations[k])} ${k}</span><span><span class="pill ${intPill(state.integrations[k])}">${state.integrations[k]}</span> <button class="btn ghost sm" style="display:inline-block;width:auto;padding:4px 8px;margin-left:6px" onclick="testConnection('${k}')">Test</button></span></div>`).join('');
-  $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">🔌 Integration health · ${state.station.name}</h3>
-    <div class="banner warn"><span class="b">⚪</span><div>Device links are <b>simulated</b> in this demo — "Test" brings a link Online to show the flow. Real POS / VFD / RFID / payment need hardware + credentials (stored securely, never displayed).</div></div>
-    <div class="card">${rows}</div>
-    <button class="btn ghost sm" onclick="renderModuleHealth()">📋 Module health monitor</button>
-    <button class="btn ghost sm" style="margin-top:8px" onclick="${state.role==='admin'?'renderAdmin':'renderMgr'}()">← Back</button></div>`;
-}
-function renderModuleHealth(){ stopFocalLive(); $('#navbar').innerHTML= state.role==='admin'?adminNavHTML():managerNavHTML();
-  const rows=MODULES.map(m=>[m.icon+' '+m.name, m.status==='Active'?'<span class="pill ok">🟢 Active</span>':'<span class="pill warn">⚪ Config required</span>']);
-  $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">📋 Module health monitor</h3>
-    ${mtable(['Module','Status'],rows,['left','left'])}
-    <button class="btn ghost sm" style="margin-top:8px" onclick="renderActivationReport()">📄 Module activation report</button>
-    <button class="btn ghost sm" style="margin-top:8px" onclick="renderHealth()">← Back</button></div>`;
-}
-function renderActivationReport(){ stopFocalLive();
-  const act=MODULES.filter(m=>m.status==='Active').length, cfg=MODULES.length-act;
-  const io=Object.values(state.integrations).filter(v=>v==='Online').length, ic=Object.values(state.integrations).length-io;
-  $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">📄 Module Activation Report · ${state.company.name}</h3>
+function renderStart(){
+  state.view='home';
+  refreshTop();
+  $('#navbar').innerHTML=attendantNavHTML('home');
+  $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">${state.station?state.station.name:''} · Shift start</h3>
     <div class="card">
-      <div class="rowb"><span>Total modules</span><b>${MODULES.length}</b></div>
-      <div class="rowb"><span>Active</span><b style="color:var(--green-d)">${act}</b></div>
-      <div class="rowb"><span>Configuration required</span><b style="color:var(--amber)">${cfg}</b></div>
-      <div class="rowb"><span>Integrations online</span><b>${io}</b></div>
-      <div class="rowb"><span>Integrations needing config</span><b style="color:var(--amber)">${ic}</b></div>
-      <div class="rowb"><span>Central-engine transactions</span><b>${completed(scopeTxns()).length}</b></div>
-      <div class="rowb"><span>User accounts</span><b>${state.users.filter(u=>u.companyId===state.company.id).length}</b></div>
-      <div class="rowb"><span>RFID tags registered</span><b>${state.rfids.filter(r=>r.companyId===state.company.id).length}</b></div>
+      <label class="fl">Attendant</label>
+      <select class="txt sel" id="shiftAtt" onchange="state.attendant=this.value">${ATTENDANTS.map(a=>`<option ${a===state.attendant?'selected':''}>${a}</option>`).join('')}</select>
+      <label class="fl" style="margin-top:10px">Shift</label>
+      <select class="txt sel" id="shiftName" onchange="state.shift=this.value">${SHIFTS.map(s=>`<option ${s.name===state.shift?'selected':''}>${s.name}</option>`).join('')}</select>
+      <label class="fl" style="margin-top:10px">Shift date</label>
+      <input class="txt" type="date" id="shiftDate" value="${state.shiftDate}" onchange="state.shiftDate=this.value; if(!state.shiftDate) state.shiftDate=TODAY;">
+      <label class="fl" style="margin-top:10px">Shift start time</label>
+      <input class="txt" type="time" id="shiftStart" value="${state.shiftStart}" onchange="state.shiftStart=this.value;">
     </div>
-    <div class="card"><div class="sec" style="margin:0 0 8px">✅ Activated & functional now</div><div class="tiny">Login/roles · User management · Company registration · Tenant isolation · ANPR capture · Vehicle classification · Loyalty · Permit status · Retail sales · Industrial/bulk metering · Bulk posts · Negotiated price · Credit sales · Evidence + confirmation · Gas reconciliation · Live manager dashboard · <b>Real-Time Focal Point</b> · Central transaction engine (source/type/payment/POS/VFD/receipt) · Sync engine · Reports/export · Device-time · Licence register · RFID registry.</div></div>
-    <div class="card" style="border-color:#fcd34d"><div class="sec" style="margin:0 0 8px;color:#92400e">⚪ Configuration required (external dependencies)</div><div class="tiny">POS integration · VFD/fiscal device · RFID reader hardware · Payment gateway / push-payment · Compressor & equipment telemetry (IoT) · Server-side password hashing/sessions · Automated backups & DR. Each needs real credentials/hardware and a backend — cannot be truly activated in a front-end demo.</div></div>
-    <button class="btn dark sm" onclick="exportActivationReport()">⬇ Download report (CSV)</button>
-    <button class="btn ghost sm" style="margin-top:8px" onclick="renderModuleHealth()">← Back</button></div>`;
+    <button class="btn primary" onclick="startShift()">Start shift</button>
+    <button class="btn ghost sm" style="margin-top:8px" onclick="renderAttendantMenu()">Main menu</button></div>`;
 }
-function exportActivationReport(){ const lines=['Section,Item,Status'];
-  MODULES.forEach(m=>lines.push('Module,"'+m.name+'",'+(m.status==='Active'?'Active':'Configuration required')));
-  Object.keys(state.integrations).forEach(k=>lines.push('Integration,"'+k+'",'+state.integrations[k]));
-  dl('data:text/csv;charset=utf-8,'+encodeURIComponent(lines.join('\n')),'Module_Activation_Report_'+state.company.id+'.csv'); toast('⬇ Report exported'); }
-
-/* ================= RECONCILIATION CALCULATORS (from the station's Excel sheets) ================= */
-const RC={ RHO_NM3:0.7095, P_STD:1.01325, T_NORM:273.15, Z:0.998, CASCADE_VOL:6.38,
-  TARIFF_KWH:195, TARIFF_KVA:15004, TARIFF_SVC:14233, VAT:0.18, EWURA:0.01, REA:0.03,
-  LOSS_TARGET:0.01, LOSS_YEL:0.015, LOSS_RED:0.02, DESIGN_FLOW_KGH:603, DESIGN_FLOW_NM3H:850 };
-function gv(id){ const e=$('#'+id); return e?(parseFloat(e.value)||0):0; }
-function f2(x){ x=isFinite(x)?x:0; return x.toLocaleString('en-US',{maximumFractionDigits:2}); }
-function fpct(x){ return ((isFinite(x)?x:0)*100).toFixed(2)+'%'; }
-function fld(id,label,val,fn){ return '<label class="fl">'+label+'</label><input class="txt" id="'+id+'" inputmode="decimal" value="'+(val!==undefined&&val!==''?val:'')+'" oninput="'+fn+'()">'; }
-function rrow(l,v){ return '<div class="rowb"><span>'+l+'</span><b>'+v+'</b></div>'; }
-function reconNav(){ $('#navbar').innerHTML= state.role==='admin'?adminNavHTML():managerNavHTML(); }
-function renderRecon(){ stopFocalLive(); reconNav();
-  $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">🧮 Reconciliation calculators</h3>
-    <p class="tiny muted" style="margin:0 0 10px">Same formulas & constants as the station's Excel sheets (gas density 0.7095 kg/Nm³, TANESCO tariffs, cascade 6.38 m³, designed flow 603 kg/h). Enter readings — results compute live.</p>
-    <button class="btn primary" onclick="renderReconSales()">💵 Daily sales reconciliation</button>
-    <button class="btn ghost" style="margin-top:8px" onclick="renderReconGas()">🛢️ Gas reconciliation (mass balance)</button>
-    <button class="btn ghost" style="margin-top:8px" onclick="renderReconElec()">⚡ Electricity reconciliation & cost</button>
-    <button class="btn ghost" style="margin-top:8px" onclick="renderReconComp()">🗜️ Compressor flow / running hours</button>
-    <button class="btn ghost sm" style="margin-top:12px" onclick="${state.role==='admin'?'renderAdmin':'renderMgr'}()">← Back</button></div>`;
-}
-function renderReconSales(){ stopFocalLive(); reconNav();
-  $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">💵 Daily sales reconciliation</h3>
-    <div class="card">${fld('rsKg','KG sold','','reconSales')}${fld('rsPrice','Price / kg ('+cur()+')',price(),'reconSales')}
-      ${fld('rsCash','Cash collected ('+cur()+')','','reconSales')}${fld('rsMobile','Mobile money ('+cur()+')','','reconSales')}
-      ${fld('rsCredit','Credit sales ('+cur()+')','','reconSales')}${fld('rsInternal','Internal refills ('+cur()+')','','reconSales')}
-      <div class="grid2">${fld('rsServed','Vehicles served','','reconSales')}${fld('rsDenied','Vehicles denied','','reconSales')}</div></div>
-    <div class="card" id="rsOut"></div>
-    <button class="btn ghost sm" onclick="renderRecon()">← Back</button></div>`;
-  reconSales();
-}
-function reconSales(){ const kg=gv('rsKg'),p=gv('rsPrice'),cash=gv('rsCash'),mob=gv('rsMobile'),cr=gv('rsCredit'),intn=gv('rsInternal');
-  const gross=kg*p, collected=cash+mob+cr+intn, variance=collected-gross, net=gross-intn;
-  const st=Math.abs(variance)<1?'<span class="pill ok">✓ Balanced</span>':(variance<0?'<span class="pill bad">Short '+cur()+' '+f2(-variance)+'</span>':'<span class="pill warn">Over '+cur()+' '+f2(variance)+'</span>');
-  const el=$('#rsOut'); if(el) el.innerHTML=rrow('Gross revenue (kg × price)',money(gross))+rrow('Cash / Mobile / Credit',money(cash)+' · '+money(mob)+' · '+money(cr))+rrow('Internal refills',money(intn))+rrow('Total collected',money(collected))+rrow('Variance (collected − gross)',st)+rrow('Net sales (gross − internal)','<b style="color:var(--green-d)">'+money(net)+'</b>')+rrow('Vehicles served / denied',gv('rsServed')+' / '+gv('rsDenied')); }
-function renderReconGas(){ stopFocalLive(); reconNav();
-  $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">🛢️ Gas reconciliation (daily mass balance)</h3>
-    <div class="card"><div class="sec" style="margin:0 0 8px">Gas readings (Nm³)</div>
-      ${fld('giInput','Gas input / produced (Nm³)','','reconGas')}${fld('giVent','Maintenance venting (Nm³)','','reconGas')}
-      <div class="grid2">${fld('giOpen','Dispenser open (Nm³)','','reconGas')}${fld('giClose','Dispenser close (Nm³)','','reconGas')}</div></div>
-    <div class="card"><div class="sec" style="margin:0 0 8px">Cascade P/T (stored gas)</div>
-      <div class="grid2">${fld('giPb','Pressure before (bar)','','reconGas')}${fld('giTb','Temp before (°C)',28,'reconGas')}</div>
-      <div class="grid2">${fld('giPa','Pressure after (bar)','','reconGas')}${fld('giTa','Temp after (°C)',28,'reconGas')}</div></div>
-    <div class="card" id="giOut"></div>
-    <button class="btn ghost sm" onclick="renderRecon()">← Back</button></div>`;
-  reconGas();
-}
-function reconGas(){ const inp=gv('giInput'),vent=gv('giVent'),o=gv('giOpen'),c=gv('giClose'),pb=gv('giPb'),tb=gv('giTb'),pa=gv('giPa'),ta=gv('giTa');
-  const soldNm3=Math.max(0,c-o), soldKg=soldNm3*RC.RHO_NM3, compressed=Math.max(0,inp-vent);
-  const loss=inp>0?(vent+Math.max(0,inp-compressed-vent)):0, lossPct=inp>0?loss/inp:0;
-  const storedB=pb>0?RC.CASCADE_VOL*(pb/RC.P_STD)*(RC.T_NORM/(273.15+tb))/RC.Z:0;
-  const storedA=pa>0?RC.CASCADE_VOL*(pa/RC.P_STD)*(RC.T_NORM/(273.15+ta))/RC.Z:0;
-  const storedD=storedA-storedB, mbVar=compressed-soldNm3-storedD;
-  const status=lossPct>RC.LOSS_RED?'<span class="pill bad">CRITICAL</span>':(lossPct>RC.LOSS_YEL?'<span class="pill warn">HIGH</span>':(lossPct>RC.LOSS_TARGET?'<span class="pill warn">Watch</span>':'<span class="pill ok">OK (≤1%)</span>'));
-  const el=$('#giOut'); if(el) el.innerHTML=rrow('Gas sold',f2(soldNm3)+' Nm³ · '+f2(soldKg)+' kg')+rrow('Gas compressed (input − vent)',f2(compressed)+' Nm³')+rrow('Gas loss',f2(loss)+' Nm³')+rrow('Loss %',fpct(lossPct)+' '+status)+rrow('Cascade stored (before → after)',f2(storedB)+' → '+f2(storedA)+' Nm³')+rrow('Stored Δ',f2(storedD)+' Nm³')+rrow('Mass-balance variance (compressed − sold − Δstored)','<b style="color:'+(Math.abs(mbVar)>compressed*0.03?'var(--red)':'var(--green-d)')+'">'+f2(mbVar)+' Nm³</b>'); }
-function renderReconElec(){ stopFocalLive(); reconNav();
-  $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">⚡ Electricity reconciliation & cost</h3>
-    <div class="card"><div class="sec" style="margin:0 0 8px">Daily meter readings</div>
-      <div class="grid2">${fld('eOpen','Opening kWh','','reconElec')}${fld('eClose','Closing kWh','','reconElec')}</div>
-      <div class="grid2">${fld('ekvaO','Opening kVA','','reconElec')}${fld('ekvaC','Closing kVA','','reconElec')}</div>
-      ${fld('ePF','Power factor',0.92,'reconElec')}</div>
-    <div class="card"><div class="sec" style="margin:0 0 8px">Monthly cost build-up (TANESCO)</div>
-      <div class="grid2">${fld('emKwh','Monthly kWh','','reconElec')}${fld('emKva','Peak kVA','','reconElec')}</div>
-      ${fld('eKgSold','Gas sold this month (kg)','','reconElec')}
-      <div class="grid2">${fld('eTkwh','Energy TZS/kWh',RC.TARIFF_KWH,'reconElec')}${fld('eTkva','Demand TZS/kVA',RC.TARIFF_KVA,'reconElec')}</div>
-      ${fld('eSvc','Service charge TZS/mo',RC.TARIFF_SVC,'reconElec')}</div>
-    <div class="card" id="eOut"></div>
-    <button class="btn ghost sm" onclick="renderRecon()">← Back</button></div>`;
-  reconElec();
-}
-function reconElec(){ const o=gv('eOpen'),c=gv('eClose'),ko=gv('ekvaO'),kc=gv('ekvaC'),pf=gv('ePF');
-  const dayKwh=Math.max(0,c-o), peak=Math.max(ko,kc), tkwh=gv('eTkwh')||RC.TARIFF_KWH, tkva=gv('eTkva')||RC.TARIFF_KVA, svc=gv('eSvc');
-  const dayCost=dayKwh*tkwh+peak*tkva/30;
-  const mk=gv('emKwh'),mp=gv('emKva'),kg=gv('eKgSold');
-  const energy=mk*tkwh, demand=mp*tkva, sub=energy+demand+svc, vat=sub*RC.VAT, ewura=sub*RC.EWURA, rea=sub*RC.REA, total=sub+vat+ewura+rea, perkg=kg>0?total/kg:0;
-  const pfw=pf&&pf<0.85?'<span class="pill warn">Low PF</span>':(pf?'<span class="pill ok">OK</span>':'');
-  const el=$('#eOut'); if(el) el.innerHTML='<div class="sec" style="margin:0 0 6px">Daily</div>'+rrow('Daily kWh (close − open)',f2(dayKwh)+' kWh')+rrow('Peak kVA · PF',f2(peak)+' · '+pf+' '+pfw)+rrow('Daily electricity cost',money(dayCost))+
-    '<div class="sec" style="margin:10px 0 6px">Monthly build-up</div>'+rrow('Energy ('+f2(mk)+'×'+tkwh+')',money(energy))+rrow('Demand ('+f2(mp)+'×'+tkva+')',money(demand))+rrow('Service charge',money(svc))+rrow('Subtotal',money(sub))+rrow('VAT 18% · EWURA 1% · REA 3%',money(vat)+' · '+money(ewura)+' · '+money(rea))+rrow('TOTAL electricity cost','<b style="color:var(--green-d)">'+money(total)+'</b>')+rrow('Cost per kg gas sold',kg>0?money(perkg)+'/kg':'—'); }
-function renderReconComp(){ stopFocalLive(); reconNav();
-  $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">🗜️ Compressor flow & running hours</h3>
-    <div class="card">${fld('cKg','Gas sold / produced (kg)','','reconComp')}${fld('cHours','Actual running hours (h)','','reconComp')}
-      ${fld('cFlow','Designed flow rate (kg/h)',RC.DESIGN_FLOW_KGH,'reconComp')}</div>
-    <div class="card" id="cOut"></div>
-    <button class="btn ghost sm" onclick="renderRecon()">← Back</button></div>`;
-  reconComp();
-}
-function reconComp(){ const kg=gv('cKg'),h=gv('cHours'),df=gv('cFlow')||RC.DESIGN_FLOW_KGH;
-  const actFlow=h>0?kg/h:0, desHours=df>0?kg/df:0, hrVar=h-desHours, flowVar=actFlow-df, desOut=h*df, outVar=kg-desOut, util=h/24;
-  const el=$('#cOut'); if(el) el.innerHTML=rrow('Actual flow rate',f2(actFlow)+' kg/h')+rrow('Designed flow rate',f2(df)+' kg/h')+rrow('Flow variance',(flowVar>=0?'+':'')+f2(flowVar)+' kg/h')+rrow('Designed running hours (kg ÷ design flow)',f2(desHours)+' h')+rrow('Running-hours variance',(hrVar>=0?'+':'')+f2(hrVar)+' h')+rrow('Designed output at actual hours',f2(desOut)+' kg')+rrow('Output variance','<b style="color:'+(outVar<0?'var(--red)':'var(--green-d)')+'">'+(outVar>=0?'+':'')+f2(outVar)+' kg</b>')+rrow('Runtime utilization (h ÷ 24)',fpct(util)); }
-
-/* ================= ROLE GATE ================= */
-function attendantTopHTML(){ const s=SHIFTS.find(x=>x.name===state.shift)||SHIFTS[0]; return `<div class="row"><div class="brand"><div class="logo">${logoLetters()}</div><div>${brandName()}</div></div><div class="who"><b>${state.attendant}</b>Attendant</div></div>
-  <div class="shiftchip"><div><span class="dot"></span><b>${state.shift.toUpperCase()}</b> · ${state.shiftStart} · ${state.station?state.station.name:''}</div><div id="shiftClock" class="tiny" style="opacity:.9">${state.shiftStarted?'Open':'—'}</div></div>`; }
-function managerTopHTML(){ return `<div class="row"><div class="brand"><div class="logo">${logoLetters()}</div><div>${brandName()} · Mgr</div></div><div class="who"><b>${STATION_MANAGER}</b>Station Manager</div></div>
-  <div class="shiftchip" style="background:rgba(255,255,255,.16)"><div>${state.station?state.station.name+' · '+state.station.code:''}</div><div class="tiny">${state.company?state.company.name:''}</div></div>`; }
-function refreshTop(){ const tb=$('#topbar'); if(!tb)return; const comp=state.company;
-  if(state.role==='admin'){ tb.style.background='linear-gradient(135deg,#334155,#0f172a)'; tb.innerHTML=`<div class="row"><div class="brand"><div class="logo">${logoLetters()}</div><div>${brandName()} · Admin</div></div><div class="who"><b>${state.currentUser?state.currentUser.fullName:'Administrator'}</b>Administrator</div></div><div class="shiftchip" style="background:rgba(255,255,255,.16)"><div>${state.station?state.station.name:''}</div><div class="tiny">User & system administration</div></div>`; if($('#stageCap'))$('#stageCap').textContent='ADMINISTRATOR'; }
-  else if(state.role==='manager'){ tb.style.background='linear-gradient(135deg,'+(comp?comp.colorD:'#1D4E89')+',#0f172a)'; tb.innerHTML=managerTopHTML(); if($('#stageCap'))$('#stageCap').textContent='STATION MANAGER'; }
-  else if(state.role==='attendant'){ tb.style.background='linear-gradient(135deg,'+(comp?comp.color:'#1B7A3D')+','+(comp?comp.colorD:'#14532D')+')'; tb.innerHTML=attendantTopHTML(); if($('#stageCap'))$('#stageCap').textContent='ATTENDANT'; }
-  else { tb.style.background='linear-gradient(135deg,'+(comp?comp.color:'#1B7A3D')+','+(comp?comp.colorD:'#14532D')+')'; tb.innerHTML=`<div class="row"><div class="brand"><div class="logo">${logoLetters()}</div><div>${brandName()}</div></div><div class="who">${state.station?state.station.name:'Sign in'}</div></div>`; if($('#stageCap'))$('#stageCap').textContent=brandName(); }
-}
-function attendantNavHTML(active){ const A=v=>active===v?'on':'';
-  return `<button data-nav="home" class="${A('home')}" onclick="nav('home')"><span class="ic">▦</span>Shift</button>
-    <button data-nav="list" class="${A('list')}" onclick="nav('list')"><span class="ic">☰</span>Refills</button>
-    <button class="fab" onclick="startTxn()">+</button>
-    <button data-nav="report" class="${A('report')}" onclick="nav('report')"><span class="ic">▤</span>Day Sales</button>
-    <button data-nav="close" class="${A('close')}" onclick="nav('close')"><span class="ic">◉</span>Close</button>`; }
-function managerNavHTML(){ return `<button class="on"><span class="ic">▦</span>Dashboard</button>
-    <button onclick="syncAllData()" style="color:#1D4E89"><span class="ic">🔄</span>Sync All</button>
-    <button onclick="signOut()"><span class="ic">⎋</span>Sign out</button>`; }
-// After a tenant is chosen, entry always goes through the login gate (or the signed-in user's dashboard).
-function renderRolePicker(){ if(!state.company){ return renderTenantPicker(); } if(state.currentUser){ return routeUser(); } return renderLogin(); }
-function chooseAttendant(){ state.role='attendant'; refreshTop(); $('#navbar').innerHTML=''; renderStart(); }
-function chooseManager(){ state.role=null; $('#navbar').innerHTML=''; refreshTop();
-  $('#appBody').innerHTML=`<div class="fade" style="padding-top:16px">
-    <div class="center" style="margin-bottom:12px"><div style="width:60px;height:60px;border-radius:16px;background:#e7eef7;display:grid;place-items:center;margin:0 auto;font-size:28px">🔒</div>
-    <h3 style="color:#1D4E89;margin:12px 0 2px">Station Manager sign-in</h3><div class="tiny muted">${STATION_MANAGER}</div></div>
-    <div class="card"><label class="fl">Manager PIN</label>
-      <input class="txt" id="pin" inputmode="numeric" maxlength="4" placeholder="••••" style="text-align:center;font-size:24px;letter-spacing:8px" onkeydown="if(event.key==='Enter')managerLogin()">
-      <p class="tiny muted center" style="margin:10px 0 0">Demo PIN: <b>1234</b> · production uses Microsoft sign-in</p></div>
-    <button class="btn dark" onclick="managerLogin()">Enter dashboard</button>
-    <button class="btn ghost sm" style="margin-top:8px" onclick="renderRolePicker()">Back</button></div>`;
-  setTimeout(()=>{const p=$('#pin');if(p)p.focus();},60);
-}
-function managerLogin(){ const v=($('#pin')?$('#pin').value:'').trim(); if(v!==MANAGER_PIN){toast('⚠️ Incorrect PIN');return;} state.role='manager'; refreshTop(); $('#navbar').innerHTML=managerNavHTML(); renderMgr(); }
-function signOut(){ doLogout(); }
-
-/* ================= START SHIFT ================= */
-function renderStart(){ $('#navbar').innerHTML=''; const s=SHIFTS.find(x=>x.name===state.shift)||SHIFTS[0];
-  $('#appBody').innerHTML=`<div class="fade" style="padding-top:6px">
-    <div class="tiny muted" style="text-align:right;margin-bottom:2px"><a href="#" onclick="event.preventDefault();signOut()" style="color:var(--muted)">⎋ Sign out</a></div>
-    <div class="center" style="margin-bottom:6px"><div style="width:58px;height:58px;border-radius:16px;background:var(--green-l);display:grid;place-items:center;margin:0 auto;font-size:26px">⛽</div>
-      <h3 style="color:var(--green-d);margin:10px 0 2px">Start your shift</h3><div class="tiny muted">Step 1 · confirm attendant, shift, date & start time</div></div>
-    <div class="card">
-      <label class="fl">Attendant</label>${(state.currentUser&&state.currentUser.role==='Attendant')?`<div class="txt" style="font-weight:700;background:#f4faf6">${state.attendant} <span class="tiny muted" style="font-weight:400">· @${state.currentUser.username}</span></div>`:`<select class="txt sel" id="selAtt">${ATTENDANTS.map(n=>`<option${n===state.attendant?' selected':''}>${n}</option>`).join('')}</select>`}
-      <label class="fl" style="margin-top:14px">Shift</label><select class="txt sel" id="selShift">${SHIFTS.map(x=>`<option value="${x.name}"${x.name===state.shift?' selected':''}>${x.name} Shift · ${x.time}</option>`).join('')}</select>
-      <div class="grid2" style="margin-top:14px"><div><label class="fl">Shift date</label><input class="txt" type="date" id="shiftDate" value="${state.shiftDate}"></div><div><label class="fl">Start time</label><input class="txt" type="time" id="startTime" value="${deviceTime()}"></div></div>
-      <p class="tiny muted" style="margin:10px 0 0">🕒 Date & start time are pre-filled from this device (${state.shiftDate} ${deviceTime()}). Every transaction's time is captured automatically from the device clock.</p>
-    </div>
-    <button class="btn primary" onclick="startShift()">▶︎ Start shift</button></div>`;
-}
-function startShift(){ state.attendant=($('#selAtt')?$('#selAtt').value:(state.currentUser?state.currentUser.fullName:state.attendant)); state.shift=$('#selShift').value; state.shiftDate=$('#shiftDate').value||TODAY;
-  const s=SHIFTS.find(x=>x.name===state.shift)||SHIFTS[0]; state.shiftStart=$('#startTime').value||s.start; state.shiftStarted=true;
-  refreshTop(); toast('✓ '+state.shift+' shift started · '+state.attendant.split(' ')[0]); nav('home'); }
-
-/* ================= NAV ================= */
-function nav(v){ stopFocalLive(); state.view=v; state.draft=null; $('#navbar').innerHTML=attendantNavHTML(v);
-  if(v==='home')renderHome(); else if(v==='list')renderList(); else if(v==='report')renderDaySales(); else if(v==='close')renderClose(); }
-
-function renderHome(){ const m=metrics(mine());
-  $('#appBody').innerHTML=`<div class="fade">
-    <h3 class="sec">My shift · live</h3>
-    <div class="kpis">
-      <div class="kpi wide"><div class="k">Total sales this shift</div><div class="v">${money(m.sales)}</div><div class="u">${m.n} served · ${m.unique} unique · ${m.kg.toFixed(1)} kg</div></div>
-      <div class="kpi"><div class="k">🛺 3-Wheelers</div><div class="v">${m.twN}</div><div class="u">${m.twU} uniq · ${m.twKg.toFixed(1)} kg</div></div>
-      <div class="kpi"><div class="k">🚗 4-Wheelers</div><div class="v">${m.fwN}</div><div class="u">${m.fwU} uniq · ${m.fwKg.toFixed(1)} kg</div></div>
-      <div class="kpi"><div class="k">⭐ Loyalty pts</div><div class="v" style="color:#B45309">${m.pointsAwarded.toFixed(0)}</div><div class="u">${m.membersServed} members</div></div>
-      <div class="kpi"><div class="k">TVS / Other</div><div class="v" style="font-size:20px">${m.tvsN}/${m.otherN}</div><div class="u">Bajaj types</div></div>
-      <div class="kpi"><div class="k">💵 / 📱</div><div class="v" style="font-size:15px">${money(m.cash)}</div><div class="u">${money(m.mobile)} mobile</div></div>
-      <div class="kpi" style="border-color:#fcd34d;background:#fffbeb"><div class="k" style="color:#92400e">🚫 No-permit</div><div class="v" style="color:#B45309">${m.deniedN}</div><div class="u">zero-kg</div></div>
-    </div>
-    <button class="btn primary" style="margin-top:14px" onclick="startTxn()">＋  Record a sale</button>
-    <button class="btn ghost sm" style="margin-top:8px" onclick="renderAttendantMenu()">☰ Main menu</button>
-    <div class="card" style="margin-top:12px"><div class="kv"><span class="l">Attendant</span><b>${state.attendant}</b></div>
-      <div class="kv"><span class="l">Shift</span><b>${state.shift} · start ${state.shiftStart}</b></div>
-      <div class="kv"><span class="l">Shift date</span><b>${state.shiftDate}</b></div></div>
-    <div class="grid2"><button class="btn ghost sm" onclick="renderStart()">⇄ Switch shift</button><button class="btn ghost sm" onclick="signOut()">⎋ Sign out</button></div>
-    <p class="center tiny muted" style="margin-top:12px">Price: ${money(price())}/kg · Loyalty: 1 kg = ${pts()} pt</p></div>`;
-}
-function permitPill(s){ return permitOK(s)?`<span class="pill ok">${s}</span>`:`<span class="pill bad">${s}</span>`; }
-function txnRow(x){ return `<div class="txn">
-    ${x.photo?`<img class="thumb" src="${x.photo}" onclick="savePhoto('${x.id}')">`:`<div class="ico">${typeIcon(x.type)}</div>`}
-    <div class="mid"><b>${x.plate}</b> <span class="tiny muted">${typeShort(x.type)}</span>
-      ${isMember(x)?'<span class="pill ok">⭐ Member</span>':''}${x.denied?'<span class="pill warn">No permit</span>':''}
-      <div class="m">${x.time} · ${x.denied?'Not refilled':(x.pay==='Mobile Money'?x.provider:x.pay)} · ${x.permit}${x.points?' · +'+x.points+'pt':''}</div>
-      <div style="margin-top:3px">${syncBadge(x.syncStatus)}</div></div>
-    <div class="amt2">${x.denied?'<span class="muted">—</span>':money(x.amount)}<div class="m">${x.kg.toFixed(2)} kg</div></div></div>`; }
-function renderList(){ const rows=[...mine()].reverse().map(txnRow).join('');
-  $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">My transactions (${mine().length})</h3>
-    <div class="grid2" style="margin-bottom:10px"><button class="btn ghost sm" onclick="exportCSV(mine(),'my-shift')">⬇ Export (CSV)</button><button class="btn ghost sm" onclick="saveAllPhotos()">🖼 Save photos</button></div>
-    <div class="card">${rows||'<p class="muted center">No transactions yet.</p>'}</div></div>`; }
-
-/* ================= DAY SALES (attendant) ================= */
-function renderDaySales(){ const arr=state.txns.filter(x=>x.date===state.shiftDate); const m=metrics(arr); const pc=permitCounts(arr);
-  $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">Day Sales · ${state.shiftDate}</h3>
-    <div class="banner ok"><span class="b">✓</span><div>All transactions for the business day (all shifts). Stays visible without closing the day.</div></div>
-    <div class="card">
-      <div class="rowb"><span>Total transactions</span><b>${m.total}</b></div>
-      <div class="rowb"><span>Total KG sold</span><b>${m.kg.toFixed(2)} kg</b></div>
-      <div class="rowb"><span>Total sales value</span><b style="color:var(--green-d)">${money(m.sales)}</b></div>
-      <div class="rowb"><span>Three- / Four-Wheelers</span><b>${m.twN} / ${m.fwN}</b></div>
-      <div class="rowb"><span>TVS King / Other Bajaj</span><b>${m.tvsN} / ${m.otherN}</b></div>
-      <div class="rowb"><span>Loyalty members served</span><b>${m.membersServed}</b></div>
-      <div class="rowb"><span>Total loyalty points</span><b style="color:var(--amber)">${m.pointsAwarded.toFixed(0)}</b></div>
-      <div class="rowb"><span>Active/Valid permits</span><b>${m.permitOKn}</b></div>
-      <div class="rowb"><span>Inactive/Invalid/Expired</span><b style="color:var(--red)">${m.permitIssueN}</b></div>
-      <div class="rowb"><span>No-permit / zero-kg</span><b>${m.deniedN}</b></div>
-    </div>
-    <button class="btn ghost sm" onclick="exportCSV(state.txns.filter(x=>x.date==='${state.shiftDate}'),'day-sales')">⬇ Export day sales</button></div>`;
+function startShift(){
+  state.shiftStarted = true;
+  state.attendant = $('#shiftAtt') ? $('#shiftAtt').value : state.attendant;
+  state.shift = $('#shiftName') ? $('#shiftName').value : state.shift;
+  state.shiftDate = $('#shiftDate') ? $('#shiftDate').value || TODAY : TODAY;
+  state.shiftStart = $('#shiftStart') ? $('#shiftStart').value || '08:00' : '08:00';
+  renderAttendantMenu();
 }
 
-/* ================= REFILL / SALE FORM ================= */
-const PLATES=[{raw:'MC332KDR',conf:0.94},{raw:'T564PQR',conf:0.97},{raw:'MC109JHT',conf:0.89},{raw:'T908ZXC',conf:0.92},{raw:'MC745BVN',conf:0.86},{raw:'T771ZZA',conf:0.95}];
-function formatPlate(raw){ let s=(raw||'').toUpperCase().replace(/[^A-Z0-9]/g,''); const m=s.match(/^([A-Z]{1,2})(\d{3})([A-Z]{3})$/); return m?`${m[1]} ${m[2]} ${m[3]}`:s; }
-function validPlate(v){ return /^[A-Z]{1,2} \d{3} [A-Z]{3}$/.test((v||'').trim().toUpperCase()); }
-
-function startTxn(){ state.draft={plate:'',type:'',kg:'',pay:'',provider:'',nozzle:'',denied:false,remarks:'',scanned:false,conf:null,photo:null,
-  permit:'Active', bajajStatus:'', bajajType:'', membershipId:'', driver:'', phone:'',
-  industrial:false, meterStart:'', meterEnd:'', pressure:'', temperature:'', negPrice:'', customerAccount:'', trailerId:'',
-  photos:[], confirmed:false, confirmedBy:'', rfid:''}; state._camMode='plate'; renderForm(); }
-
-function captureForm(){ const d=state.draft;
-  if($('#plateField'))d.plate=$('#plateField').value;
-  if($('#kg'))d.kg=$('#kg').value;
-  if($('#driver'))d.driver=$('#driver').value;
-  if($('#phone'))d.phone=$('#phone').value;
-  if($('#membershipId'))d.membershipId=$('#membershipId').value;
-  if($('#remarks'))d.remarks=$('#remarks').value;
-  if($('#meterStart'))d.meterStart=$('#meterStart').value;
-  if($('#meterEnd'))d.meterEnd=$('#meterEnd').value;
-  if($('#pressure'))d.pressure=$('#pressure').value;
-  if($('#temperature'))d.temperature=$('#temperature').value;
-  if($('#negPrice'))d.negPrice=$('#negPrice').value;
-  if($('#custAcct'))d.customerAccount=$('#custAcct').value;
-  if($('#trailerId'))d.trailerId=$('#trailerId').value;
-  if($('#confirmedBy'))d.confirmedBy=$('#confirmedBy').value;
+function attendantNavHTML(active){
+  return `<button class="${active==='home'?'on':''}" onclick="nav('home')"><span class="ic">▦</span>Home</button>
+    <button class="${active==='list'?'on':''}" onclick="nav('list')"><span class="ic">☰</span>List</button>
+    <button class="${active==='report'?'on':''}" onclick="nav('report')"><span class="ic">▤</span>Report</button>
+    <button class="${active==='menu'?'on':''}" onclick="renderAttendantMenu()"><span class="ic">☰</span>Menu</button>`;
 }
-function renderForm(){ const d=state.draft; const three=isThree(d.type);
-  const member = three && (d.bajajStatus==='Member' || d.bajajType==='TVS King Bajaj');
-  const kgv=parseFloat(d.kg)||0;
-  $('#appBody').innerHTML=`<div class="fade">
-    <h3 class="sec">New transaction</h3>
-    <div class="tiny muted center" style="margin:-4px 0 8px">🕒 Device time: <b id="liveClock" style="color:var(--green-d)">${clock()}</b> · ${state.shiftDate} — captured automatically at submit</div>
-    <button class="btn primary" onclick="scanPlate()">📷  SCAN VEHICLE PLATE</button>
-    <div class="center" style="margin-top:6px"><a href="#" class="tiny muted" onclick="event.preventDefault();demoScan()">▶︎ Demo scan (no camera)</a></div>
-
-    <div class="card" style="margin-top:12px">
-      ${d.photo?`<div class="cam" style="height:96px;margin-bottom:10px"><img src="${d.photo}" class="camimg"></div>`:''}
-      <label class="fl" for="plateField">Vehicle Plate Number</label>
-      <input class="txt" id="plateField" placeholder="— scan or type —" value="${d.plate||''}" style="text-transform:uppercase;font-size:22px;font-weight:800;text-align:center;letter-spacing:2px" oninput="onPlateInput()" onblur="tidyPlate()">
-      <div id="plateStatus" style="margin-top:8px;text-align:center"></div>
-      <div class="grid2" style="margin-top:10px"><button class="btn ghost sm" onclick="scanPlate()">📷 Rescan</button><button class="btn ghost sm" onclick="editPlate()">✎ Edit</button></div>
-      <label class="fl" style="margin-top:12px">Vehicle type <span class="muted" style="font-weight:400;text-transform:none">· auto from registration</span></label>
-      <div class="seg" id="segType">
-        <button class="${d.type==='Four-Wheeler'?'on':''}" onclick="setType('Four-Wheeler')"><span class="ic">🚗</span>4-Wheeler (T)</button>
-        <button class="${d.type==='Three-Wheeler'?'on':''}" onclick="setType('Three-Wheeler')"><span class="ic">🛺</span>3-Wheeler (MC)</button>
-      </div>
-    </div>
-
-    <button class="btn ${d.industrial?'dark':'ghost'} sm" style="${d.industrial?'':'border-color:#1D4E89;color:#1D4E89'}" onclick="toggleIndustrial()">${d.industrial?'✓ Industrial / bulk sale (metered)':'🏭 Switch to Industrial / bulk sale'}</button>
-
-    <div class="card">
-      <label class="fl">Driver details <span class="muted" style="font-weight:400;text-transform:none">· optional</span></label>
-      <input class="txt" id="driver" placeholder="Driver name" value="${d.driver||''}" oninput="state.draft.driver=this.value">
-      <input class="txt" id="phone" style="margin-top:8px" inputmode="tel" placeholder="Phone number" value="${d.phone||''}" oninput="state.draft.phone=this.value">
-      <div class="grid2" style="margin-top:8px"><input class="txt" id="rfid" placeholder="RFID tag (optional)" value="${d.rfid||''}" oninput="state.draft.rfid=this.value"><button class="btn ghost sm" onclick="scanRfid()">📡 Scan RFID</button></div>
-    </div>
-
-    ${three?`
-    <div class="card" style="border-color:#bbf7d0">
-      <label class="fl">⭐ Bajaj Status <span style="color:var(--red)">*</span></label>
-      <select class="txt sel" onchange="setBajajStatus(this.value)">
-        <option value=""${d.bajajStatus===''?' selected':''}>— select —</option>
-        <option value="Member"${d.bajajStatus==='Member'?' selected':''}>Yes – Member of Loyalty Program</option>
-        <option value="Not member"${d.bajajStatus==='Not member'?' selected':''}>No – Not a Member</option>
-      </select>
-      ${d.bajajStatus==='Member'?`
-        <label class="fl" style="margin-top:12px">Membership ID</label>
-        <input class="txt" id="membershipId" placeholder="e.g. GG-1001" value="${d.membershipId||''}" oninput="state.draft.membershipId=this.value">
-        <p class="tiny" style="color:var(--green-d);margin:8px 0 0">✓ Member — loyalty points will be awarded (1 kg = ${pts()} pt).</p>`:''}
-      ${d.bajajStatus==='Not member'?`
-        <label class="fl" style="margin-top:12px">Bajaj Type <span style="color:var(--red)">*</span></label>
-        <select class="txt sel" onchange="setBajajType(this.value)">
-          <option value=""${d.bajajType===''?' selected':''}>— select —</option>
-          <option${d.bajajType==='TVS King Bajaj'?' selected':''}>TVS King Bajaj</option>
-          <option${d.bajajType==='Other Bajaj'?' selected':''}>Other Bajaj</option>
-        </select>
-        ${d.bajajType==='TVS King Bajaj'?`<p class="tiny" style="color:var(--green-d);margin:8px 0 0">✓ Eligible — will be <b>registered</b> into the Loyalty Program on submit; a Membership ID is created and points awarded.</p>`:''}
-        ${d.bajajType==='Other Bajaj'?`<p class="tiny muted" style="margin:8px 0 0">Normal sale — no loyalty points awarded.</p>`:''}`:''}
-    </div>`:''}
-
-    <div class="card">
-      <label class="fl">Refill Permit Status <span style="color:var(--red)">*</span></label>
-      <select class="txt sel" onchange="setPermit(this.value)">${PERMITS.map(p=>`<option${d.permit===p?' selected':''}>${p}</option>`).join('')}</select>
-      ${permitOK(d.permit)?'':`<div class="banner warn" style="margin:10px 0 0"><span class="b">⚠️</span><div><b>${d.permit} permit.</b> Station policy may require refusal. Use the toggle below to record as not-refilled.</div></div>`}
-    </div>
-
-    <button class="btn ${d.denied?'amber':'ghost'}" onclick="toggleDenied()" style="${d.denied?'':'border-color:var(--amber);color:var(--amber)'}">
-      ${d.denied?'✓ Not Refilled (0.00 kg)':'🚫 No Valid Permit — Not Refilled'}</button>
-
-    ${d.denied?`
-    <div class="card" style="border-color:#fcd34d;background:#fffbeb">
-      <div class="banner warn" style="margin:0 0 10px"><span class="b">⚠️</span><div>Recorded as <b>0.00 kg</b>. Reason: <b>No Valid Permit – Not Refilled</b>. Kept for audit, excluded from sales/points.</div></div>
-      <label class="fl">Remarks</label><input class="txt" id="remarks" placeholder="e.g. permit expired" value="${d.remarks||''}" oninput="state.draft.remarks=this.value"></div>`:(d.industrial?`
-    <div class="card" style="border-color:#bfdbfe">
-      <div class="sec" style="margin:0 0 8px;color:#1D4E89">🏭 Industrial metering</div>
-      <div class="grid2"><div><label class="fl">Meter start (kg)</label><input class="txt" id="meterStart" inputmode="decimal" value="${d.meterStart||''}" oninput="calc()"></div><div><label class="fl">Meter end (kg)</label><input class="txt" id="meterEnd" inputmode="decimal" value="${d.meterEnd||''}" oninput="calc()"></div></div>
-      <div class="amt" id="amt" style="margin-top:10px">${money(0)}</div>
-      <div class="center tiny muted" id="ptsLine">Quantity = meter end − start</div>
-      <div class="grid2" style="margin-top:10px"><div><label class="fl">Pressure (bar)</label><input class="txt" id="pressure" inputmode="decimal" value="${d.pressure||''}" oninput="state.draft.pressure=this.value"></div><div><label class="fl">Temperature (°C)</label><input class="txt" id="temperature" inputmode="decimal" value="${d.temperature||''}" oninput="state.draft.temperature=this.value"></div></div>
-      <label class="fl" style="margin-top:10px">Negotiated price / kg (${cur()}) <span class="muted" style="font-weight:400;text-transform:none">· blank = standard ${price()}</span></label>
-      <input class="txt" id="negPrice" inputmode="decimal" placeholder="${price()}" value="${d.negPrice||''}" oninput="calc()">
-    </div>
-    <div class="card">
-      <label class="fl">Payment method</label>
-      <div class="seg" id="segPay" style="flex-wrap:wrap"><button class="${d.pay==='Cash'?'on':''}" onclick="setPay('Cash')">💵 Cash</button><button class="${d.pay==='Mobile Money'?'on':''}" onclick="setPay('Mobile Money')">📱 Mobile</button><button class="${d.pay==='Account (Credit)'?'on':''}" onclick="setPay('Account (Credit)')">🧾 Credit</button></div>
-      <div id="provBox" class="${d.pay==='Mobile Money'?'':'hidden'}" style="margin-top:12px"><label class="fl">Provider</label><select class="txt sel" id="provider" onchange="state.draft.provider=this.value"><option value="">— select —</option>${PROVIDERS.map(p=>`<option${d.provider===p?' selected':''}>${p}</option>`).join('')}</select></div>
-      <label class="fl" style="margin-top:12px">Customer / account name${d.pay==='Account (Credit)'?' <span style="color:var(--red)">*</span>':''}</label><input class="txt" id="custAcct" value="${d.customerAccount||''}" placeholder="e.g. ABC Logistics Ltd" oninput="state.draft.customerAccount=this.value">
-      <label class="fl" style="margin-top:12px">Trailer / skid ID</label><input class="txt" id="trailerId" value="${d.trailerId||''}" placeholder="e.g. SKID-014" oninput="state.draft.trailerId=this.value">
-      <label class="fl" style="margin-top:12px">Bulk filling post <span class="muted" style="font-weight:400;text-transform:none">· industrial take-off</span></label><div class="grid2" id="grNoz">${BULK_POSTS.map((n,i)=>`<div class="chip ${d.nozzle===n?'on':''}" onclick="setNoz('${n}',${i})">🛢️ ${n}</div>`).join('')}</div>
-      <label class="fl" style="margin-top:12px">Remarks</label><input class="txt" id="remarks" value="${d.remarks||''}" oninput="state.draft.remarks=this.value">
-    </div>`:`
-    <div class="card">
-      <label class="fl">CNG quantity (kg) <span class="muted" style="font-weight:400;text-transform:none">· ${KG_MIN}–${KG_MAX} kg</span></label>
-      <input class="big" id="kg" inputmode="decimal" placeholder="0.0" value="${d.kg}" oninput="calc()">
-      <div class="amt" id="amt" style="margin-top:12px">${money(Math.round(kgv*price()))}</div>
-      <div class="center tiny muted" id="ptsLine">${member?('⭐ Points to award: '+(kgv*pts()).toFixed(2)):(money(price())+' / kg')}</div>
-    </div>
-    <div class="card">
-      <label class="fl">Payment method</label>
-      <div class="seg" id="segPay"><button class="${d.pay==='Cash'?'on':''}" onclick="setPay('Cash')"><span class="ic">💵</span>Cash</button><button class="${d.pay==='Mobile Money'?'on':''}" onclick="setPay('Mobile Money')"><span class="ic">📱</span>Mobile Money</button></div>
-      <div id="provBox" class="${d.pay==='Mobile Money'?'':'hidden'}" style="margin-top:12px"><label class="fl">Mobile money provider</label>
-        <select class="txt sel" id="provider" onchange="state.draft.provider=this.value"><option value="">— select provider —</option>${PROVIDERS.map(p=>`<option${d.provider===p?' selected':''}>${p}</option>`).join('')}</select></div>
-      <label class="fl" style="margin-top:16px">Nozzle</label>
-      <div class="grid4" id="grNoz">${state.nozzles.map((n,i)=>`<div class="chip ${d.nozzle===n?'on':''}" onclick="setNoz('${n}',${i})">${i+1}</div>`).join('')}</div>
-      <label class="fl" style="margin-top:16px">Remarks (optional)</label><input class="txt" id="remarks" placeholder="notes" value="${d.remarks||''}" oninput="state.draft.remarks=this.value">
-    </div>`)}
-
-    ${d.denied?'':`<div class="card">
-      <div class="sec" style="margin:0 0 8px">📸 Evidence & customer confirmation</div>
-      <div style="display:flex;gap:6px;flex-wrap:wrap">${(d.photos||[]).map(p=>`<img src="${p}" style="width:52px;height:52px;object-fit:cover;border-radius:8px;border:1px solid var(--line)">`).join('')||'<span class="tiny muted">Plate photo + up to 3 evidence photos (meter, seal, skid)</span>'}</div>
-      <button class="btn ghost sm" style="margin-top:8px" onclick="addEvidence()">📸 Add evidence photo (${(d.photos||[]).length}/3)</button>
-      <label class="fl" style="margin-top:12px;display:flex;align-items:center;gap:8px;text-transform:none;font-weight:600"><input type="checkbox" ${d.confirmed?'checked':''} onchange="state.draft.confirmed=this.checked"> Customer confirmed this transaction</label>
-      <input class="txt" id="confirmedBy" style="margin-top:6px" placeholder="Customer name / signature" value="${d.confirmedBy||''}" oninput="state.draft.confirmedBy=this.value">
-    </div>`}
-
-    <button class="btn dark" onclick="submitTxn()">Submit transaction</button>
-    <div class="grid2" style="margin-top:8px"><button class="btn ghost sm" onclick="goMainMenu()">☰ Main menu</button><button class="btn ghost sm" onclick="nav('home')">Cancel</button></div></div>`;
-  updatePlateStatus();
+function managerNavHTML(){
+  return `<button class="on" onclick="renderMgr()"><span class="ic">▦</span>Dashboard</button>
+    <button onclick="renderFocal()"><span class="ic">🛰️</span>Focal</button>
+    <button onclick="renderUsers()"><span class="ic">👥</span>Users</button>
+    <button onclick="renderSettings()"><span class="ic">⚙️</span>Config</button>`;
 }
 
-/* camera + OCR */
-function openCamera(){ const el=$('#camInput'); el.value=''; el.click(); }
-function scanPlate(){ state._camMode='plate'; openCamera(); }
-function addEvidence(){ state._camMode='evidence'; openCamera(); }
-function onPhoto(ev){ const f=ev.target.files&&ev.target.files[0]; if(!f)return; const rd=new FileReader();
-  rd.onload=()=>{ if(state._camMode==='evidence'){ captureForm(); state.draft.photos=(state.draft.photos||[]); if(state.draft.photos.length<3) state.draft.photos.push(rd.result); toast('📸 Evidence photo added ('+state.draft.photos.length+'/3)'); renderForm(); } else { state.draft.photo=rd.result; state.draft.photos=[rd.result]; runOCR(); } };
-  rd.readAsDataURL(f); }
-function demoScan(){ state.draft.photo=null; runOCR(); }
-function runOCR(){ captureForm(); const pick=PLATES[Math.floor(Math.random()*PLATES.length)]; const formatted=formatPlate(pick.raw);
-  state.draft.scanned=true; state.draft.conf=pick.conf; state.draft.plate=formatted; state.draft.type=classify(formatted);
-  toast('📷 '+formatted+' → '+typeShort(state.draft.type)+' ('+Math.round(pick.conf*100)+'%)'); renderForm();
-}
-function onPlateInput(){ const f=$('#plateField'); state.draft.plate=f.value; const t=classify(f.value); if(t&&t!==state.draft.type){ state.draft.type=t; } updatePlateStatus(); document.querySelectorAll('#segType button').forEach((b,i)=>b.classList.toggle('on',(i===0)===(state.draft.type==='Four-Wheeler'))); }
-function tidyPlate(){ const f=$('#plateField'); if(!f)return; const c=formatPlate(f.value); if(c&&c!==f.value){ f.value=c; state.draft.plate=c; captureForm(); renderForm(); } }
-function editPlate(){ const f=$('#plateField'); if(f){ f.focus(); f.select(); } toast('✎ Field is editable'); }
-function updatePlateStatus(){ const el=$('#plateStatus'); if(!el)return; const v=($('#plateField')?$('#plateField').value:state.draft.plate)||''; if(!v.trim()){el.innerHTML='<span class="tiny muted">Scan the plate, or type it</span>';return;}
-  const t=classify(v); const cls=t?`<span class="pill ok">${typeIcon(t)} ${typeShort(t)}</span>`:''; el.innerHTML=(validPlate(v)?'<span class="pill ok">✓ Verified</span> ':'<span class="pill warn">⚠ Check format</span> ')+cls; }
-function setType(t){ captureForm(); state.draft.type=t; if(!isThree(t)){ state.draft.bajajStatus=''; state.draft.bajajType=''; state.draft.membershipId=''; } renderForm(); }
-function setBajajStatus(v){ captureForm(); state.draft.bajajStatus=v; if(v!=='Not member')state.draft.bajajType=''; if(v!=='Member')state.draft.membershipId=''; renderForm(); }
-function setBajajType(v){ captureForm(); state.draft.bajajType=v; renderForm(); }
-function setPermit(v){ captureForm(); state.draft.permit=v; renderForm(); }
-function toggleIndustrial(){ captureForm(); state.draft.industrial=!state.draft.industrial; state.draft.pay=''; renderForm(); }
-function calc(){ const d=state.draft; let kg=0, unit=price();
-  if(d.industrial){ if($('#meterStart'))d.meterStart=$('#meterStart').value; if($('#meterEnd'))d.meterEnd=$('#meterEnd').value; if($('#negPrice'))d.negPrice=$('#negPrice').value;
-    kg=Math.max(0,(parseFloat(d.meterEnd)||0)-(parseFloat(d.meterStart)||0)); unit=(parseFloat(d.negPrice)>0)?parseFloat(d.negPrice):price(); }
-  else { if(!$('#kg'))return; d.kg=$('#kg').value; kg=parseFloat(d.kg)||0; }
-  if($('#amt'))$('#amt').textContent=money(Math.round(kg*unit));
-  const member=isThree(d.type)&&(d.bajajStatus==='Member'||d.bajajType==='TVS King Bajaj');
-  if($('#ptsLine'))$('#ptsLine').textContent = d.industrial ? ('Qty '+kg.toFixed(2)+' kg · '+money(Math.round(kg*unit))+(unit!==price()?' · negotiated':'')) : (member?('⭐ Points to award: '+(kg*pts()).toFixed(2)):(money(price())+' / kg')); }
-function setPay(p){ captureForm(); state.draft.pay=p; renderForm(); }
-function setNoz(n,i){ state.draft.nozzle=n; document.querySelectorAll('#grNoz .chip').forEach((c,j)=>c.classList.toggle('on',j===i)); }
-function toggleDenied(){ captureForm(); state.draft.denied=!state.draft.denied; renderForm(); }
-
-function submitTxn(){ captureForm(); const d=state.draft; const plate=(d.plate||'').trim().toUpperCase();
-  if(!plate){toast('⚠️ Scan or enter the Vehicle Plate Number');return;}
-  if(!validPlate(plate)){toast('⚠️ Plate format invalid');updatePlateStatus();return;}
-  if(!d.type){toast('⚠️ Vehicle type not detected');return;}
-  if(isThree(d.type)){ if(!d.bajajStatus){toast('⚠️ Select Bajaj Status');return;} if(d.bajajStatus==='Not member'&&!d.bajajType){toast('⚠️ Select Bajaj Type');return;} }
-  if(!d.permit){toast('⚠️ Select Refill Permit Status');return;}
-  d.plate=plate;
-  if(d.denied){ d.kg='0'; save(d); return; }
-  let kg;
-  if(d.industrial){
-    const ms=parseFloat(d.meterStart)||0, me=parseFloat(d.meterEnd)||0;
-    if(me<=ms){toast('⚠️ Meter end must be greater than meter start');return;}
-    kg=+(me-ms).toFixed(2); if(kg<=0){toast('⚠️ Metered quantity must be > 0');return;}
-    d.kg=String(kg);
-  } else {
-    kg=parseFloat(d.kg)||0;
-    if(kg<KG_MIN||kg>KG_MAX){toast('⚠️ CNG must be '+KG_MIN+'–'+KG_MAX+' kg');return;}
-    d.kg=String(kg);
-  }
-  if(!d.pay){toast('⚠️ Select payment method');return;}
-  if(d.pay==='Mobile Money'&&!d.provider){toast('⚠️ Select mobile money provider');return;}
-  if(d.pay==='Account (Credit)'&&!(d.customerAccount||'').trim()){toast('⚠️ Enter the customer / account name for credit sales');return;}
-  if(!d.nozzle){toast('⚠️ Select a nozzle');return;}
-  const dup=state.txns.find(x=>x.plate===plate&&x.status==='Completed'&&x.date===state.shiftDate&&x.shift===state.shift);
-  if(dup&&!d._confirmedDup){ return dupPrompt(dup); }
-  save(d);
-}
-function dupPrompt(dup){ $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">Duplicate check</h3>
-    <div class="banner warn"><span class="b">⚠️</span><div><b>VEHICLE ALREADY SERVED</b> this shift.</div></div>
-    <div class="card"><div class="kv"><span class="l">Vehicle</span><b>${dup.plate}</b></div><div class="kv"><span class="l">Time</span><b>${dup.time}</b></div><div class="kv"><span class="l">CNG</span><b>${dup.kg.toFixed(2)} kg</b></div></div>
-    <p class="tiny muted center">Same vehicle may refill again (extra transaction, same unique vehicle). Continue?</p>
-    <div class="grid2" style="margin-top:6px"><button class="btn ghost sm" onclick="renderForm()">Cancel</button><button class="btn amber sm" onclick="state.draft._confirmedDup=true;submitTxn()">Continue</button></div></div>`; }
-
-function save(d){ state.seq++;
-  // TVS King registration → create membership on submit
-  if(!d.denied && isThree(d.type) && d.bajajStatus==='Not member' && d.bajajType==='TVS King Bajaj' && !d.membershipId){ d.membershipId=newMembershipId(); d.bajajStatus='Member'; }
-  if(isThree(d.type) && d.bajajStatus==='Member' && !d.membershipId){ d.membershipId=newMembershipId(); }
-  const rec=buildRec({ companyId:state.company.id, stationId:state.station.id, date:state.shiftDate, time:clock(), att:state.attendant, shift:state.shift,
-    plate:d.plate, type:d.type, kg:d.kg, pay:d.pay, prov:d.provider, noz:d.nozzle, permit:d.permit, denied:d.denied,
-    reason:d.denied?'No Valid Permit – Not Refilled':'', remarks:d.remarks,
-    bajajStatus:d.bajajStatus, bajajType:d.bajajType, membershipId:d.membershipId, driver:d.driver, phone:d.phone,
-    mode:d.industrial?'Industrial':'Retail', meterStart:d.meterStart, meterEnd:d.meterEnd, pressure:d.pressure, temperature:d.temperature,
-    negPrice:d.negPrice, customerAccount:d.customerAccount, trailerId:d.trailerId, photos:(d.photos&&d.photos.length?d.photos:(d.photo?[d.photo]:[])), confirmed:d.confirmed, confirmedBy:d.confirmedBy, rfid:d.rfid,
-    method:d.scanned?'ANPR/OCR':'Manual', conf:d.conf });
-  rec.syncStatus=SYNC.PENDING; rec.syncAt=null;         // saved locally, not yet synced
-  state.txns.push(rec); bumpData(); state.draft=null; state.view='success'; screenSuccess(rec);
-  scheduleSync(rec);                                     // auto-sync to central (no manual upload)
-}
-function clock(){ const n=new Date(); return String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')+':'+String(n.getSeconds()).padStart(2,'0'); } // HH:MM:SS from device
-
-function screenSuccess(rec){ const denied=rec.denied;
-  $('#appBody').innerHTML=`<div class="fade" style="padding-top:16px">
-    <div class="center"><div style="width:76px;height:76px;border-radius:50%;background:${denied?'#fef3c7':'var(--green-l)'};display:grid;place-items:center;margin:0 auto;font-size:38px">${denied?'🚫':'✓'}</div>
-      <h3 style="color:${denied?'#B45309':'var(--green-d)'};margin:14px 0 2px">${denied?'Recorded — not refilled':'Transaction saved'}</h3>
-      <div class="tiny muted">Saved to Day Sales + Sales History</div></div>
-    ${rec.photo?`<div class="cam" style="height:104px;margin-top:14px"><img src="${rec.photo}" class="camimg"></div>`:''}
-    <div class="card" style="margin-top:14px">
-      <div class="kv"><span class="l">Transaction ID</span><b style="font-family:monospace">${rec.id}</b></div>
-      <div class="kv"><span class="l">Date · time (device)</span><b>${rec.date} · ${rec.time}</b></div>
-      <div class="kv"><span class="l">Vehicle</span><b>${rec.plate} · ${typeShort(rec.type)}</b></div>
-      ${rec.driver?`<div class="kv"><span class="l">Driver</span><b>${rec.driver}${rec.phone?' · '+rec.phone:''}</b></div>`:''}
-      ${isThree(rec.type)?`<div class="kv"><span class="l">Loyalty</span><b>${rec.loyaltyStatus}${rec.membershipId?' · '+rec.membershipId:''}${rec.bajajType?' · '+rec.bajajType:''}</b></div>`:''}
-      <div class="kv"><span class="l">Permit status</span><b>${rec.permit}</b></div>
-      <div class="kv"><span class="l">Sync status</span><b id="succSync_${rec.id}">${syncBadge(rec.syncStatus)}</b></div>
-      <div class="kv"><span class="l">CNG quantity</span><b>${rec.kg.toFixed(2)} kg</b></div>
-      ${denied?`<div class="kv"><span class="l">Reason</span><b style="color:var(--amber)">${rec.reason}</b></div>`:`
-      <div class="kv"><span class="l">Amount</span><b style="color:var(--green-d)">${money(rec.amount)}</b></div>
-      <div class="kv"><span class="l">Payment</span><b>${rec.pay==='Mobile Money'?rec.provider:rec.pay}</b></div>
-      ${rec.points?`<div class="kv"><span class="l">⭐ Loyalty points</span><b style="color:var(--amber)">+${rec.points}</b></div>`:''}`}
-    </div>
-    ${rec.photo?`<button class="btn ghost sm" onclick="savePhoto('${rec.id}')">⬇ Save plate photo</button>`:''}
-    <button class="btn primary" style="margin-top:8px" onclick="startTxn()">＋  Next vehicle</button>
-    <button class="btn ghost sm" style="margin-top:8px" onclick="nav('home')">Back to shift</button></div>`;
-  toast(`<span class="big">${denied?'🚫':'✓'}</span> ${rec.id} saved${rec.points?' · +'+rec.points+'pt':''}`);
-}
-
-/* ================= SHIFT CLOSE ================= */
-function renderClose(){ const m=metrics(mine()); const starts={'Nozzle 1':10420.0,'Nozzle 2':8890.5,'Nozzle 3':7714.0,'Nozzle 4':6002.0}; const perNoz={}; state.nozzles.forEach(n=>perNoz[n]=0); mine().filter(x=>!x.denied).forEach(x=>perNoz[x.nozzle]=(perNoz[x.nozzle]||0)+x.kg);
-  $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">Close shift · nozzle readings</h3>
-    <div class="banner ok"><span class="b">ℹ️</span><div>Enter each nozzle end reading. Dispensed = end − start.</div></div>
-    <div class="card">${state.nozzles.map(n=>{const st=starts[n];const sug=(st+(perNoz[n]||0)).toFixed(1);return `<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700"><span>${n}</span><span class="muted tiny" style="font-weight:600">start ${st.toFixed(1)}</span></div><div class="grid2" style="margin-top:6px"><input class="txt" data-start="${st}" id="end_${n.replace(' ','_')}" value="${sug}" inputmode="decimal" oninput="recon()"><div class="chip" id="disp_${n.replace(' ','_')}" style="border-color:var(--green-l);color:var(--green-d)">— kg</div></div></div>`;}).join('')}</div>
-    <div class="card" id="reconCard"></div>
-    <button class="btn dark" onclick="confirmClose()">Confirm shift closing</button>
-    <p class="tiny muted center" style="margin-top:8px">Once confirmed the shift is locked.</p></div>`; recon();
-}
-function recon(){ const m=metrics(mine()); let totalNoz=0; state.nozzles.forEach(n=>{const el=$('#end_'+n.replace(' ','_'));if(!el)return;const st=parseFloat(el.getAttribute('data-start'));let end=parseFloat(el.value);const disp=(isNaN(end)?0:end)-st;const chip=$('#disp_'+n.replace(' ','_'));if(!isNaN(end)&&end<st){chip.textContent='end < start';chip.style.color='var(--red)';}else{chip.textContent=(disp>0?disp.toFixed(1):'0.0')+' kg';chip.style.color='var(--green-d)';totalNoz+=Math.max(0,disp);}});
-  const varr=totalNoz-m.kg;const pct=totalNoz?(varr/totalNoz*100):0;const over=Math.abs(pct)>2;
-  $('#reconCard').innerHTML=`<div class="rowb"><span>Total nozzle dispensed</span><b>${totalNoz.toFixed(1)} kg</b></div><div class="rowb"><span>Total transaction CNG</span><b>${m.kg.toFixed(1)} kg</b></div><div class="rowb"><span>Variance</span><b style="color:${over?'var(--red)':'var(--green-d)'}">${varr>=0?'+':''}${varr.toFixed(1)} kg (${pct.toFixed(1)}%)</b></div><div style="margin-top:8px">${over?'<span class="pill bad">⚑ Attention — nozzle variance</span>':'<span class="pill ok">✓ Within 2% tolerance</span>'}</div>`; }
-function confirmClose(){ const bad=state.nozzles.some(n=>{const el=$('#end_'+n.replace(' ','_'));const st=parseFloat(el.getAttribute('data-start'));return parseFloat(el.value)<st;}); if(bad){toast('⚠️ A nozzle end reading is below its start');return;} const m=metrics(mine());
-  $('#appBody').innerHTML=`<div class="fade" style="padding-top:16px"><div class="center"><div style="width:74px;height:74px;border-radius:50%;background:var(--green-l);display:grid;place-items:center;margin:0 auto;font-size:38px">🔒</div><h3 style="color:var(--green-d);margin:14px 0 2px">Shift closed & locked</h3><div class="tiny muted">${state.shift} shift (start ${state.shiftStart}) · ${state.attendant} · ${state.shiftDate}</div></div>
-    <div class="card" style="margin-top:14px"><div class="kv"><span class="l">Served</span><b>${m.n} (${m.twN} 3W · ${m.fwN} 4W)</b></div><div class="kv"><span class="l">Total CNG</span><b>${m.kg.toFixed(1)} kg</b></div><div class="kv"><span class="l">Loyalty points</span><b>${m.pointsAwarded.toFixed(0)}</b></div><div class="kv"><span class="l">Total sales</span><b style="color:var(--green-d)">${money(m.sales)}</b></div></div>
-    <div class="banner ok"><span class="b">✓</span><div>Summary sent to Station Manager. Day sales & history updated.</div></div>
-    <button class="btn ghost" onclick="nav('home')">Back to shift</button></div>`;
-  if($('#shiftClock'))$('#shiftClock').textContent='Locked 🔒'; toast('<span class="big">🔒</span> Shift closed and locked');
-}
-
-/* ================= EXPORT ================= */
-function exportRowsCSV(arr){
-  const head=['Company','Station','TransactionID','Date','Time','Shift','ShiftStart','Attendant','Driver','Phone','VehicleReg','VehicleType','Mode','MeterStart','MeterEnd','Pressure','Temperature','CustomerAccount','TrailerSkid','BajajStatus','BajajType','LoyaltyStatus','MembershipID','LoyaltyPoints','PermitStatus','CNG_kg','UnitPrice','SalesValue','PaymentMethod','Provider','Negotiated','Confirmed','ConfirmedBy','ReasonZeroKg','Remarks','EntryMethod','Status','SyncStatus','Source','TxType','RFID','PaymentStatus','POSRef','VFDStatus','ReceiptNo'];
-  const lines=[head.join(',')];
-  arr.forEach(x=>{ const row=[companyById(x.companyId).name,x.stationId,x.id,x.date,x.time,x.shift,x.shiftStart,x.attendant,x.driver||'',x.phone||'',x.plate,x.type,x.mode||'Retail',x.meterStart||'',x.meterEnd||'',x.pressure||'',x.temperature||'',x.customerAccount||'',x.trailerId||'',x.bajajStatus||'',x.bajajType||'',x.loyaltyStatus,x.membershipId||'',x.points||0,x.permit,x.kg.toFixed(2),x.unitPrice,x.amount,(x.pay==='Mobile Money'?'Mobile Money':x.pay),x.provider||'',x.negotiated?'Yes':'',x.confirmed?'Yes':'',x.confirmedBy||'',x.reason||'',x.remarks||'',x.method,x.status,x.syncStatus,x.source||'',x.txType||'',x.rfid||'',x.paymentStatus||'',x.posRef||'',x.vfdStatus||'',x.receiptNo||''];
-    lines.push(row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')); });
-  return lines.join('\n');
-}
-function exportCSV(arr,label){ dl('data:text/csv;charset=utf-8,'+encodeURIComponent(exportRowsCSV(arr||[])),'CNG_'+(label||'export')+'_'+state.shiftDate+'.csv'); toast('⬇ Exported '+(arr?arr.length:0)+' records'); }
-function savePhoto(id){const x=state.txns.find(t=>t.id===id);if(!x||!x.photo){toast('No photo on this record');return;}dl(x.photo,x.id+'_'+x.plate.replace(/ /g,'')+'.jpg');toast('⬇ Saved '+x.plate);}
-function saveAllPhotos(){const w=state.txns.filter(x=>x.photo);if(!w.length){toast('No captured photos yet');return;}w.forEach((x,i)=>setTimeout(()=>savePhoto(x.id),i*400));}
-
-/* ================= MANAGER DASHBOARD ================= */
-function applyFilter(arr){ const f=state.filter; const q=(f.q||'').replace(/ /g,'').toUpperCase();
-  return completed(arr).filter(inTenant).filter(x=>
-    (f.date==='All'||x.date===f.date) && (f.attendant==='All'||x.attendant===f.attendant) &&
-    (f.shift==='All'||x.shift===f.shift) && (f.type==='All'||x.type===f.type) &&
-    (f.payment==='All'||channel(x)===f.payment) && (f.permit==='All'||x.permit===f.permit) &&
-    (f.bajaj==='All'||x.bajajType===f.bajaj) && (f.loyalty==='All'||x.loyaltyStatus===f.loyalty) &&
-    (!q || (x.plate+ (x.membershipId||'') + (x.driver||'') + (x.phone||'')).replace(/ /g,'').toUpperCase().includes(q))
-  );
-}
-function mtable(headers, rows, aligns){ const th=headers.map((h,i)=>`<th style="text-align:${aligns&&aligns[i]||'left'};padding:6px 6px;border-bottom:2px solid #e5e7eb;color:#6B7280">${h}</th>`).join(''); const tr=rows.map(r=>`<tr>${r.map((c,i)=>`<td style="text-align:${aligns&&aligns[i]||'left'};padding:6px 6px;border-bottom:1px solid #f1f5f9">${c}</td>`).join('')}</tr>`).join(''); return `<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:11.5px"><thead><tr>${th}</tr></thead><tbody>${tr}</tbody></table></div>`; }
-function optionList(sel, values, labels){ return values.map((v,i)=>`<option value="${v}"${sel===v?' selected':''}>${labels?labels[i]:v}</option>`).join(''); }
-function renderMgr(){ stopFocalLive(); state.view='dashboard'; const all=completed(scopeTxns()); const dates=['All',...Array.from(new Set(all.map(x=>x.date)))]; const atts=['All',...Array.from(new Set(all.map(x=>x.attendant)))]; const f=state.filter;
-  const fil=applyFilter(state.txns); const m=metrics(fil); const pc=permitCounts(fil); const totalSales=m.sales||1;
-  const payRows=PAY_CHANNELS.map(ch=>{const set=m.refilled.filter(x=>channel(x)===ch);const s=sum(set,x=>x.amount),kg=sum(set,x=>x.kg);return [ch,set.length,kg.toFixed(1),money(s),(s/totalSales*100).toFixed(1)+'%'];}); payRows.push([`<b>Total</b>`,`<b>${m.refilled.length}</b>`,`<b>${m.kg.toFixed(1)}</b>`,`<b>${money(m.sales)}</b>`,'<b>100%</b>']);
-  const attList=Array.from(new Set(fil.map(x=>x.attendant))); const attRows=attList.map(a=>{const mm=metrics(fil.filter(x=>x.attendant===a));return [a,mm.n,mm.kg.toFixed(1),money(mm.sales),mm.pointsAwarded.toFixed(0),mm.deniedN];});
-  const keys=Array.from(new Set(fil.map(x=>x.attendant+'|'+x.shift+'|'+x.date))); const shiftRows=keys.map(k=>{const [a,sh,dt]=k.split('|');const set=fil.filter(x=>x.attendant===a&&x.shift===sh&&x.date===dt);const mm=metrics(set);const start=(set[0]&&set[0].shiftStart)||'';return [a,`${sh}<div class="tiny muted">${dt} · ${start}</div>`,mm.total,mm.kg.toFixed(1),money(mm.sales),mm.twN,mm.fwN,mm.membersServed,mm.pointsAwarded.toFixed(0),mm.deniedN];});
-  const denRows=m.denied.map(x=>[x.plate,typeShort(x.type),x.date,x.time,x.attendant,x.shift,x.permit,x.reason]);
-  const permitRows=PERMITS.map(p=>[p,pc[p]||0, permitOK(p)?'<span class="pill ok">OK</span>':'<span class="pill bad">Issue</span>']);
-  $('#appBody').innerHTML=`<div class="fade"><h3 class="sec">Station Manager Dashboard</h3>
-    <div class="banner ok" style="background:#ecfdf5;border-color:#a7f3d0"><span class="b">🟢</span><div><b id="liveStamp">System Status: 🟢 Live · Connected · ${clock()}</b><div class="tiny muted">Last data update: ${state.central.lastSync||'—'} · updates automatically — no manual refresh needed.</div></div></div>
-    <div class="grid2" style="margin-bottom:8px">
-      <button class="btn dark sm" onclick="syncAllData()">🔄 Synchronize All Data</button>
-      <button class="btn ${state.demoLive?'amber':'ghost'} sm" onclick="toggleDemoLive()">${state.demoLive?'⏸ Stop live demo':'▶︎ Live demo'}</button>
-    </div>
-    <div class="grid2" style="margin-bottom:6px">
-      <button class="btn ghost sm" onclick="renderGasRecon()">🛢️ Gas reconciliation</button>
-      <button class="btn ghost sm" onclick="renderModules()">📦 Modules</button>
-    </div>
-    <div class="grid2" style="margin-bottom:6px">
-      <button class="btn ghost sm" onclick="renderUsers()">👥 User management</button>
-      <button class="btn ghost sm" onclick="renderSettings()">⚙️ Settings</button>
-    </div>
-    <div class="grid2" style="margin-bottom:6px">
-      <button class="btn dark sm" onclick="renderFocal()">🛰️ Real-Time Focal Point</button>
-      <button class="btn ghost sm" onclick="renderHealth()">🔌 Integration health</button>
-    </div>
-    <div class="grid2" style="margin-bottom:10px">
-      <button class="btn ghost sm" onclick="renderRecon()">🧮 Reconciliations</button>
-      <button class="btn ghost sm" onclick="renderRfid()">📡 RFID</button>
-    </div>
-    <div class="card"><div style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Filters</div>
-      <div class="grid2" style="gap:8px">
-        <select class="txt sel" onchange="state.filter.date=this.value;renderMgr()">${optionList(f.date,dates)}</select>
-        <select class="txt sel" onchange="state.filter.attendant=this.value;renderMgr()">${optionList(f.attendant,atts)}</select>
-        <select class="txt sel" onchange="state.filter.shift=this.value;renderMgr()">${optionList(f.shift,['All','Day','Night'])}</select>
-        <select class="txt sel" onchange="state.filter.type=this.value;renderMgr()">${optionList(f.type,['All','Four-Wheeler','Three-Wheeler'],['All types','4-Wheeler','3-Wheeler'])}</select>
-        <select class="txt sel" onchange="state.filter.payment=this.value;renderMgr()">${optionList(f.payment,['All',...PAY_CHANNELS])}</select>
-        <select class="txt sel" onchange="state.filter.permit=this.value;renderMgr()">${optionList(f.permit,['All',...PERMITS])}</select>
-        <select class="txt sel" onchange="state.filter.bajaj=this.value;renderMgr()">${optionList(f.bajaj,['All',...BAJAJ_TYPES],['All bajaj','TVS King','Other'])}</select>
-        <select class="txt sel" onchange="state.filter.loyalty=this.value;renderMgr()">${optionList(f.loyalty,['All','Member','Non-member'],['All loyalty','Members','Non-members'])}</select>
-      </div>
-      <input class="txt" id="mgrSearch" style="margin-top:8px" placeholder="Search plate / membership / driver / phone" value="${f.q}" oninput="state.filter.q=this.value;state._sf=true;renderMgr()">
-      <div class="grid2" style="margin-top:8px"><button class="btn ghost sm" onclick="resetFilter()">↺ Reset</button><button class="btn dark sm" onclick="exportCSV(applyFilter(state.txns),'manager-filtered')">⬇ Export sales data</button></div>
-    </div>
-    <div class="kpis">
-      <div class="kpi wide" style="background:linear-gradient(135deg,#1D4E89,#0f2f57)"><div class="k">Total sales value</div><div class="v">${money(m.sales)}</div><div class="u">${m.n} served · ${m.unique} unique · ${m.kg.toFixed(1)} kg</div></div>
-      <div class="kpi"><div class="k">Transactions</div><div class="v" style="color:#1D4E89">${m.total}</div><div class="u">incl. no-permit</div></div>
-      <div class="kpi"><div class="k">⭐ Loyalty pts</div><div class="v" style="color:#B45309">${m.pointsAwarded.toFixed(0)}</div><div class="u">${m.membersServed} members</div></div>
-      <div class="kpi"><div class="k">🛺 3-Wheeler</div><div class="v" style="color:#1D4E89">${m.twN}</div><div class="u">${m.twU} uniq · ${m.twKg.toFixed(1)} kg</div></div>
-      <div class="kpi"><div class="k">🚗 4-Wheeler</div><div class="v" style="color:#1D4E89">${m.fwN}</div><div class="u">${m.fwU} uniq · ${m.fwKg.toFixed(1)} kg</div></div>
-      <div class="kpi"><div class="k">TVS / Other</div><div class="v" style="color:#1D4E89;font-size:20px">${m.tvsN}/${m.otherN}</div><div class="u">Bajaj</div></div>
-      <div class="kpi" style="border-color:#fcd34d;background:#fffbeb"><div class="k" style="color:#92400e">🚫 No valid permit</div><div class="v" style="color:#B45309">${m.deniedN}</div><div class="u">zero-kg</div></div>
-    </div>
-    <div class="card" style="border-color:#bfdbfe"><div class="sec" style="margin:0 0 8px;color:#1D4E89">⚡ Live transactions <span class="tiny muted" style="text-transform:none;font-weight:400">· newest first, updates automatically</span></div>${liveFeedHTML()}</div>
-    <div class="card"><div class="sec" style="margin:0 0 8px">Vehicle type performance</div>${mtable(['Metric','🛺 3-Wheeler','🚗 4-Wheeler'],[['Transactions',m.twN,m.fwN],['Unique vehicles',m.twU,m.fwU],['CNG (kg)',m.twKg.toFixed(1),m.fwKg.toFixed(1)],['Sales',money(m.twSales),money(m.fwSales)],['Avg kg/txn',(m.twN?m.twKg/m.twN:0).toFixed(1),(m.fwN?m.fwKg/m.fwN:0).toFixed(1)],['No-permit',m.deniedTW,m.deniedFW]],['left','right','right'])}</div>
-    <div class="card"><div class="sec" style="margin:0 0 8px">Payment method analytics</div>${mtable(['Payment','Txns','CNG (kg)','Sales','% sales'],payRows,['left','right','right','right','right'])}</div>
-    <div class="card"><div class="sec" style="margin:0 0 8px">Loyalty & permit summary</div>
-      <div class="rowb"><span>Loyalty members served</span><b>${m.membersServed}</b></div>
-      <div class="rowb"><span>Total points awarded</span><b style="color:var(--amber)">${m.pointsAwarded.toFixed(0)}</b></div>
-      <div class="rowb"><span>TVS King / Other Bajaj</span><b>${m.tvsN} / ${m.otherN}</b></div>
-      <div style="margin-top:8px">${mtable(['Permit status','Count','Flag'],permitRows,['left','right','left'])}</div></div>
-    <div class="card"><div class="sec" style="margin:0 0 8px">Sales by attendant</div>${mtable(['Attendant','Served','CNG','Sales','Pts','No-permit'],attRows,['left','right','right','right','right','right'])}</div>
-    <div class="card"><div class="sec" style="margin:0 0 8px">Shift monitoring</div>${mtable(['Attendant','Shift','Txns','CNG','Sales','3W','4W','Members','Pts','0-kg'],shiftRows,['left','left','right','right','right','right','right','right','right','right'])}</div>
-    <div class="card" style="border-color:#fcd34d"><div class="sec" style="margin:0 0 8px;color:#92400e">🚫 No-permit vehicles (drill-down)</div>${denRows.length?mtable(['Plate','Type','Date','Time','Attendant','Shift','Permit','Reason'],denRows,['left','left','left','left','left','left','left','left']):'<p class="tiny muted center">None for current filter.</p>'}</div>
-    <div class="card" style="background:var(--green-ll)"><div class="sec" style="margin:0 0 8px">Daily station summary ${f.date!=='All'?'· '+f.date:'· all dates'}</div>
-      <div class="rowb"><span>Total transactions</span><b>${m.total}</b></div><div class="rowb"><span>Total CNG</span><b>${m.kg.toFixed(1)} kg</b></div>
-      <div class="rowb"><span>Total sales</span><b style="color:var(--green-d)">${money(m.sales)}</b></div><div class="rowb"><span>Unique vehicles</span><b>${m.unique}</b></div>
-      <div class="rowb"><span>3W / 4W served</span><b>${m.twN} / ${m.fwN}</b></div><div class="rowb"><span>Members · points</span><b>${m.membersServed} · ${m.pointsAwarded.toFixed(0)}</b></div>
-      <div class="rowb"><span>Zero-kg / no-permit</span><b style="color:var(--amber)">${m.deniedN}</b></div><div class="rowb"><span>Avg kg/txn · avg value</span><b>${m.avgKg.toFixed(1)} · ${money(m.avgVal)}</b></div></div>
-    <div class="card" style="border-color:#bfdbfe;background:#eff6ff">
-      <div class="sec" style="margin:0 0 8px;color:#1D4E89">🛰️ Data synchronization status</div>
-      <div id="syncPanel">${syncPanelHTML()}</div>
-      ${failedList()}
-      <p class="tiny muted" style="margin:8px 0 0">Auto-synchronizes every few seconds from the same central store the attendants write to. Refresh is only a manual backup.</p>
-    </div>
-    <p class="tiny muted center" style="margin-top:6px">Showing ${fil.length} of ${all.length} transactions · one source of truth (Attendant → central → Manager).</p></div>`;
-  state.lastRenderVersion=state.dataVersion; startMgrLive();
-  if(state._sf){ const si=$('#mgrSearch'); if(si){ si.focus(); const v=si.value; si.setSelectionRange(v.length,v.length); } state._sf=false; }
-}
-function failedList(){ const bad=scopeTxns().filter(x=>x.syncStatus===SYNC.FAILED||x.syncStatus===SYNC.PENDING||x.syncStatus===SYNC.SYNCING);
-  if(!bad.length) return '<div class="tiny" style="color:var(--green-d);margin-top:6px">✓ All attendant transactions are synchronized — nothing missing or pending.</div>';
-  return '<div style="margin-top:8px">'+bad.map(x=>`<div class="rowb"><span>${x.id} · ${x.attendant.split(' ')[0]}</span>${syncBadge(x.syncStatus)}</div>`).join('')+'</div>'; }
-function resetFilter(){ state.filter={date:'All',attendant:'All',shift:'All',type:'All',payment:'All',permit:'All',bajaj:'All',loyalty:'All',q:''}; renderMgr(); }
-
-/* ================= INIT ================= */
+// initialize first load
 renderTenantPicker();
-setInterval(()=>{ const el=$('#liveClock'); if(el) el.textContent=clock(); }, 1000);  // live device clock on the form
 
-</script>
-
-<script>
-if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}
-let __dp=null;function __ib(){if(document.getElementById('__installBtn'))return;const b=document.createElement('button');b.id='__installBtn';b.textContent='⬇ Install app';b.style.cssText='position:fixed;left:50%;transform:translateX(-50%);bottom:16px;z-index:9999;background:#1B7A3D;color:#fff;border:0;border-radius:24px;padding:12px 22px;font-size:15px;font-weight:700;box-shadow:0 8px 22px rgba(0,0,0,.35);cursor:pointer;font-family:-apple-system,Segoe UI,Roboto,sans-serif';b.onclick=async()=>{if(!__dp)return;__dp.prompt();await __dp.userChoice;__dp=null;b.remove();};document.body.appendChild(b);}
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();__dp=e;__ib();});window.addEventListener('appinstalled',()=>{const b=document.getElementById('__installBtn');if(b)b.remove();});
-(function(){const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);const sa=window.navigator.standalone||window.matchMedia('(display-mode: standalone)').matches;if(ios&&!sa){window.addEventListener('load',()=>{const h=document.createElement('div');h.style.cssText='position:fixed;left:12px;right:12px;bottom:14px;z-index:9999;background:#14532D;color:#fff;border-radius:14px;padding:12px 14px;font-size:13px;font-weight:600;box-shadow:0 10px 26px rgba(0,0,0,.35);font-family:-apple-system,Segoe UI,Roboto,sans-serif;text-align:center';h.innerHTML='To install: tap <b>Share</b> then <b>Add to Home Screen</b> &nbsp;·&nbsp; <span id="__xh" style="text-decoration:underline">dismiss</span>';document.body.appendChild(h);h.querySelector('#__xh').onclick=()=>h.remove();setTimeout(()=>{if(h.parentNode)h.remove();},9000);});}})();
 </script>
 </body>
 </html>
