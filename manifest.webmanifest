@@ -1,18 +1,15 @@
 {
-  "name": "Energy Station Platform",
-  "short_name": "CNG Attendant",
-  "description": "Green Gas CNG live refill & vehicle transaction capture with ANPR plate scanning.",
-  "id": "/cng-attendant/",
-  "start_url": "./index.html",
+  "id": "/cng-station-management/",
+  "name": "Green Gas CNG Station Management",
+  "short_name": "CNG Station",
+  "description": "CNG station attendant and manager management application.",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#14532D",
   "theme_color": "#1B7A3D",
-  "categories": [
-    "business",
-    "productivity"
-  ],
+  "categories": ["business", "productivity"],
   "icons": [
     {
       "src": "icons/icon-192.png",
