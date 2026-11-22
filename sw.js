@@ -1,4 +1,4 @@
-/* Green Gas CNG Attendant - offline app shell */
+/* Green Gas CNG Attendant - PWA install and service worker */
 const CACHE = 'cng-attendant-v15';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest',
@@ -24,7 +24,6 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
-
   event.respondWith(
     fetch(event.request)
       .then(response => {
@@ -34,8 +33,6 @@ self.addEventListener('fetch', event => {
         }
         return response;
       })
-      .catch(() =>
-        caches.match(event.request).then(cached => cached || caches.match('./index.html'))
-      )
+      .catch(() => caches.match(event.request).then(cached => cached || caches.match('./index.html')))
   );
 });
